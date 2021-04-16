@@ -33,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public GetCustomerResponse getCustomerById(Int32Value request) {
-        Customer customer = customerRepository.getCustomerById(request.getValue());
+        Customer customer = customerRepository.findCustomerById(request.getValue());
         PCustomer pCustomer = CustomerMapper.toProtobuf(customer);
         return GetCustomerResponse.newBuilder().setData(pCustomer).build();
     }
