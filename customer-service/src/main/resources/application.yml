@@ -6,7 +6,7 @@ grpc:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/nab_customer?useUnicode=true&amp;characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/nab_customer
     username: root
     password: 123456789
   jpa:
@@ -15,7 +15,6 @@ spring:
       ddl-auto: none
     properties:
       hibernate:
-        default_schema: nab_customer
         enable_lazy_load_no_trans: true
         format_sql: false
         temp:
