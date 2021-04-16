@@ -1,0 +1,14 @@
+syntax = "proto3";
+package customer.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.customer.api";
+
+import "google/protobuf/wrappers.proto";
+import "customer-service/customer_shared.proto";
+
+service CustomerService {
+  rpc createCustomer(PCustomer) returns (google.protobuf.Int32Value);
+
+  rpc getCustomerById(google.protobuf.Int32Value) returns (GetCustomerResponse);
+}

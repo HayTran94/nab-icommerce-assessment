@@ -2,7 +2,7 @@ syntax = "proto3";
 package customer.service;
 
 option java_multiple_files = true;
-option java_package = "au.com.nab.icommerce.customer.service.protobuf";
+option java_package = "au.com.nab.icommerce.customer.protobuf";
 
 message PCustomer {
   int32 id = 1;
@@ -12,4 +12,9 @@ message PCustomer {
   string providerId = 5;
   string photoUrl = 6;
   string token = 7;
+}
+
+message GetCustomerResponse {
+  int32 code = 1;
+  customer.service.PCustomer data = 2;
 }
