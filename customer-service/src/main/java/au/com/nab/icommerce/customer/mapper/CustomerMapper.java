@@ -5,28 +5,28 @@ import au.com.nab.icommerce.customer.protobuf.PCustomer;
 
 public class CustomerMapper {
 
-    public static Customer toEntity(PCustomer pCustomer) {
+    public static Customer toEntity(PCustomer protobuf) {
         Customer entity = new Customer();
-        entity.setId(pCustomer.getId());
-        entity.setName(pCustomer.getName());
-        entity.setEmail(pCustomer.getEmail());
-        entity.setProvider(pCustomer.getProvider());
-        entity.setProviderId(pCustomer.getProviderId());
-        entity.setPhotoUrl(pCustomer.getPhotoUrl());
-        entity.setToken(pCustomer.getToken());
+        entity.setId(protobuf.getId());
+        entity.setName(protobuf.getName());
+        entity.setEmail(protobuf.getEmail());
+        entity.setProvider(protobuf.getProvider());
+        entity.setProviderId(protobuf.getProviderId());
+        entity.setPhotoUrl(protobuf.getPhotoUrl());
+        entity.setToken(protobuf.getToken());
 
         return entity;
     }
 
-    public static PCustomer toProtobuf(Customer customer) {
+    public static PCustomer toProtobuf(Customer entity) {
         PCustomer.Builder protobuf = PCustomer.newBuilder();
-        protobuf.setId(customer.getId());
-        protobuf.setName(customer.getName());
-        protobuf.setEmail(customer.getEmail());
-        protobuf.setProvider(customer.getProvider());
-        protobuf.setProviderId(customer.getProviderId());
-        protobuf.setPhotoUrl(customer.getPhotoUrl());
-        protobuf.setToken(customer.getToken());
+        protobuf.setId(entity.getId());
+        protobuf.setName(entity.getName());
+        protobuf.setEmail(entity.getEmail());
+        protobuf.setProvider(entity.getProvider());
+        protobuf.setProviderId(entity.getProviderId());
+        protobuf.setPhotoUrl(entity.getPhotoUrl());
+        protobuf.setToken(entity.getToken());
 
         return protobuf.build();
     }
