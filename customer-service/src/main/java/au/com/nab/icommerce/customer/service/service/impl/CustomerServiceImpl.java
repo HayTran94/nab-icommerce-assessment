@@ -1,5 +1,6 @@
 package au.com.nab.icommerce.customer.service.service.impl;
 
+import au.com.nab.icommerce.customer.service.api.GetCustomerResponse;
 import au.com.nab.icommerce.customer.service.constant.AppConstant;
 import au.com.nab.icommerce.customer.service.entity.Customer;
 import au.com.nab.icommerce.customer.service.mapper.CustomerMapper;
@@ -31,8 +32,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public PCustomer getCustomerById(Int32Value request) {
+    public GetCustomerResponse getCustomerById(Int32Value request) {
         Customer customer = customerRepository.getCustomerById(request.getValue());
-        return CustomerMapper.toProtobuf(customer);
+        PCustomer pCustomer = CustomerMapper.toProtobuf(customer);
+        return GetCustomerResponse.newBuilder().setData(pCustomer).build();
     }
 }

@@ -1,6 +1,7 @@
 package au.com.nab.icommerce.customer.service;
 
 import au.com.nab.icommerce.customer.service.api.CustomerServiceGrpc;
+import au.com.nab.icommerce.customer.service.api.GetCustomerResponse;
 import au.com.nab.icommerce.customer.service.protobuf.PCustomer;
 import au.com.nab.icommerce.customer.service.service.CustomerService;
 import com.google.protobuf.Int32Value;
@@ -22,8 +23,8 @@ public class CustomerServiceGrpcServer extends CustomerServiceGrpc.CustomerServi
     }
 
     @Override
-    public void getCustomerById(Int32Value request, StreamObserver<PCustomer> responseObserver) {
-        PCustomer result = customerService.getCustomerById(request);
+    public void getCustomerById(Int32Value request, StreamObserver<GetCustomerResponse> responseObserver) {
+        GetCustomerResponse result = customerService.getCustomerById(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }

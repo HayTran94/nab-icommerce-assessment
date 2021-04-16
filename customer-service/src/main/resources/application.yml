@@ -2,7 +2,7 @@ server:
   port: 8000
 
 grpc:
-  port: 6565
+  port: 8001
 
 spring:
   datasource:
