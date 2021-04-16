@@ -20,12 +20,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Int32Value createCustomer(PCustomer request) {
-        Customer customer = CustomerMapper.toEntity(request);
-        customer = customerRepository.save(customer);
-
         int res = AppConstant.FAILED;
-        if (customer.getId() > 0) {
-            res = AppConstant.SUCCESS;
+        try {
+            Customer customer = CustomerMapper.toEntity(request);
+            customer = customerRepository.save(customer);
+            if (customer.getId() > 0) {
+                res = AppConstant.SUCCESS;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return Int32Value.of(res);
@@ -33,8 +36,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public GetCustomerResponse getCustomerById(Int32Value request) {
-        Customer customer = customerRepository.findCustomerById(request.getValue());
-        PCustomer pCustomer = CustomerMapper.toProtobuf(customer);
+        PCustomer pCustomer = null;
+        try {
+            Customer customer = customerRepository.findCustomerById(request.getValue());
+            pCustomer = CustomerMapper.toProtobuf(customer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return GetCustomerResponse.newBuilder().setData(pCustomer).build();
     }
 }
