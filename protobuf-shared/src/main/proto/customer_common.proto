@@ -1,0 +1,15 @@
+syntax = "proto3";
+package customer.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.customer.service.protobuf";
+
+message PCustomer {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  string provider = 4;
+  string providerId = 5;
+  string photoUrl = 6;
+  string token = 7;
+}
