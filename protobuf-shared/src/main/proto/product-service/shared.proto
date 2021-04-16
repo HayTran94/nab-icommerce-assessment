@@ -1,0 +1,21 @@
+syntax = "proto3";
+package product.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.product.protobuf";
+option java_outer_classname = "ProductServiceDomain";
+
+message PProduct {
+  int32 id = 1;
+  string name = 2;
+  string brand = 3;
+  int32 price = 4;
+  string color = 5;
+  string image = 6;
+  string unit = 7;
+}
+
+message GetProductResponse {
+  int32 code = 1;
+  PProduct data = 2;
+}

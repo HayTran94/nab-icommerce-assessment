@@ -3,6 +3,7 @@ package customer.service;
 
 option java_multiple_files = true;
 option java_package = "au.com.nab.icommerce.customer.protobuf";
+option java_outer_classname = "CustomerServiceDomain";
 
 message PCustomer {
   int32 id = 1;
@@ -16,5 +17,5 @@ message PCustomer {
 
 message GetCustomerResponse {
   int32 code = 1;
-  customer.service.PCustomer data = 2;
+  PCustomer data = 2;
 }

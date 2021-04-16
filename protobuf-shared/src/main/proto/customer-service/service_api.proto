@@ -3,9 +3,10 @@ package customer.service;
 
 option java_multiple_files = true;
 option java_package = "au.com.nab.icommerce.customer.api";
+option java_outer_classname = "CustomerServiceApi";
 
 import "google/protobuf/wrappers.proto";
-import "customer-service/customer_shared.proto";
+import "customer-service/shared.proto";
 
 service CustomerService {
   rpc createCustomer(PCustomer) returns (google.protobuf.Int32Value);
