@@ -1,7 +1,7 @@
-package au.com.nab.icommerce.customer.service;
+package au.com.nab.icommerce.customer;
 
-import au.com.nab.icommerce.customer.service.api.CustomerServiceGrpc;
-import au.com.nab.icommerce.customer.service.api.GetCustomerResponse;
+import au.com.nab.icommerce.customer.api.CustomerServiceGrpc;
+import au.com.nab.icommerce.customer.api.GetCustomerResponse;
 import com.google.protobuf.Int32Value;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

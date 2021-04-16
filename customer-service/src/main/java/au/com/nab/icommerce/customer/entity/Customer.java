@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.customer.service.entity;
+package au.com.nab.icommerce.customer.entity;
 
 import lombok.Getter;
 import lombok.Setter;

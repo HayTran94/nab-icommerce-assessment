@@ -1,9 +1,9 @@
-package au.com.nab.icommerce.customer.service;
+package au.com.nab.icommerce.customer;
 
-import au.com.nab.icommerce.customer.service.api.CustomerServiceGrpc;
-import au.com.nab.icommerce.customer.service.api.GetCustomerResponse;
-import au.com.nab.icommerce.customer.service.protobuf.PCustomer;
-import au.com.nab.icommerce.customer.service.service.CustomerService;
+import au.com.nab.icommerce.customer.api.CustomerServiceGrpc;
+import au.com.nab.icommerce.customer.service.CustomerService;
+import au.com.nab.icommerce.customer.api.GetCustomerResponse;
+import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import com.google.protobuf.Int32Value;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;

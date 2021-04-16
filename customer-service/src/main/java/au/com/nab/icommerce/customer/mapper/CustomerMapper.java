@@ -1,7 +1,7 @@
-package au.com.nab.icommerce.customer.service.mapper;
+package au.com.nab.icommerce.customer.mapper;
 
-import au.com.nab.icommerce.customer.service.entity.Customer;
-import au.com.nab.icommerce.customer.service.protobuf.PCustomer;
+import au.com.nab.icommerce.customer.entity.Customer;
+import au.com.nab.icommerce.customer.protobuf.PCustomer;
 
 public class CustomerMapper {
 

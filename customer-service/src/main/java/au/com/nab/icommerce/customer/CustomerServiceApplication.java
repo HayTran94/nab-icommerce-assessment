@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.customer.service;
+package au.com.nab.icommerce.customer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
