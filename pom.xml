@@ -15,8 +15,9 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>customer-service</module>
         <module>protobuf-shared</module>
+        <module>customer-service</module>
+        <module>write-product-service</module>
     </modules>
 
     <properties>
