@@ -10,5 +10,10 @@ import "customer_common.proto";
 service CustomerService {
   rpc createCustomer(customer.service.PCustomer) returns (google.protobuf.Int32Value);
 
-  rpc getCustomerById(google.protobuf.Int32Value) returns (customer.service.PCustomer);
+  rpc getCustomerById(google.protobuf.Int32Value) returns (GetCustomerResponse);
+}
+
+message GetCustomerResponse {
+  int32 code = 1;
+  customer.service.PCustomer data = 2;
 }
