@@ -3,7 +3,7 @@ package au.com.nab.icommerce.customer.service.impl;
 import au.com.nab.icommerce.customer.constant.AppConstant;
 import au.com.nab.icommerce.customer.entity.Customer;
 import au.com.nab.icommerce.customer.mapper.CustomerMapper;
-import au.com.nab.icommerce.customer.protobuf.GetCustomerResponse;
+import au.com.nab.icommerce.customer.protobuf.CustomerResponse;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import au.com.nab.icommerce.customer.repository.CustomerRepository;
 import au.com.nab.icommerce.customer.service.CustomerService;
@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public GetCustomerResponse getCustomerById(Int32Value request) {
+    public CustomerResponse getCustomerById(Int32Value request) {
         PCustomer pCustomer = null;
         try {
             Customer customer = customerRepository.findCustomerById(request.getValue());
@@ -44,6 +44,6 @@ public class CustomerServiceImpl implements CustomerService {
             e.printStackTrace();
         }
 
-        return GetCustomerResponse.newBuilder().setData(pCustomer).build();
+        return CustomerResponse.newBuilder().setData(pCustomer).build();
     }
 }

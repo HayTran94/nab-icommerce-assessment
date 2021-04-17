@@ -1,7 +1,7 @@
 package au.com.nab.icommerce.customer;
 
 import au.com.nab.icommerce.customer.api.CustomerServiceGrpc;
-import au.com.nab.icommerce.customer.protobuf.GetCustomerResponse;
+import au.com.nab.icommerce.customer.protobuf.CustomerResponse;
 import com.google.protobuf.Int32Value;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -17,7 +17,7 @@ class CustomerServiceApplicationTests {
 
         CustomerServiceGrpc.CustomerServiceBlockingStub customerServiceBlockingStub = CustomerServiceGrpc.newBlockingStub(channel);
 
-        GetCustomerResponse pCustomer = customerServiceBlockingStub.getCustomerById(Int32Value.of(1));
+        CustomerResponse pCustomer = customerServiceBlockingStub.getCustomerById(Int32Value.of(1));
         System.out.println(pCustomer);
 
         channel.shutdown();
