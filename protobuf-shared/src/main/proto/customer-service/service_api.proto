@@ -11,5 +11,5 @@ import "customer-service/shared.proto";
 service CustomerService {
   rpc createCustomer(PCustomer) returns (google.protobuf.Int32Value);
 
-  rpc getCustomerById(google.protobuf.Int32Value) returns (GetCustomerResponse);
+  rpc getCustomerById(google.protobuf.Int32Value) returns (CustomerResponse);
 }

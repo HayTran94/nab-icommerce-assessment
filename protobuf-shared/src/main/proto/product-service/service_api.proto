@@ -12,4 +12,8 @@ service ProductService {
   rpc createProduct(PProduct) returns (google.protobuf.Int32Value);
 
   rpc updateProduct(PProduct) returns (google.protobuf.Int32Value);
+
+  rpc getProductsById(google.protobuf.Int32Value) returns (ProductResponse);
+
+  rpc getProductsByCriteria(ProductSearchCriteria) returns (ProductListResponse);
 }

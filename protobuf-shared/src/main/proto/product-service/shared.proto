@@ -15,7 +15,22 @@ message PProduct {
   string unit = 7;
 }
 
-message GetProductResponse {
+message ProductResponse {
   int32 code = 1;
   PProduct data = 2;
+}
+
+message ProductSearchCriteria {
+  string name = 1;
+  string brand = 2;
+  int32 priceFrom = 3;
+  int32 priceTo = 4;
+  string color = 5;
+  string image = 6;
+  string unit = 7;
+}
+
+message ProductListResponse {
+  int32 code = 1;
+  repeated PProduct data = 2;
 }

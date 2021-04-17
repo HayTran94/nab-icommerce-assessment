@@ -15,7 +15,7 @@ message PCustomer {
   string token = 7;
 }
 
-message GetCustomerResponse {
+message CustomerResponse {
   int32 code = 1;
   PCustomer data = 2;
 }
