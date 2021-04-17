@@ -1,0 +1,58 @@
+version: '3.7'
+services:
+  zookeeper:
+    image: debezium/zookeeper:${DEBEZIUM_VERSION}
+    container_name: icommerce-zookeeper
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+  kafka:
+    image: debezium/kafka:${DEBEZIUM_VERSION}
+    container_name: icommerce-kafka
+    ports:
+      - 9092:9092
+    links:
+      - zookeeper
+    environment:
+      - ZOOKEEPER_CONNECT=zookeeper:2181
+  mysql:
+    image: mysql:8.0
+    container_name: icommerce-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456789
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/log:/var/log/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d/:ro
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.0
+    container_name: icommerce-elasticsearch
+    ports:
+      - 9200:9200
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=127.0.0.1
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  debezium:
+    image: debezium/connect-jdbc-es:${DEBEZIUM_VERSION}
+    container_name: icommerce-debezium
+    build:
+      context: debezium
+    ports:
+      - 8083:8083
+      - 5005:5005
+    links:
+      - kafka
+      - mysql
+      - elasticsearch
+    environment:
+      - BOOTSTRAP_SERVERS=kafka:9092
+      - GROUP_ID=1
+      - CONFIG_STORAGE_TOPIC=my_connect_configs
+      - OFFSET_STORAGE_TOPIC=my_connect_offsets
+      - STATUS_STORAGE_TOPIC=my_source_connect_statuses
