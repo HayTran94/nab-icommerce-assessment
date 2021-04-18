@@ -1,11 +1,11 @@
 package au.com.nab.icommerce.customer.mapper;
 
-import au.com.nab.icommerce.customer.entity.Customer;
+import au.com.nab.icommerce.customer.domain.Customer;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 
 public class CustomerMapper {
 
-    public static Customer toEntity(PCustomer protobuf) {
+    public static Customer toDomain(PCustomer protobuf) {
         Customer entity = new Customer();
         entity.setId(protobuf.getId());
         entity.setName(protobuf.getName());

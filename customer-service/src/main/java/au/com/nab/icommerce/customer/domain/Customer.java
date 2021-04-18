@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.customer.entity;
+package au.com.nab.icommerce.customer.domain;
 
 import lombok.Getter;
 import lombok.Setter;
