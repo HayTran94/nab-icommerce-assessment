@@ -9,7 +9,7 @@ import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @GRpcService
-public class ProductServiceGrpcServer extends ProductCommandServiceGrpc.ProductCommandServiceImplBase {
+public class ProductCommandServiceGrpcServer extends ProductCommandServiceGrpc.ProductCommandServiceImplBase {
 
     @Autowired
     private ProductService customerService;
