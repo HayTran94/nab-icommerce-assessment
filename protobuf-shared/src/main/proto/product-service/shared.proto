@@ -15,13 +15,16 @@ message PProduct {
   string unit = 7;
 }
 
-message PProductSearchCriteria {
+message PProductCriteria {
   string name = 1;
   string brand = 2;
   int32 priceFrom = 3;
   int32 priceTo = 4;
   string color = 5;
   string unit = 6;
+
+  int32 pageIndex = 100;
+  int32 pageSize = 101;
 }
 
 message ProductListResponse {

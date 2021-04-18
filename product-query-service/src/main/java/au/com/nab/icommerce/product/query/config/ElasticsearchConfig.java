@@ -11,10 +11,10 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "au.com.nab.icommerce.product.repository")
+@EnableElasticsearchRepositories(basePackages = "au.com.nab.icommerce.product.query.repository")
 public class ElasticsearchConfig {
 
-    @Value("spring.elasticsearch.rest.uris")
+    @Value("${spring.elasticsearch.rest.uris}")
     private String elasticsearchUris;
 
     @Bean

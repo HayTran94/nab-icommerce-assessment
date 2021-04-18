@@ -12,15 +12,15 @@
 
     <artifactId>read-product-service</artifactId>
 
-    <properties>
-        <spring-es.version>4.2.0</spring-es.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-elasticsearch</artifactId>
-            <version>${spring-es.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
         </dependency>
 
         <dependency>

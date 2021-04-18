@@ -3,6 +3,9 @@ package au.com.nab.icommerce.product.query.mapper;
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import au.com.nab.icommerce.product.query.domain.Product;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ProductMapper {
 
     public static Product toDomain(PProduct protobuf) {
@@ -29,5 +32,11 @@ public class ProductMapper {
         protobuf.setUnit(entity.getUnit());
 
         return protobuf.build();
+    }
+
+    public static List<PProduct> toProtobuf(List<Product> entities) {
+        return entities.stream()
+                .map(ProductMapper::toProtobuf)
+                .collect(Collectors.toList());
     }
 }
