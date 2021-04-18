@@ -9,7 +9,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Getter
 @Setter
-@Document(indexName = "product")
+@Document(indexName = "cdc.nab_product.product")
 public class Product {
 
     @Id

@@ -8,13 +8,14 @@
         "database.user": "root",
         "database.password": "123456789",
         "database.server.id": "184054",
-        "database.server.name": "dbserver1",
+        "database.server.name": "mysql_server",
         "database.include": "nab_product",
         "database.history.kafka.bootstrap.servers": "kafka:9092",
         "database.history.kafka.topic": "schema-changes.nab_product",
+        "include.schema.changes": true,
         "transforms": "route",
         "transforms.route.type": "org.apache.kafka.connect.transforms.RegexRouter",
         "transforms.route.regex": "([^.]+)\\.([^.]+)\\.([^.]+)",
-        "transforms.route.replacement": "$3"
+        "transforms.route.replacement": "cdc.$2.$3"
     }
 }
