@@ -20,6 +20,7 @@
         <module>product-command-service</module>
         <module>product-query-service</module>
         <module>cart-service</module>
+        <module>customer-auditing-service</module>
     </modules>
 
     <properties>

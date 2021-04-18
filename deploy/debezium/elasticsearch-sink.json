@@ -3,7 +3,7 @@
     "config": {
         "connector.class": "io.confluent.connect.elasticsearch.ElasticsearchSinkConnector",
         "tasks.max": "1",
-        "topics": "cdc.nab_product.product",
+        "topics": "cdc-product",
         "connection.url": "http://elasticsearch:9200",
         "transforms": "unwrap,key",
         "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
@@ -11,7 +11,7 @@
         "transforms.key.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
         "transforms.key.field": "id",
         "key.ignore": "false",
-        "type.name": "product",
+        "type.name": "nab-product",
         "behavior.on.null.values": "delete"
     }
 }
