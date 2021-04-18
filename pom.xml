@@ -19,6 +19,7 @@
         <module>customer-service</module>
         <module>product-command-service</module>
         <module>product-query-service</module>
+        <module>cart-service</module>
     </modules>
 
     <properties>

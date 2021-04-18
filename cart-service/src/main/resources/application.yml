@@ -1,0 +1,10 @@
+server:
+  port: 8300
+
+grpc:
+  port: 8301
+
+spring:
+  redis:
+    host: localhost
+    port: 6379

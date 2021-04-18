@@ -1,0 +1,15 @@
+syntax = "proto3";
+package cart.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.cart.api";
+option java_outer_classname = "CartServiceApi";
+
+import "google/protobuf/wrappers.proto";
+import "cart-service/shared.proto";
+
+service CartService {
+  rpc addItemToCart(PAddItemRequest) returns (google.protobuf.Int32Value);
+
+  rpc getCartByCustomerId(google.protobuf.Int32Value) returns (PCart);
+}
