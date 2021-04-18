@@ -17,7 +17,8 @@
     <modules>
         <module>protobuf-shared</module>
         <module>customer-service</module>
-        <module>write-product-service</module>
+        <module>product-command-service</module>
+        <module>product-query-service</module>
     </modules>
 
     <properties>
@@ -29,6 +30,7 @@
         <protobuf.version>3.15.8</protobuf.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <grpcspringboot.version>4.4.5</grpcspringboot.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
     </properties>
 
     <dependencies>
@@ -59,11 +61,22 @@
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-jdk8</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

@@ -1,0 +1,10 @@
+server:
+  port: 8200
+
+grpc:
+  port: 8201
+
+spring:
+  elasticsearch:
+    rest:
+      uris: http://localhost:9200

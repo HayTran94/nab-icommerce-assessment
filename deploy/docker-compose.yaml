@@ -28,7 +28,7 @@ services:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d/:ro
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.3.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.3
     container_name: icommerce-elasticsearch
     ports:
       - 9200:9200
