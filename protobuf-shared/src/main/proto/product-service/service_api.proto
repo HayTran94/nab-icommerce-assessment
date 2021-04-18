@@ -8,12 +8,15 @@ option java_outer_classname = "ProductServiceApi";
 import "google/protobuf/wrappers.proto";
 import "product-service/shared.proto";
 
-service ProductService {
+service ProductCommandService {
   rpc createProduct(PProduct) returns (google.protobuf.Int32Value);
 
   rpc updateProduct(PProduct) returns (google.protobuf.Int32Value);
-
-  rpc getProductsById(google.protobuf.Int32Value) returns (ProductResponse);
-
-  rpc getProductsByCriteria(ProductSearchCriteria) returns (ProductListResponse);
 }
+
+service ProductQueryService {
+  rpc getProductsById(google.protobuf.Int32Value) returns (PProduct);
+
+  rpc searchProductsByCriteria(PProductSearchCriteria) returns (ProductListResponse);
+}
+

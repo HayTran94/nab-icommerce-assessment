@@ -14,8 +14,3 @@ message PCustomer {
   string photoUrl = 6;
   string token = 7;
 }
-
-message CustomerResponse {
-  int32 code = 1;
-  PCustomer data = 2;
-}
