@@ -47,7 +47,6 @@ public class CartServiceImpl implements CartService {
                 Cart init = new Cart();
                 init.setId(cartCacheKey);
                 init.setCustomerId(customerId);
-                init.setCustomerName(addItemRequest.getCustomerName());
                 return init;
             });
 
@@ -84,7 +83,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public PCart getCartByCustomerId(Int32Value customerId) {
+    public PCart getCustomerCart(Int32Value customerId) {
         PCart pCart = null;
         try {
             String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId.getValue());
@@ -97,5 +96,18 @@ public class CartServiceImpl implements CartService {
             e.printStackTrace();
         }
         return pCart;
+    }
+
+    @Override
+    public Int32Value clearCustomerCart(Int32Value customerId) {
+        int res = ErrorCode.FAILED;
+        try {
+            String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId.getValue());
+            cartRepository.deleteById(cartCacheKey);
+            res = ErrorCode.SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Int32Value.of(res);
     }
 }

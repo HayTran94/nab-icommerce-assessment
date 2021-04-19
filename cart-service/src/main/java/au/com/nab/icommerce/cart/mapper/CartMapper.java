@@ -17,7 +17,6 @@ public class CartMapper extends AbstractProtobufMapper<Cart, PCart> {
         Cart entity = new Cart();
         entity.setId(protobuf.getId());
         entity.setCustomerId(protobuf.getCustomerId());
-        entity.setCustomerName(protobuf.getCustomerName());
         entity.setItems(itemMapper.toDomain(protobuf.getItemsList()));
 
         return entity;
@@ -28,7 +27,6 @@ public class CartMapper extends AbstractProtobufMapper<Cart, PCart> {
         PCart.Builder protobuf = PCart.newBuilder();
         protobuf.setId(entity.getId());
         protobuf.setCustomerId(entity.getCustomerId());
-        protobuf.setCustomerName(entity.getCustomerName());
         protobuf.addAllItems(itemMapper.toProtobuf(entity.getItems()));
 
         return protobuf.build();

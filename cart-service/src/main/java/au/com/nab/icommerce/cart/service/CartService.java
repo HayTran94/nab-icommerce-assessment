@@ -7,5 +7,7 @@ import com.google.protobuf.Int32Value;
 public interface CartService {
     Int32Value addItemToCart(PAddItemRequest addItemRequest);
 
-    PCart getCartByCustomerId(Int32Value customerId);
+    PCart getCustomerCart(Int32Value customerId);
+
+    Int32Value clearCustomerCart(Int32Value customerId);
 }

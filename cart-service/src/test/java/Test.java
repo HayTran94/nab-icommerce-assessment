@@ -16,13 +16,12 @@ public class Test {
 
         PAddItemRequest addItemRequest = PAddItemRequest.newBuilder()
                 .setCustomerId(1)
-                .setCustomerName("Vo Thanh Tai")
                 .addItems(PItem.newBuilder().setProductId(102).setQuantity(1).build())
                 .build();
         Int32Value res = blockingStub.addItemToCart(addItemRequest);
         System.out.println("Add: " + res);
 
-        PCart response = blockingStub.getCartByCustomerId(Int32Value.of(1));
+        PCart response = blockingStub.getCustomerCart(Int32Value.of(1));
         System.out.println(response);
 
         channel.shutdown();

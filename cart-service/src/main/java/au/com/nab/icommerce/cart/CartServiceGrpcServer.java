@@ -23,10 +23,16 @@ public class CartServiceGrpcServer extends CartServiceGrpc.CartServiceImplBase {
     }
 
     @Override
-    public void getCartByCustomerId(Int32Value request, StreamObserver<PCart> responseObserver) {
-        PCart result = cartService.getCartByCustomerId(request);
+    public void getCustomerCart(Int32Value request, StreamObserver<PCart> responseObserver) {
+        PCart result = cartService.getCustomerCart(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }
 
+    @Override
+    public void clearCustomerCart(Int32Value request, StreamObserver<Int32Value> responseObserver) {
+        Int32Value result = cartService.clearCustomerCart(request);
+        responseObserver.onNext(result);
+        responseObserver.onCompleted();
+    }
 }
