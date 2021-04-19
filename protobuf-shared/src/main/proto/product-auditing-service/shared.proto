@@ -1,0 +1,18 @@
+syntax = "proto3";
+package product.auditing.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.product.auditing.protobuf";
+option java_outer_classname = "ProductAuditingServiceDomain";
+
+message PProductPriceHistory {
+  string id = 1;
+  int32 productId = 2;
+  int32 oldPrice = 3;
+  int32 newPrice = 4;
+  int64 dateTime = 5;
+}
+
+message PProductPriceHistoriesResponse {
+  repeated PProductPriceHistory productPriceHistories = 1;
+}

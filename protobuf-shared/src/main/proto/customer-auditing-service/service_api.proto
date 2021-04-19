@@ -11,7 +11,7 @@ import "customer-auditing-service/shared.proto";
 service CustomerAuditingService {
   rpc addCustomerActivity(PCustomerActivity) returns (google.protobuf.Int32Value);
 
-  rpc addCustomerActivities(PCustomerActivityListRequest) returns (google.protobuf.Int32Value);
+  rpc addCustomerActivities(PCustomerActivitiesRequest) returns (google.protobuf.Int32Value);
 
-  rpc getCustomerActivitiesByCustomerId(google.protobuf.Int32Value) returns (PCustomerActivityListResponse);
+  rpc getCustomerActivitiesByCustomerId(google.protobuf.Int32Value) returns (PCustomerActivitiesResponse);
 }

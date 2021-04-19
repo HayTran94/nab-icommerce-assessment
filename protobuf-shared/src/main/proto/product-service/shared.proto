@@ -27,6 +27,6 @@ message PProductCriteria {
   int32 pageSize = 101;
 }
 
-message PProductListResponse {
+message PProductsResponse {
   repeated PProduct products = 1;
 }

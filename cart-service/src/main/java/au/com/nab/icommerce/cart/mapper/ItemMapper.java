@@ -13,7 +13,7 @@ public class ItemMapper extends AbstractProtobufMapper<Item, PItem> {
         Item entity = new Item();
         entity.setProductId(protobuf.getProductId());
         entity.setQuantity(protobuf.getQuantity());
-        entity.setAddedTime(protobuf.getAddedTime());
+        entity.setDateTime(protobuf.getDateTime());
 
         return entity;
     }
@@ -23,7 +23,7 @@ public class ItemMapper extends AbstractProtobufMapper<Item, PItem> {
         PItem.Builder protobuf = PItem.newBuilder();
         protobuf.setProductId(entity.getProductId());
         protobuf.setQuantity(entity.getQuantity());
-        protobuf.setAddedTime(entity.getAddedTime());
+        protobuf.setDateTime(entity.getDateTime());
 
         return protobuf.build();
     }

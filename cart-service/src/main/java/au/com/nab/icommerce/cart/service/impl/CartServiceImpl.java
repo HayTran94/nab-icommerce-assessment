@@ -59,8 +59,8 @@ public class CartServiceImpl implements CartService {
 
             for (Item newItem : newItems) {
                 // Set added time for new item
-                if (newItem.getAddedTime() == 0) {
-                    newItem.setAddedTime(System.currentTimeMillis());
+                if (newItem.getDateTime() == 0) {
+                    newItem.setDateTime(System.currentTimeMillis());
                 }
 
                 // Add new item into current items

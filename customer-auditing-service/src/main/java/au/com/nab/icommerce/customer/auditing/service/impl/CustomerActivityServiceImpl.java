@@ -3,9 +3,9 @@ package au.com.nab.icommerce.customer.auditing.service.impl;
 import au.com.nab.icommerce.common.constant.ErrorCode;
 import au.com.nab.icommerce.customer.auditing.domain.CustomerActivity;
 import au.com.nab.icommerce.customer.auditing.mapper.CustomerActivityMapper;
+import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivitiesRequest;
+import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivitiesResponse;
 import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivity;
-import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivityListRequest;
-import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivityListResponse;
 import au.com.nab.icommerce.customer.auditing.repository.CustomerActivityRepository;
 import au.com.nab.icommerce.customer.auditing.service.CustomerActivityService;
 import com.google.protobuf.Int32Value;
@@ -40,7 +40,7 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
     }
 
     @Override
-    public Int32Value addCustomerActivities(PCustomerActivityListRequest pCustomerActivityListRequest) {
+    public Int32Value addCustomerActivities(PCustomerActivitiesRequest pCustomerActivityListRequest) {
         int res = ErrorCode.FAILED;
         try {
             List<PCustomerActivity> pCustomerActivities = pCustomerActivityListRequest.getCustomerActivitiesList();
@@ -54,7 +54,7 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
     }
 
     @Override
-    public PCustomerActivityListResponse getCustomerActivitiesByCustomerId(Int32Value customerId) {
+    public PCustomerActivitiesResponse getCustomerActivitiesByCustomerId(Int32Value customerId) {
         List<PCustomerActivity> pCustomerActivities = Collections.emptyList();
         try {
             List<CustomerActivity> customerActivities = customerActivityRepository.findAllByCustomerId(customerId.getValue());
@@ -62,7 +62,7 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PCustomerActivityListResponse.newBuilder().addAllCustomerActivities(pCustomerActivities).build();
+        return PCustomerActivitiesResponse.newBuilder().addAllCustomerActivities(pCustomerActivities).build();
     }
 
 }

@@ -1,7 +1,7 @@
 import au.com.nab.icommerce.customer.auditing.api.CustomerAuditingServiceGrpc;
 import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivity;
-import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivityListRequest;
-import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivityListResponse;
+import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivitiesRequest;
+import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivitiesResponse;
 import com.google.protobuf.Int32Value;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -31,7 +31,7 @@ public class Test {
                 .setTime(System.currentTimeMillis())
                 .setData("{\"productId\":100,\"data\":{\"order_no\":\"210416000400843\",\"hl_order_stt\":\"CANCELLED\",\"ts\":1618787759611,\"sig\":\"3b3d086675aaae03fbf064a0c44dcef3d7b963d1d28f4d3c2f51f5cabcb02dbf\"}}")
                 .build();
-        PCustomerActivityListRequest customerActivityListRequest = PCustomerActivityListRequest.newBuilder()
+        PCustomerActivitiesRequest customerActivityListRequest = PCustomerActivitiesRequest.newBuilder()
                 .addCustomerActivities(pCustomerActivity1)
                 .addCustomerActivities(pCustomerActivity2)
                 .build();
@@ -40,7 +40,7 @@ public class Test {
 
         System.out.println("========================================================================");
 
-        PCustomerActivityListResponse customerActivityListResponse = blockingStub.getCustomerActivitiesByCustomerId(Int32Value.of(1));
+        PCustomerActivitiesResponse customerActivityListResponse = blockingStub.getCustomerActivitiesByCustomerId(Int32Value.of(1));
         System.out.println("getCustomerActivitiesByCustomerId: " + customerActivityListResponse);
 
         channel.shutdown();

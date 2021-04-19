@@ -8,7 +8,7 @@ option java_outer_classname = "CartServiceDomain";
 message PItem {
   int32 productId = 1;
   int32 quantity = 2;
-  int64 addedTime = 3;
+  int64 dateTime = 3;
 }
 
 message PCart {

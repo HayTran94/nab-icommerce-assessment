@@ -10,5 +10,5 @@ import org.springframework.data.redis.core.RedisHash;
 public class Item {
     private Integer productId;
     private Integer quantity;
-    private Long addedTime;
+    private Long dateTime;
 }

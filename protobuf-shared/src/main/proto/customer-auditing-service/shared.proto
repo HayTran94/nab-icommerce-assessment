@@ -13,10 +13,10 @@ message PCustomerActivity {
   string data = 5;
 }
 
-message PCustomerActivityListRequest {
+message PCustomerActivitiesRequest {
   repeated PCustomerActivity customerActivities = 1;
 }
 
-message PCustomerActivityListResponse {
+message PCustomerActivitiesResponse {
   repeated PCustomerActivity customerActivities = 1;
 }

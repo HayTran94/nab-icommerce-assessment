@@ -1,9 +1,9 @@
 package au.com.nab.icommerce.customer.auditing;
 
 import au.com.nab.icommerce.customer.auditing.api.CustomerAuditingServiceGrpc;
+import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivitiesRequest;
+import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivitiesResponse;
 import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivity;
-import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivityListRequest;
-import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivityListResponse;
 import au.com.nab.icommerce.customer.auditing.service.CustomerActivityService;
 import com.google.protobuf.Int32Value;
 import io.grpc.stub.StreamObserver;
@@ -24,15 +24,15 @@ public class CustomerAuditingServiceGrpcServer extends CustomerAuditingServiceGr
     }
 
     @Override
-    public void addCustomerActivities(PCustomerActivityListRequest request, StreamObserver<Int32Value> responseObserver) {
+    public void addCustomerActivities(PCustomerActivitiesRequest request, StreamObserver<Int32Value> responseObserver) {
         Int32Value result = customerActivityService.addCustomerActivities(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }
 
     @Override
-    public void getCustomerActivitiesByCustomerId(Int32Value request, StreamObserver<PCustomerActivityListResponse> responseObserver) {
-        PCustomerActivityListResponse result = customerActivityService.getCustomerActivitiesByCustomerId(request);
+    public void getCustomerActivitiesByCustomerId(Int32Value request, StreamObserver<PCustomerActivitiesResponse> responseObserver) {
+        PCustomerActivitiesResponse result = customerActivityService.getCustomerActivitiesByCustomerId(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }

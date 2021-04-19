@@ -2,7 +2,7 @@ package au.com.nab.icommerce.product.query.service.impl;
 
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import au.com.nab.icommerce.product.protobuf.PProductCriteria;
-import au.com.nab.icommerce.product.protobuf.PProductListResponse;
+import au.com.nab.icommerce.product.protobuf.PProductsResponse;
 import au.com.nab.icommerce.product.query.domain.Product;
 import au.com.nab.icommerce.product.query.dto.ProductCriteria;
 import au.com.nab.icommerce.product.query.mapper.ProductCriteriaMapper;
@@ -41,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PProductListResponse getProductsByCriteria(PProductCriteria criteria) {
+    public PProductsResponse getProductsByCriteria(PProductCriteria criteria) {
         List<PProduct> pProducts = Collections.emptyList();
         try {
             ProductCriteria productCriteria = ProductCriteriaMapper.toDto(criteria);
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PProductListResponse.newBuilder().addAllProducts(pProducts).build();
+        return PProductsResponse.newBuilder().addAllProducts(pProducts).build();
     }
 
 }
