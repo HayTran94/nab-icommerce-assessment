@@ -1,0 +1,22 @@
+syntax = "proto3";
+package customer.auditing.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.customer.auditing.protobuf";
+option java_outer_classname = "CustomerAuditingServiceDomain";
+
+message PCustomerActivity {
+  string id = 1;
+  int32 customerId = 2;
+  string action = 3;
+  int64 time = 4;
+  string data = 5;
+}
+
+message PCustomerActivityListRequest {
+  repeated PCustomerActivity customerActivities = 1;
+}
+
+message PCustomerActivityListResponse {
+  repeated PCustomerActivity customerActivities = 1;
+}

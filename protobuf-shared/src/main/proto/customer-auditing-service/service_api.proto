@@ -1,0 +1,17 @@
+syntax = "proto3";
+package customer.auditing.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.customer.auditing.api";
+option java_outer_classname = "CustomerAuditingServiceApi";
+
+import "google/protobuf/wrappers.proto";
+import "customer-auditing-service/shared.proto";
+
+service CustomerAuditingService {
+  rpc addCustomerActivity(PCustomerActivity) returns (google.protobuf.Int32Value);
+
+  rpc addCustomerActivities(PCustomerActivityListRequest) returns (google.protobuf.Int32Value);
+
+  rpc getCustomerActivitiesByCustomerId(google.protobuf.Int32Value) returns (PCustomerActivityListResponse);
+}
