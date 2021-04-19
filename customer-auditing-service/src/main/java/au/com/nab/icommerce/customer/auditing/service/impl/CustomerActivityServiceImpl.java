@@ -1,6 +1,6 @@
 package au.com.nab.icommerce.customer.auditing.service.impl;
 
-import au.com.nab.icommerce.common.constant.ErrorCode;
+import au.com.nab.icommerce.common.error.ErrorCode;
 import au.com.nab.icommerce.customer.auditing.domain.CustomerActivity;
 import au.com.nab.icommerce.customer.auditing.mapper.CustomerActivityMapper;
 import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivitiesRequest;

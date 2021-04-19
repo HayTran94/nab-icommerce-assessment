@@ -1,6 +1,6 @@
 package au.com.nab.icommerce.customer.service.impl;
 
-import au.com.nab.icommerce.common.constant.ErrorCode;
+import au.com.nab.icommerce.common.error.ErrorCode;
 import au.com.nab.icommerce.customer.domain.Customer;
 import au.com.nab.icommerce.customer.mapper.CustomerMapper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;

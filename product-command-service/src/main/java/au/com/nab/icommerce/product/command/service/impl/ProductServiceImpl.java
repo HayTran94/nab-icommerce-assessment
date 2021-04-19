@@ -1,6 +1,6 @@
 package au.com.nab.icommerce.product.command.service.impl;
 
-import au.com.nab.icommerce.common.constant.ErrorCode;
+import au.com.nab.icommerce.common.error.ErrorCode;
 import au.com.nab.icommerce.product.command.domain.Product;
 import au.com.nab.icommerce.product.command.mapper.ProductMapper;
 import au.com.nab.icommerce.product.command.repository.ProductRepository;

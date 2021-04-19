@@ -10,7 +10,7 @@ import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.cart.protobuf.PItem;
 import au.com.nab.icommerce.cart.repository.CartRepository;
 import au.com.nab.icommerce.cart.service.CartService;
-import au.com.nab.icommerce.common.constant.ErrorCode;
+import au.com.nab.icommerce.common.error.ErrorCode;
 import com.google.protobuf.Int32Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

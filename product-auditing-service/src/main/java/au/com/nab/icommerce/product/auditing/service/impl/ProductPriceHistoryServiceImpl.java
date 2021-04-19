@@ -1,6 +1,6 @@
 package au.com.nab.icommerce.product.auditing.service.impl;
 
-import au.com.nab.icommerce.common.constant.ErrorCode;
+import au.com.nab.icommerce.common.error.ErrorCode;
 import au.com.nab.icommerce.product.auditing.domain.ProductPriceHistory;
 import au.com.nab.icommerce.product.auditing.mapper.ProductPriceHistoryMapper;
 import au.com.nab.icommerce.product.auditing.protobuf.PProductPriceHistoriesResponse;
