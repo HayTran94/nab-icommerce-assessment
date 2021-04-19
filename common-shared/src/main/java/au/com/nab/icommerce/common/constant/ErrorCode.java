@@ -1,6 +1,6 @@
-package au.com.nab.icommerce.product.query.constant;
+package au.com.nab.icommerce.common.constant;
 
-public class ErrorConstant {
+public class ErrorCode {
     public static final int SUCCESS = 0;
     public static final int FAILED = -1;
 

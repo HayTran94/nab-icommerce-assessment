@@ -19,8 +19,12 @@ import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductMapper productMapper;
 
     @Override
     public PProduct getProductById(Int32Value id) {
@@ -28,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             Optional<Product> product = productRepository.findById(id.getValue());
             if (product.isPresent()) {
-                pProduct = ProductMapper.toProtobuf(product.get());
+                pProduct = productMapper.toProtobuf(product.get());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -42,7 +46,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             ProductCriteria productCriteria = ProductCriteriaMapper.toDto(criteria);
             List<Product> products = productRepository.findProductsByCriteria(productCriteria);
-            pProducts = ProductMapper.toProtobuf(products);
+            pProducts = productMapper.toProtobuf(products);
         } catch (Exception e) {
             e.printStackTrace();
         }

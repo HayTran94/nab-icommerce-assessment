@@ -1,6 +1,6 @@
 package au.com.nab.icommerce.customer.auditing.service.impl;
 
-import au.com.nab.icommerce.common.constant.ErrorConstant;
+import au.com.nab.icommerce.common.constant.ErrorCode;
 import au.com.nab.icommerce.customer.auditing.domain.CustomerActivity;
 import au.com.nab.icommerce.customer.auditing.mapper.CustomerActivityMapper;
 import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivity;
@@ -28,11 +28,11 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
 
     @Override
     public Int32Value addCustomerActivity(PCustomerActivity pCustomerActivity) {
-        int res = ErrorConstant.FAILED;
+        int res = ErrorCode.FAILED;
         try {
             CustomerActivity customerActivity = customerActivityMapper.toDomain(pCustomerActivity);
             customerActivityRepository.save(customerActivity);
-            res = ErrorConstant.SUCCESS;
+            res = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,12 +41,12 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
 
     @Override
     public Int32Value addCustomerActivities(PCustomerActivityListRequest pCustomerActivityListRequest) {
-        int res = ErrorConstant.FAILED;
+        int res = ErrorCode.FAILED;
         try {
             List<PCustomerActivity> pCustomerActivities = pCustomerActivityListRequest.getCustomerActivitiesList();
             List<CustomerActivity> customerActivities = customerActivityMapper.toDomain(pCustomerActivities);
             customerActivityRepository.saveAll(customerActivities);
-            res = ErrorConstant.SUCCESS;
+            res = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,6 +1,6 @@
 package au.com.nab.icommerce.product.command.service.impl;
 
-import au.com.nab.icommerce.product.command.constant.AppConstant;
+import au.com.nab.icommerce.common.constant.ErrorCode;
 import au.com.nab.icommerce.product.command.domain.Product;
 import au.com.nab.icommerce.product.command.mapper.ProductMapper;
 import au.com.nab.icommerce.product.command.repository.ProductRepository;
@@ -18,14 +18,17 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ProductMapper productMapper;
+
     @Override
     public Int32Value createProduct(PProduct pProduct) {
-        int res = AppConstant.FAILED;
+        int res = ErrorCode.FAILED;
         try {
-            Product product = ProductMapper.toDomain(pProduct);
+            Product product = productMapper.toDomain(pProduct);
             product = productRepository.save(product);
             if (product.getId() > 0) {
-                res = AppConstant.SUCCESS;
+                res = ErrorCode.SUCCESS;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,11 +39,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Int32Value updateProduct(PProduct pProduct) {
-        int res = AppConstant.FAILED;
+        int res = ErrorCode.FAILED;
         try {
-            Product product = ProductMapper.toDomain(pProduct);
+            Product product = productMapper.toDomain(pProduct);
             productRepository.save(product);
-            res = AppConstant.SUCCESS;
+            res = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }

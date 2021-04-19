@@ -1,11 +1,15 @@
 package au.com.nab.icommerce.product.command.mapper;
 
+import au.com.nab.icommerce.common.mapper.AbstractProtobufMapper;
 import au.com.nab.icommerce.product.command.domain.Product;
 import au.com.nab.icommerce.product.protobuf.PProduct;
+import org.springframework.stereotype.Component;
 
-public class ProductMapper {
+@Component
+public class ProductMapper extends AbstractProtobufMapper<Product, PProduct> {
 
-    public static Product toDomain(PProduct protobuf) {
+    @Override
+    public Product toDomain(PProduct protobuf) {
         Product entity = new Product();
         entity.setId(protobuf.getId());
         entity.setName(protobuf.getName());
@@ -18,7 +22,8 @@ public class ProductMapper {
         return entity;
     }
 
-    public static PProduct toProtobuf(Product entity) {
+    @Override
+    public PProduct toProtobuf(Product entity) {
         PProduct.Builder protobuf = PProduct.newBuilder();
         protobuf.setId(entity.getId());
         protobuf.setName(entity.getName());

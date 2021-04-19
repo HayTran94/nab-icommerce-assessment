@@ -1,7 +1,6 @@
 package au.com.nab.icommerce.cart.service.impl;
 
 import au.com.nab.icommerce.cart.cache.CacheKeyManager;
-import au.com.nab.icommerce.cart.constant.AppConstant;
 import au.com.nab.icommerce.cart.domain.Cart;
 import au.com.nab.icommerce.cart.domain.Item;
 import au.com.nab.icommerce.cart.mapper.CartMapper;
@@ -11,6 +10,7 @@ import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.cart.protobuf.PItem;
 import au.com.nab.icommerce.cart.repository.CartRepository;
 import au.com.nab.icommerce.cart.service.CartService;
+import au.com.nab.icommerce.common.constant.ErrorCode;
 import com.google.protobuf.Int32Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +35,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Int32Value addItemToCart(PAddItemRequest addItemRequest) {
-        int res = AppConstant.FAILED;
+        int res = ErrorCode.FAILED;
         try {
             int customerId = addItemRequest.getCustomerId();
             List<PItem> pItems = addItemRequest.getItemsList();
@@ -75,7 +75,7 @@ public class CartServiceImpl implements CartService {
             }
 
             cartRepository.save(cart);
-            res = AppConstant.SUCCESS;
+            res = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }

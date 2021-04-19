@@ -2,6 +2,7 @@ package au.com.nab.icommerce.cart.mapper;
 
 import au.com.nab.icommerce.cart.domain.Item;
 import au.com.nab.icommerce.cart.protobuf.PItem;
+import au.com.nab.icommerce.common.mapper.AbstractProtobufMapper;
 import org.springframework.stereotype.Component;
 
 @Component

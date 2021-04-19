@@ -1,14 +1,15 @@
 package au.com.nab.icommerce.product.query.mapper;
 
+import au.com.nab.icommerce.common.mapper.AbstractProtobufMapper;
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import au.com.nab.icommerce.product.query.domain.Product;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
+@Component
+public class ProductMapper extends AbstractProtobufMapper<Product, PProduct> {
 
-public class ProductMapper {
-
-    public static Product toDomain(PProduct protobuf) {
+    @Override
+    public Product toDomain(PProduct protobuf) {
         Product entity = new Product();
         entity.setId(protobuf.getId());
         entity.setName(protobuf.getName());
@@ -21,7 +22,8 @@ public class ProductMapper {
         return entity;
     }
 
-    public static PProduct toProtobuf(Product entity) {
+    @Override
+    public PProduct toProtobuf(Product entity) {
         PProduct.Builder protobuf = PProduct.newBuilder();
         protobuf.setId(entity.getId());
         protobuf.setName(entity.getName());
@@ -34,9 +36,4 @@ public class ProductMapper {
         return protobuf.build();
     }
 
-    public static List<PProduct> toProtobuf(List<Product> entities) {
-        return entities.stream()
-                .map(ProductMapper::toProtobuf)
-                .collect(Collectors.toList());
-    }
 }

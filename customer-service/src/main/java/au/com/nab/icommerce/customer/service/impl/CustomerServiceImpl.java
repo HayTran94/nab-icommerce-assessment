@@ -1,6 +1,6 @@
 package au.com.nab.icommerce.customer.service.impl;
 
-import au.com.nab.icommerce.customer.constant.AppConstant;
+import au.com.nab.icommerce.common.constant.ErrorCode;
 import au.com.nab.icommerce.customer.domain.Customer;
 import au.com.nab.icommerce.customer.mapper.CustomerMapper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
@@ -16,17 +16,21 @@ import java.util.Optional;
 @Service
 @Transactional(rollbackFor = Throwable.class)
 public class CustomerServiceImpl implements CustomerService {
+
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Autowired
+    private CustomerMapper customerMapper;
+
     @Override
     public Int32Value createCustomer(PCustomer pCustomer) {
-        int res = AppConstant.FAILED;
+        int res = ErrorCode.FAILED;
         try {
-            Customer customer = CustomerMapper.toDomain(pCustomer);
+            Customer customer = customerMapper.toDomain(pCustomer);
             customer = customerRepository.save(customer);
             if (customer.getId() > 0) {
-                res = AppConstant.SUCCESS;
+                res = customer.getId();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
         try {
             Optional<Customer> customer = customerRepository.findById(id.getValue());
             if (customer.isPresent()) {
-                pCustomer = CustomerMapper.toProtobuf(customer.get());
+                pCustomer = customerMapper.toProtobuf(customer.get());
             }
         } catch (Exception e) {
             e.printStackTrace();

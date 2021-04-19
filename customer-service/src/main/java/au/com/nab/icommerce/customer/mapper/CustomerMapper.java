@@ -1,11 +1,15 @@
 package au.com.nab.icommerce.customer.mapper;
 
+import au.com.nab.icommerce.common.mapper.AbstractProtobufMapper;
 import au.com.nab.icommerce.customer.domain.Customer;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
+import org.springframework.stereotype.Component;
 
-public class CustomerMapper {
+@Component
+public class CustomerMapper extends AbstractProtobufMapper<Customer, PCustomer> {
 
-    public static Customer toDomain(PCustomer protobuf) {
+    @Override
+    public Customer toDomain(PCustomer protobuf) {
         Customer entity = new Customer();
         entity.setId(protobuf.getId());
         entity.setName(protobuf.getName());
@@ -14,11 +18,11 @@ public class CustomerMapper {
         entity.setProviderId(protobuf.getProviderId());
         entity.setPhotoUrl(protobuf.getPhotoUrl());
         entity.setToken(protobuf.getToken());
-
         return entity;
     }
 
-    public static PCustomer toProtobuf(Customer entity) {
+    @Override
+    public PCustomer toProtobuf(Customer entity) {
         PCustomer.Builder protobuf = PCustomer.newBuilder();
         protobuf.setId(entity.getId());
         protobuf.setName(entity.getName());
@@ -27,7 +31,6 @@ public class CustomerMapper {
         protobuf.setProviderId(entity.getProviderId());
         protobuf.setPhotoUrl(entity.getPhotoUrl());
         protobuf.setToken(entity.getToken());
-
         return protobuf.build();
     }
 }
