@@ -12,18 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ProductCommandServiceGrpcServer extends ProductCommandServiceGrpc.ProductCommandServiceImplBase {
 
     @Autowired
-    private ProductService customerService;
+    private ProductService productService;
 
     @Override
     public void createProduct(PProduct request, StreamObserver<Int32Value> responseObserver) {
-        Int32Value result = customerService.createProduct(request);
+        Int32Value result = productService.createProduct(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }
 
     @Override
     public void updateProduct(PProduct request, StreamObserver<Int32Value> responseObserver) {
-        Int32Value result = customerService.updateProduct(request);
+        Int32Value result = productService.updateProduct(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }

@@ -1,10 +1,12 @@
 package au.com.nab.icommerce.common.mapper;
 
+import com.google.protobuf.GeneratedMessageV3;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class AbstractProtobufMapper<E, P> {
+public abstract class AbstractProtobufMapper<E, P extends GeneratedMessageV3> {
 
     public abstract E toDomain(P protobuf);
 

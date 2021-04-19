@@ -22,6 +22,7 @@
         <module>cart-service</module>
         <module>customer-auditing-service</module>
         <module>common-shared</module>
+        <module>product-auditing-service</module>
     </modules>
 
     <properties>
