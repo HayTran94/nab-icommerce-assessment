@@ -5,6 +5,8 @@ grpc:
   port: 8201
 
 spring:
+  application:
+    name: product-query-service
   elasticsearch:
     rest:
       uris: localhost:9200

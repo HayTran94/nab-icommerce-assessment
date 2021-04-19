@@ -5,6 +5,8 @@ grpc:
   port: 8001
 
 spring:
+  application:
+    name: customer-service
   datasource:
     url: jdbc:mysql://localhost:3306/nab_customer
     username: root

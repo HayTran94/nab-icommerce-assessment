@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: product-auditing-service
   kafka:
     bootstrap-servers:
       - localhost:9092

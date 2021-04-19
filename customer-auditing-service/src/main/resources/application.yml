@@ -5,6 +5,8 @@ grpc:
   port: 8401
 
 spring:
+  application:
+    name: customer-auditing-service
   elasticsearch:
     rest:
       uris: localhost:9200
