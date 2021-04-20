@@ -1,6 +1,6 @@
 import au.com.nab.icommerce.product.api.ProductQueryServiceGrpc;
 import au.com.nab.icommerce.product.protobuf.PProductCriteria;
-import au.com.nab.icommerce.product.protobuf.PProductListResponse;
+import au.com.nab.icommerce.product.protobuf.PProductsResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -19,7 +19,7 @@ public class Test {
                 .setColor("gray")
                 .setUnit("unit")
                 .build();
-        PProductListResponse response = blockingStub.getProductsByCriteria(criteria);
+        PProductsResponse response = blockingStub.getProductsByCriteria(criteria);
         System.out.println(response);
 
         channel.shutdown();

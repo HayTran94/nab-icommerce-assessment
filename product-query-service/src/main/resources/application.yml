@@ -10,3 +10,11 @@ spring:
   elasticsearch:
     rest:
       uris: localhost:9200
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    enabled: true
+  instance:
+    preferIpAddress: true

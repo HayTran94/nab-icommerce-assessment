@@ -1,6 +1,6 @@
 spring:
   application:
-    name: product-auditing-service
+    name: product-auditing-worker
   kafka:
     bootstrap-servers:
       - localhost:9092
@@ -10,6 +10,14 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       enable-auto-commit: true
       auto-offset-reset: latest
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    enabled: true
+  instance:
+    preferIpAddress: true
 
 product-auditing-service:
   grpcserver:
