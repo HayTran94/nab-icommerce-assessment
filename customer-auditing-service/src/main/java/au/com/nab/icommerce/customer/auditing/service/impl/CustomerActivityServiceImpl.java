@@ -44,7 +44,7 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
         int res = ErrorCode.FAILED;
         try {
             List<PCustomerActivity> pCustomerActivities = pCustomerActivityListRequest.getCustomerActivitiesList();
-            List<CustomerActivity> customerActivities = customerActivityMapper.toDomain(pCustomerActivities);
+            List<CustomerActivity> customerActivities = customerActivityMapper.toDomainList(pCustomerActivities);
             customerActivityRepository.saveAll(customerActivities);
             res = ErrorCode.SUCCESS;
         } catch (Exception e) {
@@ -58,7 +58,7 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
         List<PCustomerActivity> pCustomerActivities = Collections.emptyList();
         try {
             List<CustomerActivity> customerActivities = customerActivityRepository.findAllByCustomerId(customerId.getValue());
-            pCustomerActivities = customerActivityMapper.toProtobuf(customerActivities);
+            pCustomerActivities = customerActivityMapper.toProtobufList(customerActivities);
         } catch (Exception e) {
             e.printStackTrace();
         }

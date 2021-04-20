@@ -9,9 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>write-product-service</artifactId>
-    <name>write-product-service</name>
-    <packaging>jar</packaging>
+    <artifactId>product-command-service</artifactId>
 
     <dependencies>
         <dependency>

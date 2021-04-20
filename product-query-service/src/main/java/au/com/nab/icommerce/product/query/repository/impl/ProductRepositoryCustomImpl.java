@@ -4,9 +4,9 @@ import au.com.nab.icommerce.product.query.domain.Product;
 import au.com.nab.icommerce.product.query.dto.ProductCriteria;
 import au.com.nab.icommerce.product.query.mapper.SearchHitsMapper;
 import au.com.nab.icommerce.product.query.repository.ProductRepositoryCustom;
+import au.com.nab.icommerce.protobuf.util.PagingUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -15,9 +15,6 @@ import org.springframework.data.elasticsearch.core.query.CriteriaQuery;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
-import static au.com.nab.icommerce.product.query.constant.AppConstant.DEFAULT_PAGE_INDEX;
-import static au.com.nab.icommerce.product.query.constant.AppConstant.DEFAULT_PAGE_SIZE;
 
 @Repository
 public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
@@ -30,11 +27,11 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
         Criteria esCriteria = new Criteria();
 
         if (StringUtils.isNotBlank(productCriteria.getName())) {
-            esCriteria.and(Criteria.where("name").expression(productCriteria.getName()));
+            esCriteria.and(Criteria.where("name").contains(productCriteria.getName()));
         }
 
         if (StringUtils.isNotBlank(productCriteria.getBrand())) {
-            esCriteria.and(Criteria.where("brand").expression(productCriteria.getBrand()));
+            esCriteria.and(Criteria.where("brand").contains(productCriteria.getBrand()));
         }
 
         if (productCriteria.getPriceFrom() > 0) {
@@ -53,16 +50,7 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
             esCriteria.and(Criteria.where("unit").is(productCriteria.getUnit()));
         }
 
-        int pageIndex = DEFAULT_PAGE_INDEX;
-        if (productCriteria.getPageIndex() > 0) {
-            pageIndex = productCriteria.getPageIndex();
-        }
-        int pageSize = DEFAULT_PAGE_SIZE;
-        if (productCriteria.getPageSize() > 0) {
-            pageSize = productCriteria.getPageSize();
-        }
-
-        Pageable pageable = PageRequest.of(pageIndex, pageSize);
+        Pageable pageable = PagingUtil.toPageable(productCriteria.getPaging(), productCriteria.getSorting());
         CriteriaQuery query = new CriteriaQuery(esCriteria, pageable);
         SearchHits<Product> searchHits = elasticsearchTemplate.search(query, Product.class);
         return SearchHitsMapper.toDomain(searchHits);

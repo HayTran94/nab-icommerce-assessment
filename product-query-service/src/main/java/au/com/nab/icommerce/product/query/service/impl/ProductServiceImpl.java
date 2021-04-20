@@ -26,6 +26,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductMapper productMapper;
 
+    @Autowired
+    private ProductCriteriaMapper productCriteriaMapper;
+
     @Override
     public PProduct getProductById(Int32Value id) {
         PProduct pProduct = null;
@@ -44,9 +47,9 @@ public class ProductServiceImpl implements ProductService {
     public PProductsResponse getProductsByCriteria(PProductCriteria criteria) {
         List<PProduct> pProducts = Collections.emptyList();
         try {
-            ProductCriteria productCriteria = ProductCriteriaMapper.toDto(criteria);
+            ProductCriteria productCriteria = productCriteriaMapper.toDomain(criteria);
             List<Product> products = productRepository.findProductsByCriteria(productCriteria);
-            pProducts = productMapper.toProtobuf(products);
+            pProducts = productMapper.toProtobufList(products);
         } catch (Exception e) {
             e.printStackTrace();
         }

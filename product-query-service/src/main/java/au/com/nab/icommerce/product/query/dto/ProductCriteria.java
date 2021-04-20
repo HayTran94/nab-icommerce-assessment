@@ -1,5 +1,7 @@
 package au.com.nab.icommerce.product.query.dto;
 
+import au.com.nab.icommerce.protobuf.domain.Paging;
+import au.com.nab.icommerce.protobuf.domain.Sorting;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +14,6 @@ public class ProductCriteria {
     private int priceTo;
     private String color;
     private String unit;
-    private int pageIndex;
-    private int pageSize;
+    private Paging paging;
+    private Sorting sorting;
 }

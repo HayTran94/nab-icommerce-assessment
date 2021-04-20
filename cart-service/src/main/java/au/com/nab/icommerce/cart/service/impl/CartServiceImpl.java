@@ -39,7 +39,7 @@ public class CartServiceImpl implements CartService {
         try {
             int customerId = addItemRequest.getCustomerId();
             List<PItem> pItems = addItemRequest.getItemsList();
-            List<Item> newItems = itemMapper.toDomain(pItems);
+            List<Item> newItems = itemMapper.toDomainList(pItems);
 
             String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId);
             Optional<Cart> cartOptional = cartRepository.findById(cartCacheKey);

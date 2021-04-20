@@ -1,8 +1,12 @@
 package au.com.nab.icommerce.common.grpc;
 
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.annotation.PreDestroy;
 import java.util.ArrayList;
@@ -10,8 +14,17 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class BaseClientServicesConfiguration {
+public class BaseGrpcServicesConfiguration {
+
+    @Autowired
+    @Qualifier("eurekaClient")
+    private EurekaClient eurekaClient;
+
     protected final List<ManagedChannel> channels = new ArrayList<>();
+
+    protected InstanceInfo getGrpcInstanceInfo(String serviceName) {
+        return eurekaClient.getNextServerFromEureka(serviceName, false);
+    }
 
     protected ManagedChannel newChannel(String host, int port) {
         log.info("Bootstrapping GRPC proxy... Host=" + host + "; Port=" + port);

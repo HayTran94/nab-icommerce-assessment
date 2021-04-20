@@ -1,0 +1,21 @@
+syntax = "proto3";
+package common.protobuf;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.common.protobuf";
+option java_outer_classname = "CommonProtobufDomain";
+
+message PPaging {
+  int32 index = 1;
+  int32 size = 2;
+}
+
+enum PDirection {
+  ASC = 0;
+  DESC = 1;
+}
+
+message PSorting {
+  string property = 1;
+  PDirection direction = 2;
+}

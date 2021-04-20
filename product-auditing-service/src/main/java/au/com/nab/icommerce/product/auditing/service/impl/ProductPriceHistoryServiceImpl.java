@@ -48,7 +48,7 @@ public class ProductPriceHistoryServiceImpl implements ProductPriceHistoryServic
         try {
             List<ProductPriceHistory> productPriceHistories
                     = productPriceHistoryRepository.findAllByProductId(productId.getValue());
-            pProductPriceHistories = productPriceHistoryMapper.toProtobuf(productPriceHistories);
+            pProductPriceHistories = productPriceHistoryMapper.toProtobufList(productPriceHistories);
         } catch (Exception e) {
             e.printStackTrace();
         }

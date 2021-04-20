@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@RedisHash(value = "cart", timeToLive = 2592000)
+@RedisHash(value = "cart", timeToLive = 2592000)    // 30 days
 public class Cart implements Serializable {
 
     private String id;

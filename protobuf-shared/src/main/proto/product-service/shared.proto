@@ -5,6 +5,8 @@ option java_multiple_files = true;
 option java_package = "au.com.nab.icommerce.product.protobuf";
 option java_outer_classname = "ProductServiceDomain";
 
+import "common/shared.proto";
+
 message PProduct {
   int32 id = 1;
   string name = 2;
@@ -23,8 +25,8 @@ message PProductCriteria {
   string color = 5;
   string unit = 6;
 
-  int32 pageIndex = 100;
-  int32 pageSize = 101;
+  common.protobuf.PPaging paging = 100;
+  common.protobuf.PSorting sorting = 101;
 }
 
 message PProductsResponse {
