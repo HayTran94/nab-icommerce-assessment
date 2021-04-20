@@ -20,13 +20,13 @@ public class ProductPriceHistoryMapper extends AbstractProtobufMapper<ProductPri
     }
 
     @Override
-    public PProductPriceHistory toProtobuf(ProductPriceHistory entity) {
+    public PProductPriceHistory toProtobuf(ProductPriceHistory domain) {
         PProductPriceHistory.Builder protobuf = PProductPriceHistory.newBuilder();
-        protobuf.setId(entity.getId());
-        protobuf.setProductId(entity.getProductId());
-        protobuf.setOldPrice(entity.getOldPrice());
-        protobuf.setNewPrice(entity.getNewPrice());
-        protobuf.setDateTime(entity.getDateTime());
+        protobuf.setId(domain.getId());
+        protobuf.setProductId(domain.getProductId());
+        protobuf.setOldPrice(domain.getOldPrice());
+        protobuf.setNewPrice(domain.getNewPrice());
+        protobuf.setDateTime(domain.getDateTime());
         return protobuf.build();
     }
 }

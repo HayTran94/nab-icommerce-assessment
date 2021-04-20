@@ -1,6 +1,5 @@
 package au.com.nab.icommerce.product.query.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

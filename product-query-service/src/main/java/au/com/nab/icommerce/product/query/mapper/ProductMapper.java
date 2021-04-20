@@ -23,15 +23,15 @@ public class ProductMapper extends AbstractProtobufMapper<Product, PProduct> {
     }
 
     @Override
-    public PProduct toProtobuf(Product entity) {
+    public PProduct toProtobuf(Product domain) {
         PProduct.Builder protobuf = PProduct.newBuilder();
-        protobuf.setId(entity.getId());
-        protobuf.setName(entity.getName());
-        protobuf.setBrand(entity.getBrand());
-        protobuf.setPrice(entity.getPrice());
-        protobuf.setColor(entity.getColor());
-        protobuf.setImage(entity.getImage());
-        protobuf.setUnit(entity.getUnit());
+        protobuf.setId(domain.getId());
+        protobuf.setName(domain.getName());
+        protobuf.setBrand(domain.getBrand());
+        protobuf.setPrice(domain.getPrice());
+        protobuf.setColor(domain.getColor());
+        protobuf.setImage(domain.getImage());
+        protobuf.setUnit(domain.getUnit());
 
         return protobuf.build();
     }

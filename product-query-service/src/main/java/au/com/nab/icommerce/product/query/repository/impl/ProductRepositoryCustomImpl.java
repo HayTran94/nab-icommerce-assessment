@@ -26,40 +26,40 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
     private ElasticsearchOperations elasticsearchTemplate;
 
     @Override
-    public List<Product> findProductsByCriteria(ProductCriteria criteria) {
+    public List<Product> findProductsByCriteria(ProductCriteria productCriteria) {
         Criteria esCriteria = new Criteria();
 
-        if (StringUtils.isNotBlank(criteria.getName())) {
-            esCriteria.and(Criteria.where("name").expression(criteria.getName()));
+        if (StringUtils.isNotBlank(productCriteria.getName())) {
+            esCriteria.and(Criteria.where("name").expression(productCriteria.getName()));
         }
 
-        if (StringUtils.isNotBlank(criteria.getBrand())) {
-            esCriteria.and(Criteria.where("brand").expression(criteria.getBrand()));
+        if (StringUtils.isNotBlank(productCriteria.getBrand())) {
+            esCriteria.and(Criteria.where("brand").expression(productCriteria.getBrand()));
         }
 
-        if (criteria.getPriceFrom() > 0) {
-            esCriteria.and(Criteria.where("price").greaterThanEqual(criteria.getPriceFrom()));
+        if (productCriteria.getPriceFrom() > 0) {
+            esCriteria.and(Criteria.where("price").greaterThanEqual(productCriteria.getPriceFrom()));
         }
 
-        if (criteria.getPriceTo() > 0) {
-            esCriteria.and(Criteria.where("price").lessThanEqual(criteria.getPriceTo()));
+        if (productCriteria.getPriceTo() > 0) {
+            esCriteria.and(Criteria.where("price").lessThanEqual(productCriteria.getPriceTo()));
         }
 
-        if (StringUtils.isNotBlank(criteria.getColor())) {
-            esCriteria.and(Criteria.where("color").is(criteria.getColor()));
+        if (StringUtils.isNotBlank(productCriteria.getColor())) {
+            esCriteria.and(Criteria.where("color").is(productCriteria.getColor()));
         }
 
-        if (StringUtils.isNotBlank(criteria.getUnit())) {
-            esCriteria.and(Criteria.where("unit").is(criteria.getUnit()));
+        if (StringUtils.isNotBlank(productCriteria.getUnit())) {
+            esCriteria.and(Criteria.where("unit").is(productCriteria.getUnit()));
         }
 
         int pageIndex = DEFAULT_PAGE_INDEX;
-        if (criteria.getPageIndex() > 0) {
-            pageIndex = criteria.getPageIndex();
+        if (productCriteria.getPageIndex() > 0) {
+            pageIndex = productCriteria.getPageIndex();
         }
         int pageSize = DEFAULT_PAGE_SIZE;
-        if (criteria.getPageSize() > 0) {
-            pageSize = criteria.getPageSize();
+        if (productCriteria.getPageSize() > 0) {
+            pageSize = productCriteria.getPageSize();
         }
 
         Pageable pageable = PageRequest.of(pageIndex, pageSize);

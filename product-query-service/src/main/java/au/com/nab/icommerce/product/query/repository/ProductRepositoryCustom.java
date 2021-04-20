@@ -6,5 +6,5 @@ import au.com.nab.icommerce.product.query.dto.ProductCriteria;
 import java.util.List;
 
 public interface ProductRepositoryCustom {
-    List<Product> findProductsByCriteria(ProductCriteria criteria);
+    List<Product> findProductsByCriteria(ProductCriteria productCriteria);
 }

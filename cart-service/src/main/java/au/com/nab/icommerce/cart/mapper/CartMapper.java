@@ -23,11 +23,11 @@ public class CartMapper extends AbstractProtobufMapper<Cart, PCart> {
     }
 
     @Override
-    public PCart toProtobuf(Cart entity) {
+    public PCart toProtobuf(Cart domain) {
         PCart.Builder protobuf = PCart.newBuilder();
-        protobuf.setId(entity.getId());
-        protobuf.setCustomerId(entity.getCustomerId());
-        protobuf.addAllItems(itemMapper.toProtobuf(entity.getItems()));
+        protobuf.setId(domain.getId());
+        protobuf.setCustomerId(domain.getCustomerId());
+        protobuf.addAllItems(itemMapper.toProtobuf(domain.getItems()));
 
         return protobuf.build();
     }

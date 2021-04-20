@@ -22,15 +22,15 @@ public class CustomerMapper extends AbstractProtobufMapper<Customer, PCustomer> 
     }
 
     @Override
-    public PCustomer toProtobuf(Customer entity) {
+    public PCustomer toProtobuf(Customer domain) {
         PCustomer.Builder protobuf = PCustomer.newBuilder();
-        protobuf.setId(entity.getId());
-        protobuf.setName(entity.getName());
-        protobuf.setEmail(entity.getEmail());
-        protobuf.setProvider(entity.getProvider());
-        protobuf.setProviderId(entity.getProviderId());
-        protobuf.setPhotoUrl(entity.getPhotoUrl());
-        protobuf.setToken(entity.getToken());
+        protobuf.setId(domain.getId());
+        protobuf.setName(domain.getName());
+        protobuf.setEmail(domain.getEmail());
+        protobuf.setProvider(domain.getProvider());
+        protobuf.setProviderId(domain.getProviderId());
+        protobuf.setPhotoUrl(domain.getPhotoUrl());
+        protobuf.setToken(domain.getToken());
         return protobuf.build();
     }
 }

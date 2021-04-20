@@ -19,11 +19,11 @@ public class ItemMapper extends AbstractProtobufMapper<Item, PItem> {
     }
 
     @Override
-    public PItem toProtobuf(Item entity) {
+    public PItem toProtobuf(Item domain) {
         PItem.Builder protobuf = PItem.newBuilder();
-        protobuf.setProductId(entity.getProductId());
-        protobuf.setQuantity(entity.getQuantity());
-        protobuf.setDateTime(entity.getDateTime());
+        protobuf.setProductId(domain.getProductId());
+        protobuf.setQuantity(domain.getQuantity());
+        protobuf.setDateTime(domain.getDateTime());
 
         return protobuf.build();
     }

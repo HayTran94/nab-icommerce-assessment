@@ -20,13 +20,13 @@ public class CustomerActivityMapper extends AbstractProtobufMapper<CustomerActiv
     }
 
     @Override
-    public PCustomerActivity toProtobuf(CustomerActivity entity) {
+    public PCustomerActivity toProtobuf(CustomerActivity domain) {
         PCustomerActivity.Builder protobuf = PCustomerActivity.newBuilder();
-        protobuf.setId(entity.getId());
-        protobuf.setCustomerId(entity.getCustomerId());
-        protobuf.setAction(entity.getAction());
-        protobuf.setTime(entity.getTime());
-        protobuf.setData(entity.getData());
+        protobuf.setId(domain.getId());
+        protobuf.setCustomerId(domain.getCustomerId());
+        protobuf.setAction(domain.getAction());
+        protobuf.setTime(domain.getTime());
+        protobuf.setData(domain.getData());
         return protobuf.build();
     }
 }
