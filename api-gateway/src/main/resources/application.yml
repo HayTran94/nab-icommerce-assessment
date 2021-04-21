@@ -16,3 +16,9 @@ security:
   facebook:
     clientId: 98123841002394711283
     clientSecret: 3DS9v9KWpt3TeCGWcISuOZOrMtunHn4c
+  auth:
+    login-url: /api/customers/login
+    header-name: Authorization
+    header-prefix: "Bearer "
+    expiration-time: 864000000  # 10 days
+    secret-key: 01Yd91OYRQGt4VbYHRxaMmnplggPjkZb

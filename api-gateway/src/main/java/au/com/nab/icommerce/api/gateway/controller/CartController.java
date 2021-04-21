@@ -14,6 +14,8 @@ import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,6 +54,9 @@ public class CartController {
             if (customer == null) {
                 return ApiMessage.CUSTOMER_NOT_FOUND;
             }
+
+            // Check customer login
+            SecurityContext securityContext = SecurityContextHolder.getContext();
 
             // Check product is existed
             for (CartItemRequest cartItemRequest : cartItemRequests) {
