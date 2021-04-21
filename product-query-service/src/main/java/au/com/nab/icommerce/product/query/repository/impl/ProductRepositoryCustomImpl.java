@@ -4,10 +4,13 @@ import au.com.nab.icommerce.product.query.domain.Product;
 import au.com.nab.icommerce.product.query.dto.ProductCriteria;
 import au.com.nab.icommerce.product.query.mapper.SearchHitsMapper;
 import au.com.nab.icommerce.product.query.repository.ProductRepositoryCustom;
+import au.com.nab.icommerce.product.query.util.ESDocumentUtil;
+import au.com.nab.icommerce.protobuf.domain.Sorting;
 import au.com.nab.icommerce.protobuf.util.PagingUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.Criteria;
@@ -50,7 +53,16 @@ public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
             esCriteria.and(Criteria.where("unit").is(productCriteria.getUnit()));
         }
 
-        Pageable pageable = PagingUtil.toPageable(productCriteria.getPaging(), productCriteria.getSorting());
+        // Check sort field
+        Sorting sorting = productCriteria.getSorting();
+        if (sorting != null) {
+            FieldType fieldType = ESDocumentUtil.getFieldType(Product.class, sorting.getProperty());
+            if (FieldType.Text == fieldType) {
+                sorting.setProperty(String.format("%s.keyword", sorting.getProperty()));
+            }
+        }
+
+        Pageable pageable = PagingUtil.toPageable(productCriteria.getPaging(), sorting);
         CriteriaQuery query = new CriteriaQuery(esCriteria, pageable);
         SearchHits<Product> searchHits = elasticsearchTemplate.search(query, Product.class);
         return SearchHitsMapper.toDomain(searchHits);
