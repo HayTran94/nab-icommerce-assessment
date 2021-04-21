@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -44,14 +43,14 @@ public class ProductPriceHistoryServiceImpl implements ProductPriceHistoryServic
 
     @Override
     public PProductPriceHistoriesResponse getProductPriceHistories(Int32Value productId) {
-        List<PProductPriceHistory> pProductPriceHistories = Collections.emptyList();
+        PProductPriceHistoriesResponse.Builder response = PProductPriceHistoriesResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
-            List<ProductPriceHistory> productPriceHistories
-                    = productPriceHistoryRepository.findAllByProductId(productId.getValue());
-            pProductPriceHistories = productPriceHistoryMapper.toProtobufList(productPriceHistories);
+            List<ProductPriceHistory> productPriceHistories = productPriceHistoryRepository.findAllByProductId(productId.getValue());
+            List<PProductPriceHistory> pProductPriceHistories = productPriceHistoryMapper.toProtobufList(productPriceHistories);
+            response.setCode(ErrorCode.SUCCESS).addAllData(pProductPriceHistories).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PProductPriceHistoriesResponse.newBuilder().addAllData(pProductPriceHistories).build();
+        return response.build();
     }
 }

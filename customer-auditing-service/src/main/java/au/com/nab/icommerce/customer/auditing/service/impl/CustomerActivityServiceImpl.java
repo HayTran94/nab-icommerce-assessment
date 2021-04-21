@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -55,14 +54,15 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
 
     @Override
     public PCustomerActivitiesResponse getCustomerActivitiesByCustomerId(Int32Value customerId) {
-        List<PCustomerActivity> pCustomerActivities = Collections.emptyList();
+        PCustomerActivitiesResponse.Builder response = PCustomerActivitiesResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
             List<CustomerActivity> customerActivities = customerActivityRepository.findAllByCustomerId(customerId.getValue());
-            pCustomerActivities = customerActivityMapper.toProtobufList(customerActivities);
+            List<PCustomerActivity> pCustomerActivities = customerActivityMapper.toProtobufList(customerActivities);
+            return response.setCode(ErrorCode.SUCCESS).addAllData(pCustomerActivities).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PCustomerActivitiesResponse.newBuilder().addAllData(pCustomerActivities).build();
+        return response.build();
     }
 
 }

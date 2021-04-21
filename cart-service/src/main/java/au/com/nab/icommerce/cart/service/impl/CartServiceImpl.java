@@ -85,18 +85,19 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public PCartResponse getCustomerCart(Int32Value customerId) {
-        PCart pCart = null;
+        PCartResponse.Builder response = PCartResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
             String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId.getValue());
             Optional<Cart> cartOptional = cartRepository.findById(cartCacheKey);
             if (cartOptional.isPresent()) {
                 Cart cart = cartOptional.get();
-                pCart = cartMapper.toProtobuf(cart);
+                PCart pCart = cartMapper.toProtobuf(cart);
+                return response.setCode(ErrorCode.SUCCESS).setData(pCart).build();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PCartResponse.newBuilder().setData(pCart).build();
+        return response.build();
     }
 
     @Override

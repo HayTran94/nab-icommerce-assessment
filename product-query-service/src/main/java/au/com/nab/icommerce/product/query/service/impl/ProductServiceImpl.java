@@ -1,5 +1,6 @@
 package au.com.nab.icommerce.product.query.service.impl;
 
+import au.com.nab.icommerce.common.error.ErrorCode;
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import au.com.nab.icommerce.product.protobuf.PProductCriteriaRequest;
 import au.com.nab.icommerce.product.protobuf.PProductResponse;
@@ -14,7 +15,6 @@ import com.google.protobuf.Int32Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,29 +32,31 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public PProductResponse getProductById(Int32Value id) {
-        PProduct pProduct = null;
+        PProductResponse.Builder response = PProductResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
             Optional<Product> product = productRepository.findById(id.getValue());
             if (product.isPresent()) {
-                pProduct = productMapper.toProtobuf(product.get());
+                PProduct pProduct = productMapper.toProtobuf(product.get());
+                return response.setCode(ErrorCode.SUCCESS).setData(pProduct).build();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PProductResponse.newBuilder().setData(pProduct).build();
+        return response.build();
     }
 
     @Override
     public PProductsResponse getProductsByCriteria(PProductCriteriaRequest criteria) {
-        List<PProduct> pProducts = Collections.emptyList();
+        PProductsResponse.Builder response = PProductsResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
             ProductCriteria productCriteria = productCriteriaMapper.toDomain(criteria);
             List<Product> products = productRepository.findProductsByCriteria(productCriteria);
-            pProducts = productMapper.toProtobufList(products);
+            List<PProduct> pProducts = productMapper.toProtobufList(products);
+            return response.setCode(ErrorCode.SUCCESS).addAllData(pProducts).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PProductsResponse.newBuilder().addAllData(pProducts).build();
+        return response.build();
     }
 
 }

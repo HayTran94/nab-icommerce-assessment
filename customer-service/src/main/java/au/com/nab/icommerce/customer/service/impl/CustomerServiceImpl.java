@@ -41,15 +41,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public PCustomerResponse getCustomerById(Int32Value id) {
-        PCustomer pCustomer = null;
+        PCustomerResponse.Builder response = PCustomerResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
-            Optional<Customer> customer = customerRepository.findById(id.getValue());
-            if (customer.isPresent()) {
-                pCustomer = customerMapper.toProtobuf(customer.get());
+            Optional<Customer> customerOptional = customerRepository.findById(id.getValue());
+            if (customerOptional.isPresent()) {
+                PCustomer pCustomer = customerMapper.toProtobuf(customerOptional.get());
+                return response.setCode(ErrorCode.SUCCESS).setData(pCustomer).build();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PCustomerResponse.newBuilder().setData(pCustomer).build();
+        return response.build();
     }
 }

@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,28 +81,30 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public POrderResponse getOrderById(Int32Value id) {
-        POrder pOrder = null;
+        POrderResponse.Builder response = POrderResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
             Optional<Order> order = orderRepository.findById(id.getValue());
             if (order.isPresent()) {
-                pOrder = orderMapper.toProtobuf(order.get());
+                POrder pOrder = orderMapper.toProtobuf(order.get());
+                return response.setCode(ErrorCode.SUCCESS).setData(pOrder).build();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return POrderResponse.newBuilder().setData(pOrder).build();
+        return response.build();
     }
 
     @Override
     public POrdersResponse getOrdersByCustomerId(Int32Value customerId) {
-        List<POrder> pOrders = Collections.emptyList();
+        POrdersResponse.Builder response = POrdersResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
             List<Order> orders = orderRepository.findAllByCustomerId(customerId.getValue());
-            pOrders = orderMapper.toProtobufList(orders);
+            List<POrder> pOrders = orderMapper.toProtobufList(orders);
+            return response.setCode(ErrorCode.SUCCESS).addAllData(pOrders).build();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return POrdersResponse.newBuilder().addAllData(pOrders).build();
+        return response.build();
     }
 
 }
