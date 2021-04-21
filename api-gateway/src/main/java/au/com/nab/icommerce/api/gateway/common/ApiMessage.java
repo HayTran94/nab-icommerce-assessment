@@ -1,6 +1,7 @@
 package au.com.nab.icommerce.api.gateway.common;
 
 
+import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,10 @@ public class ApiMessage {
     public static ApiMessage CART_ITEMS_EMPTY = new ApiMessage(-101, "Cart items is empty");
     public static ApiMessage ADD_TO_CART_FAILED = new ApiMessage(-102, "Add to cart failed");
     public static ApiMessage CLEAR_CART_FAILED = new ApiMessage(-103, "Clear cart failed");
+    public static ApiMessage CART_EMPTY = new ApiMessage(-103, "Cart is empty");
+
+    // CUSTOMER ERRORS CODE
+    public static ApiMessage CUSTOMER_NOT_FOUND = new ApiMessage(-200, "Customer not found");
 
     private int code;
     private String message;
@@ -34,6 +39,14 @@ public class ApiMessage {
         ApiMessage instance = new ApiMessage(code, message);
         instance.setData(this.getData());
         return instance;
+    }
+
+    public boolean isSuccess() {
+        return ErrorCodeHelper.isSuccess(this.code);
+    }
+
+    public boolean isFail() {
+        return !this.isSuccess();
     }
 
     public static ApiMessage success(Object data) {

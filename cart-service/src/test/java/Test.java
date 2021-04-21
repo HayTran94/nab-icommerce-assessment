@@ -1,7 +1,7 @@
 import au.com.nab.icommerce.cart.api.CartServiceGrpc;
-import au.com.nab.icommerce.cart.protobuf.PAddItemRequest;
+import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
 import au.com.nab.icommerce.cart.protobuf.PCart;
-import au.com.nab.icommerce.cart.protobuf.PItem;
+import au.com.nab.icommerce.cart.protobuf.PCartItem;
 import com.google.protobuf.Int32Value;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -14,11 +14,11 @@ public class Test {
 
         CartServiceGrpc.CartServiceBlockingStub blockingStub = CartServiceGrpc.newBlockingStub(channel);
 
-        PAddItemRequest addItemRequest = PAddItemRequest.newBuilder()
+        PAddToCartRequest addItemRequest = PAddToCartRequest.newBuilder()
                 .setCustomerId(1)
-                .addItems(PItem.newBuilder().setProductId(102).setQuantity(1).build())
+                .addItems(PCartItem.newBuilder().setProductId(102).setQuantity(1).build())
                 .build();
-        Int32Value res = blockingStub.addItemToCart(addItemRequest);
+        Int32Value res = blockingStub.addItemsToCart(addItemRequest);
         System.out.println("Add: " + res);
 
         PCart response = blockingStub.getCustomerCart(Int32Value.of(1));

@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 public class CartServiceClient {
 
     @Autowired
-    private CartServiceGrpc.CartServiceBlockingStub cartService;
+    private CartServiceGrpc.CartServiceBlockingStub cartServiceBlockingStub;
 
     public Integer addItemsToCart(PAddToCartRequest addToCartRequest) {
-        Int32Value res = cartService.addItemsToCart(addToCartRequest);
+        Int32Value res = cartServiceBlockingStub.addItemsToCart(addToCartRequest);
         return res.getValue();
     }
 
     public PCart getCustomerCart(Integer customerId) {
-        return cartService.getCustomerCart(Int32Value.of(customerId));
+        return cartServiceBlockingStub.getCustomerCart(Int32Value.of(customerId));
     }
 
     public Integer clearCustomerCart(Integer customerId) {
-        Int32Value res = cartService.clearCustomerCart(Int32Value.of(customerId));
+        Int32Value res = cartServiceBlockingStub.clearCustomerCart(Int32Value.of(customerId));
         return res.getValue();
     }
 }

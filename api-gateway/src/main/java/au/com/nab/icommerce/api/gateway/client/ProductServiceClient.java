@@ -15,27 +15,27 @@ import java.util.List;
 public class ProductServiceClient {
 
     @Autowired
-    private ProductCommandServiceGrpc.ProductCommandServiceBlockingStub productCommandService;
+    private ProductCommandServiceGrpc.ProductCommandServiceBlockingStub productCommandServiceBlockingStub;
 
     @Autowired
-    private ProductQueryServiceGrpc.ProductQueryServiceBlockingStub productQueryService;
+    private ProductQueryServiceGrpc.ProductQueryServiceBlockingStub productQueryServiceBlockingStub;
 
     public Integer createProduct(PProduct product) {
-        Int32Value res = productCommandService.createProduct(product);
+        Int32Value res = productCommandServiceBlockingStub.createProduct(product);
         return res.getValue();
     }
 
     public Integer updateProduct(PProduct product) {
-        Int32Value res = productCommandService.updateProduct(product);
+        Int32Value res = productCommandServiceBlockingStub.updateProduct(product);
         return res.getValue();
     }
 
     public PProduct getProductsById(Integer productId) {
-        return productQueryService.getProductsById(Int32Value.of(productId));
+        return productQueryServiceBlockingStub.getProductsById(Int32Value.of(productId));
     }
 
     public List<PProduct> getProductsByCriteria(PProductCriteriaRequest productCriteriaRequest) {
-        PProductsResponse res = productQueryService.getProductsByCriteria(productCriteriaRequest);
+        PProductsResponse res = productQueryServiceBlockingStub.getProductsByCriteria(productCriteriaRequest);
         return res.getProductsList();
     }
 }
