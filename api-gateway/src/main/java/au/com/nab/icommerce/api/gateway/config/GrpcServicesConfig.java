@@ -1,6 +1,8 @@
 package au.com.nab.icommerce.api.gateway.config;
 
+import au.com.nab.icommerce.cart.api.CartServiceGrpc;
 import au.com.nab.icommerce.common.grpc.BaseGrpcServicesConfiguration;
+import au.com.nab.icommerce.customer.api.CustomerServiceGrpc;
 import au.com.nab.icommerce.product.api.ProductCommandServiceGrpc;
 import au.com.nab.icommerce.product.api.ProductQueryServiceGrpc;
 import com.netflix.appinfo.InstanceInfo;
@@ -22,6 +24,18 @@ public class GrpcServicesConfig extends BaseGrpcServicesConfiguration {
     public ProductQueryServiceGrpc.ProductQueryServiceBlockingStub productQueryServiceBlockingStub() {
         InstanceInfo instanceInfo = getGrpcInstanceInfo("product-query-service");
         return ProductQueryServiceGrpc.newBlockingStub(newChannel(instanceInfo.getHostName(), instanceInfo.getPort()));
+    }
+
+    @Bean
+    public CartServiceGrpc.CartServiceBlockingStub cartServiceBlockingStub() {
+        InstanceInfo instanceInfo = getGrpcInstanceInfo("cart-service");
+        return CartServiceGrpc.newBlockingStub(newChannel(instanceInfo.getHostName(), instanceInfo.getPort()));
+    }
+
+    @Bean
+    public CustomerServiceGrpc.CustomerServiceBlockingStub customerServiceBlockingStub() {
+        InstanceInfo instanceInfo = getGrpcInstanceInfo("customer-service");
+        return CustomerServiceGrpc.newBlockingStub(newChannel(instanceInfo.getHostName(), instanceInfo.getPort()));
     }
 
 }

@@ -1,17 +1,16 @@
 package au.com.nab.icommerce.api.gateway.service;
 
-import au.com.nab.icommerce.api.gateway.dto.request.ProductCriteria;
-import au.com.nab.icommerce.api.gateway.dto.response.Product;
-
-import java.util.List;
+import au.com.nab.icommerce.api.gateway.common.ApiMessage;
+import au.com.nab.icommerce.api.gateway.dto.ProductCriteriaRequest;
+import au.com.nab.icommerce.api.gateway.dto.ProductRequest;
 
 public interface ProductService {
 
-    Product getProductById(Integer productId);
+    ApiMessage getProductById(Integer productId);
 
-    List<Product> getProductsByCriteria(ProductCriteria productCriteria);
+    ApiMessage getProductsByCriteria(ProductCriteriaRequest productCriteriaRequest);
 
-    Integer createProduct(Product product);
+    ApiMessage createProduct(ProductRequest productRequest);
 
-    Integer updateProduct(Product product);
+    ApiMessage updateProduct(ProductRequest productRequest);
 }

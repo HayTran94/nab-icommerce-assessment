@@ -1,5 +1,5 @@
 import au.com.nab.icommerce.product.api.ProductQueryServiceGrpc;
-import au.com.nab.icommerce.product.protobuf.PProductCriteria;
+import au.com.nab.icommerce.product.protobuf.PProductCriteriaRequest;
 import au.com.nab.icommerce.product.protobuf.PProductsResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -12,7 +12,7 @@ public class Test {
 
         ProductQueryServiceGrpc.ProductQueryServiceBlockingStub blockingStub = ProductQueryServiceGrpc.newBlockingStub(channel);
 
-        PProductCriteria criteria = PProductCriteria.newBuilder()
+        PProductCriteriaRequest criteria = PProductCriteriaRequest.newBuilder()
                 .setName("Pro")
                 .setPriceFrom(45000000)
                 .setPriceTo(49000000)

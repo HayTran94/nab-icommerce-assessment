@@ -1,11 +1,11 @@
-package au.com.nab.icommerce.api.gateway.dto.response;
+package au.com.nab.icommerce.api.gateway.dto;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Product {
+public class ProductRequest {
     private Integer id;
     private String name;
     private String brand;

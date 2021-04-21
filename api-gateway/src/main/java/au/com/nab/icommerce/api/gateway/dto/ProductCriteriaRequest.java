@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.api.gateway.dto.request;
+package au.com.nab.icommerce.api.gateway.dto;
 
 import au.com.nab.icommerce.protobuf.domain.Paging;
 import au.com.nab.icommerce.protobuf.domain.Sorting;
@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductCriteria {
+public class ProductCriteriaRequest {
     private String name;
     private String brand;
     private int priceFrom;

@@ -14,6 +14,6 @@ public class Cart implements Serializable {
 
     private String id;
     private Integer customerId;
-    private List<Item> items = new ArrayList<>();
+    private List<CartItem> items = new ArrayList<>();
 
 }

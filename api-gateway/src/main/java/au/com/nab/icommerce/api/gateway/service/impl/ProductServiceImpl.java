@@ -1,20 +1,20 @@
 package au.com.nab.icommerce.api.gateway.service.impl;
 
-import au.com.nab.icommerce.api.gateway.dto.request.ProductCriteria;
-import au.com.nab.icommerce.api.gateway.dto.response.Product;
-import au.com.nab.icommerce.api.gateway.mapper.ProductCriteriaMapper;
-import au.com.nab.icommerce.api.gateway.mapper.ProductMapper;
+import au.com.nab.icommerce.api.gateway.common.ApiMessage;
+import au.com.nab.icommerce.api.gateway.dto.ProductCriteriaRequest;
+import au.com.nab.icommerce.api.gateway.dto.ProductRequest;
+import au.com.nab.icommerce.api.gateway.mapper.ProductCriteriaRequestMapper;
+import au.com.nab.icommerce.api.gateway.mapper.ProductRequestMapper;
 import au.com.nab.icommerce.api.gateway.service.ProductService;
+import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.product.api.ProductCommandServiceGrpc;
 import au.com.nab.icommerce.product.api.ProductQueryServiceGrpc;
 import au.com.nab.icommerce.product.protobuf.PProduct;
-import au.com.nab.icommerce.product.protobuf.PProductCriteria;
+import au.com.nab.icommerce.product.protobuf.PProductCriteriaRequest;
 import au.com.nab.icommerce.product.protobuf.PProductsResponse;
 import com.google.protobuf.Int32Value;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -26,36 +26,67 @@ public class ProductServiceImpl implements ProductService {
     private ProductQueryServiceGrpc.ProductQueryServiceBlockingStub productQueryService;
 
     @Autowired
-    private ProductCriteriaMapper productCriteriaMapper;
+    private ProductCriteriaRequestMapper productCriteriaRequestMapper;
 
     @Autowired
-    private ProductMapper productMapper;
+    private ProductRequestMapper productRequestMapper;
 
     @Override
-    public Product getProductById(Integer productId) {
-        PProduct pProduct = productQueryService.getProductsById(Int32Value.of(productId));
-        return productMapper.toDomain(pProduct);
+    public ApiMessage getProductById(Integer productId) {
+        try {
+            PProduct pProduct = productQueryService.getProductsById(Int32Value.of(productId));
+            if (pProduct == null) {
+                return ApiMessage.NOT_FOUND;
+            }
+
+            return ApiMessage.success(pProduct);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiMessage.UNKNOWN_EXCEPTION;
+        }
     }
 
     @Override
-    public List<Product> getProductsByCriteria(ProductCriteria productCriteria) {
-        PProductCriteria pProductCriteria = productCriteriaMapper.toProtobuf(productCriteria);
-        PProductsResponse productsResponse = productQueryService.getProductsByCriteria(pProductCriteria);
-        List<PProduct> pProducts = productsResponse.getProductsList();
-        return productMapper.toDomainList(pProducts);
+    public ApiMessage getProductsByCriteria(ProductCriteriaRequest productCriteriaRequest) {
+        try {
+            PProductCriteriaRequest pProductCriteriaRequest = productCriteriaRequestMapper.toProtobuf(productCriteriaRequest);
+            PProductsResponse productsResponse = productQueryService.getProductsByCriteria(pProductCriteriaRequest);
+            return ApiMessage.success(productsResponse.getProductsList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiMessage.UNKNOWN_EXCEPTION;
+        }
     }
 
     @Override
-    public Integer createProduct(Product product) {
-        PProduct pProduct = productMapper.toProtobuf(product);
-        Int32Value res = productCommandService.createProduct(pProduct);
-        return res.getValue();
+    public ApiMessage createProduct(ProductRequest productRequest) {
+        try {
+            PProduct pProduct = productRequestMapper.toProtobuf(productRequest);
+            Int32Value res = productCommandService.createProduct(pProduct);
+            if (ErrorCodeHelper.isFail(res.getValue())) {
+                return ApiMessage.CREATE_FAILED;
+            }
+
+            return ApiMessage.success(res.getValue());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiMessage.UNKNOWN_EXCEPTION;
+        }
     }
 
     @Override
-    public Integer updateProduct(Product product) {
-        PProduct pProduct = productMapper.toProtobuf(product);
-        Int32Value res = productCommandService.updateProduct(pProduct);
-        return res.getValue();
+    public ApiMessage updateProduct(ProductRequest productRequest) {
+        try {
+            PProduct pProduct = productRequestMapper.toProtobuf(productRequest);
+            Int32Value res = productCommandService.updateProduct(pProduct);
+            if (ErrorCodeHelper.isFail(res.getValue())) {
+                return ApiMessage.UPDATE_FAILED;
+            }
+
+            return ApiMessage.SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiMessage.UNKNOWN_EXCEPTION;
+        }
     }
 }

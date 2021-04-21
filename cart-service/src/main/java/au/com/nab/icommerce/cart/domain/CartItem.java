@@ -7,7 +7,7 @@ import org.springframework.data.redis.core.RedisHash;
 @Getter
 @Setter
 @RedisHash
-public class Item {
+public class CartItem {
     private Integer productId;
     private Integer quantity;
     private Long dateTime;

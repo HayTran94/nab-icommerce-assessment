@@ -5,7 +5,7 @@ option java_multiple_files = true;
 option java_package = "au.com.nab.icommerce.cart.protobuf";
 option java_outer_classname = "CartServiceDomain";
 
-message PItem {
+message PCartItem {
   int32 productId = 1;
   int32 quantity = 2;
   int64 dateTime = 3;
@@ -14,10 +14,10 @@ message PItem {
 message PCart {
   string id = 1;
   int32 customerId = 2;
-  repeated PItem items = 3;
+  repeated PCartItem items = 3;
 }
 
-message PAddItemRequest {
+message PAddToCartRequest {
   int32 customerId = 1;
-  repeated PItem items = 2;
+  repeated PCartItem items = 2;
 }

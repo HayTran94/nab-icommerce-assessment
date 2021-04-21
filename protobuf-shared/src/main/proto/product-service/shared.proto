@@ -17,7 +17,7 @@ message PProduct {
   string unit = 7;
 }
 
-message PProductCriteria {
+message PProductCriteriaRequest {
   string name = 1;
   string brand = 2;
   int32 priceFrom = 3;

@@ -2,12 +2,12 @@ package au.com.nab.icommerce.cart.service.impl;
 
 import au.com.nab.icommerce.cart.cache.CacheKeyManager;
 import au.com.nab.icommerce.cart.domain.Cart;
-import au.com.nab.icommerce.cart.domain.Item;
+import au.com.nab.icommerce.cart.domain.CartItem;
 import au.com.nab.icommerce.cart.mapper.CartMapper;
 import au.com.nab.icommerce.cart.mapper.ItemMapper;
-import au.com.nab.icommerce.cart.protobuf.PAddItemRequest;
+import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
 import au.com.nab.icommerce.cart.protobuf.PCart;
-import au.com.nab.icommerce.cart.protobuf.PItem;
+import au.com.nab.icommerce.cart.protobuf.PCartItem;
 import au.com.nab.icommerce.cart.repository.CartRepository;
 import au.com.nab.icommerce.cart.service.CartService;
 import au.com.nab.icommerce.common.error.ErrorCode;
@@ -34,12 +34,12 @@ public class CartServiceImpl implements CartService {
     private ItemMapper itemMapper;
 
     @Override
-    public Int32Value addItemToCart(PAddItemRequest addItemRequest) {
+    public Int32Value addItemsToCart(PAddToCartRequest addToCartRequest) {
         int res = ErrorCode.FAILED;
         try {
-            int customerId = addItemRequest.getCustomerId();
-            List<PItem> pItems = addItemRequest.getItemsList();
-            List<Item> newItems = itemMapper.toDomainList(pItems);
+            int customerId = addToCartRequest.getCustomerId();
+            List<PCartItem> pItems = addToCartRequest.getItemsList();
+            List<CartItem> newCartItems = itemMapper.toDomainList(pItems);
 
             String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId);
             Optional<Cart> cartOptional = cartRepository.findById(cartCacheKey);
@@ -50,26 +50,26 @@ public class CartServiceImpl implements CartService {
                 return init;
             });
 
-            List<Item> currentItems = cart.getItems() != null ? cart.getItems() : new ArrayList<>();
-            Map<Integer, Item> curItemMap = currentItems.stream()
-                    .collect(Collectors.toMap(Item::getProductId,
+            List<CartItem> currentCartItems = cart.getItems() != null ? cart.getItems() : new ArrayList<>();
+            Map<Integer, CartItem> curItemMap = currentCartItems.stream()
+                    .collect(Collectors.toMap(CartItem::getProductId,
                             Function.identity(),
                             (v1, v2) -> v1,
                             LinkedHashMap::new));
 
-            for (Item newItem : newItems) {
+            for (CartItem newCartItem : newCartItems) {
                 // Set added time for new item
-                if (newItem.getDateTime() == 0) {
-                    newItem.setDateTime(System.currentTimeMillis());
+                if (newCartItem.getDateTime() == 0) {
+                    newCartItem.setDateTime(System.currentTimeMillis());
                 }
 
                 // Add new item into current items
-                Item curItem = curItemMap.get(newItem.getProductId());
-                if (curItem != null) {
-                    curItem.setQuantity(newItem.getQuantity());
+                CartItem curCartItem = curItemMap.get(newCartItem.getProductId());
+                if (curCartItem != null) {
+                    curCartItem.setQuantity(newCartItem.getQuantity());
                 } else {
-                    curItemMap.put(newItem.getProductId(), newItem);
-                    currentItems.add(newItem);
+                    curItemMap.put(newCartItem.getProductId(), newCartItem);
+                    currentCartItems.add(newCartItem);
                 }
             }
 
