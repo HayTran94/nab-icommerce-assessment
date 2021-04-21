@@ -26,17 +26,17 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Int32Value createCustomer(PCustomer pCustomer) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             Customer customer = customerMapper.toDomain(pCustomer);
             customer = customerRepository.save(customer);
             if (customer.getId() > 0) {
-                res = customer.getId();
+                response = customer.getId();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
     @Override

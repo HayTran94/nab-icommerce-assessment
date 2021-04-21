@@ -23,32 +23,32 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Int32Value createProduct(PProduct pProduct) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             Product product = productMapper.toDomain(pProduct);
             product = productRepository.save(product);
             if (product.getId() > 0) {
-                res = ErrorCode.SUCCESS;
+                response = ErrorCode.SUCCESS;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
     @Override
     public Int32Value updateProduct(PProduct pProduct) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             Product product = productMapper.toDomain(pProduct);
             productRepository.save(product);
-            res = ErrorCode.SUCCESS;
+            response = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
 }

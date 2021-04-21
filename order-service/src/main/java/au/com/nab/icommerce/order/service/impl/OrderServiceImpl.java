@@ -35,22 +35,22 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Int32Value createOrder(POrder pOrder) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             Order order = orderMapper.toDomain(pOrder);
             order = orderRepository.save(order);
             if (order.getId() > 0) {
-                res = order.getId();
+                response = order.getId();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
     @Override
     public Int32Value updateOrderStatus(PUpdateOrderStatusRequest pUpdateOrderStatusRequest) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             int orderId = pUpdateOrderStatusRequest.getOrderId();
             OrderStatus newStatus = orderStatusMapper.toDomain(pUpdateOrderStatusRequest.getStatus());
@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
             // Check order is existed
             Optional<Order> orderOptional = orderRepository.findById(orderId);
             if (!orderOptional.isPresent()) {
-                return Int32Value.of(res);
+                return Int32Value.of(response);
             }
 
             // Validate change status flow
@@ -66,17 +66,17 @@ public class OrderServiceImpl implements OrderService {
             OrderStatus curStatus = order.getStatus();
             boolean changeStatusValid = OrderStatusHelper.isChangeStatusValid(curStatus, newStatus);
             if (!changeStatusValid) {
-                return Int32Value.of(res);
+                return Int32Value.of(response);
             }
 
             // Update status
             order.setStatus(newStatus);
             orderRepository.save(order);
-            res = ErrorCode.SUCCESS;
+            response = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
     @Override

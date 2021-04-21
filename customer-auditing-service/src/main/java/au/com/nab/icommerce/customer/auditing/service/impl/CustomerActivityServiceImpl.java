@@ -27,29 +27,29 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
 
     @Override
     public Int32Value addCustomerActivity(PCustomerActivity pCustomerActivity) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             CustomerActivity customerActivity = customerActivityMapper.toDomain(pCustomerActivity);
             customerActivityRepository.save(customerActivity);
-            res = ErrorCode.SUCCESS;
+            response = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
     @Override
     public Int32Value addCustomerActivities(PCustomerActivitiesRequest pCustomerActivityListRequest) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             List<PCustomerActivity> pCustomerActivities = pCustomerActivityListRequest.getCustomerActivitiesList();
             List<CustomerActivity> customerActivities = customerActivityMapper.toDomainList(pCustomerActivities);
             customerActivityRepository.saveAll(customerActivities);
-            res = ErrorCode.SUCCESS;
+            response = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
     @Override

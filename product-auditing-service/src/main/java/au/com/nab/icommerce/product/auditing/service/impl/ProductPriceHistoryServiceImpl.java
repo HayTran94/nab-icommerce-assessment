@@ -26,7 +26,7 @@ public class ProductPriceHistoryServiceImpl implements ProductPriceHistoryServic
 
     @Override
     public Int32Value addProductPriceHistory(PProductPriceHistory pProductPriceHistory) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             ProductPriceHistory product = productPriceHistoryMapper.toDomain(pProductPriceHistory);
             if (product.getDateTime() == 0) {
@@ -34,11 +34,11 @@ public class ProductPriceHistoryServiceImpl implements ProductPriceHistoryServic
             }
 
             productPriceHistoryRepository.save(product);
-            res = ErrorCode.SUCCESS;
+            response = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
     @Override

@@ -36,7 +36,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Int32Value addItemsToCart(PAddToCartRequest addToCartRequest) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             int customerId = addToCartRequest.getCustomerId();
             List<PCartItem> pItems = addToCartRequest.getItemsList();
@@ -75,12 +75,12 @@ public class CartServiceImpl implements CartService {
             }
 
             cartRepository.save(cart);
-            res = ErrorCode.SUCCESS;
+            response = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 
     @Override
@@ -102,14 +102,14 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Int32Value clearCustomerCart(Int32Value customerId) {
-        int res = ErrorCode.FAILED;
+        int response = ErrorCode.FAILED;
         try {
             String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId.getValue());
             cartRepository.deleteById(cartCacheKey);
-            res = ErrorCode.SUCCESS;
+            response = ErrorCode.SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return Int32Value.of(res);
+        return Int32Value.of(response);
     }
 }
