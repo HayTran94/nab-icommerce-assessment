@@ -4,6 +4,7 @@ import au.com.nab.icommerce.common.error.ErrorCode;
 import au.com.nab.icommerce.customer.domain.Customer;
 import au.com.nab.icommerce.customer.mapper.CustomerMapper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
+import au.com.nab.icommerce.customer.protobuf.PCustomerResponse;
 import au.com.nab.icommerce.customer.repository.CustomerRepository;
 import au.com.nab.icommerce.customer.service.CustomerService;
 import com.google.protobuf.Int32Value;
@@ -39,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public PCustomer getCustomerById(Int32Value id) {
+    public PCustomerResponse getCustomerById(Int32Value id) {
         PCustomer pCustomer = null;
         try {
             Optional<Customer> customer = customerRepository.findById(id.getValue());
@@ -49,6 +50,6 @@ public class CustomerServiceImpl implements CustomerService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return pCustomer;
+        return PCustomerResponse.newBuilder().setData(pCustomer).build();
     }
 }

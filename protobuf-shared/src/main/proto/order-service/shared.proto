@@ -38,6 +38,12 @@ message PUpdateOrderStatusRequest {
   POrderStatus status = 2;
 }
 
+message POrderResponse {
+  int32 code = 1;
+  POrder data = 2;
+}
+
 message POrdersResponse {
-  repeated POrder orders = 1;
+  int32 code = 1;
+  repeated POrder data = 2;
 }

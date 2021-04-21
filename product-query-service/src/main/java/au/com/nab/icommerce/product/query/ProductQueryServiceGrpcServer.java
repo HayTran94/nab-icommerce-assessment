@@ -1,8 +1,8 @@
 package au.com.nab.icommerce.product.query;
 
 import au.com.nab.icommerce.product.api.ProductQueryServiceGrpc;
-import au.com.nab.icommerce.product.protobuf.PProduct;
 import au.com.nab.icommerce.product.protobuf.PProductCriteriaRequest;
+import au.com.nab.icommerce.product.protobuf.PProductResponse;
 import au.com.nab.icommerce.product.protobuf.PProductsResponse;
 import au.com.nab.icommerce.product.query.service.ProductService;
 import com.google.protobuf.Int32Value;
@@ -17,8 +17,8 @@ public class ProductQueryServiceGrpcServer extends ProductQueryServiceGrpc.Produ
     private ProductService customerService;
 
     @Override
-    public void getProductsById(Int32Value request, StreamObserver<PProduct> responseObserver) {
-        PProduct result = customerService.getProductById(request);
+    public void getProductsById(Int32Value request, StreamObserver<PProductResponse> responseObserver) {
+        PProductResponse result = customerService.getProductById(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }

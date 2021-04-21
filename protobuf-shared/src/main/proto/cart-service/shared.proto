@@ -21,3 +21,8 @@ message PAddToCartRequest {
   int32 customerId = 1;
   repeated PCartItem items = 2;
 }
+
+message PCartResponse {
+  int32 code = 1;
+  PCart data = 2;
+}

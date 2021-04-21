@@ -2,7 +2,7 @@ package au.com.nab.icommerce.cart;
 
 import au.com.nab.icommerce.cart.api.CartServiceGrpc;
 import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
-import au.com.nab.icommerce.cart.protobuf.PCart;
+import au.com.nab.icommerce.cart.protobuf.PCartResponse;
 import au.com.nab.icommerce.cart.service.CartService;
 import com.google.protobuf.Int32Value;
 import io.grpc.stub.StreamObserver;
@@ -23,8 +23,8 @@ public class CartServiceGrpcServer extends CartServiceGrpc.CartServiceImplBase {
     }
 
     @Override
-    public void getCustomerCart(Int32Value request, StreamObserver<PCart> responseObserver) {
-        PCart result = cartService.getCustomerCart(request);
+    public void getCustomerCart(Int32Value request, StreamObserver<PCartResponse> responseObserver) {
+        PCartResponse result = cartService.getCustomerCart(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }

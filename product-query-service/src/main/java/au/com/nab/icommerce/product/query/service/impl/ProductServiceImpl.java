@@ -2,6 +2,7 @@ package au.com.nab.icommerce.product.query.service.impl;
 
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import au.com.nab.icommerce.product.protobuf.PProductCriteriaRequest;
+import au.com.nab.icommerce.product.protobuf.PProductResponse;
 import au.com.nab.icommerce.product.protobuf.PProductsResponse;
 import au.com.nab.icommerce.product.query.domain.Product;
 import au.com.nab.icommerce.product.query.dto.ProductCriteria;
@@ -30,7 +31,7 @@ public class ProductServiceImpl implements ProductService {
     private ProductCriteriaMapper productCriteriaMapper;
 
     @Override
-    public PProduct getProductById(Int32Value id) {
+    public PProductResponse getProductById(Int32Value id) {
         PProduct pProduct = null;
         try {
             Optional<Product> product = productRepository.findById(id.getValue());
@@ -40,7 +41,7 @@ public class ProductServiceImpl implements ProductService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return pProduct;
+        return PProductResponse.newBuilder().setData(pProduct).build();
     }
 
     @Override
@@ -53,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PProductsResponse.newBuilder().addAllProducts(pProducts).build();
+        return PProductsResponse.newBuilder().addAllData(pProducts).build();
     }
 
 }

@@ -15,7 +15,7 @@ service ProductCommandService {
 }
 
 service ProductQueryService {
-  rpc getProductsById(google.protobuf.Int32Value) returns (PProduct);
+  rpc getProductsById(google.protobuf.Int32Value) returns (PProductResponse);
 
   rpc getProductsByCriteria(PProductCriteriaRequest) returns (PProductsResponse);
 }

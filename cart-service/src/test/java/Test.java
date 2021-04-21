@@ -2,6 +2,7 @@ import au.com.nab.icommerce.cart.api.CartServiceGrpc;
 import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
 import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.cart.protobuf.PCartItem;
+import au.com.nab.icommerce.cart.protobuf.PCartResponse;
 import com.google.protobuf.Int32Value;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -21,7 +22,7 @@ public class Test {
         Int32Value res = blockingStub.addItemsToCart(addItemRequest);
         System.out.println("Add: " + res);
 
-        PCart response = blockingStub.getCustomerCart(Int32Value.of(1));
+        PCartResponse response = blockingStub.getCustomerCart(Int32Value.of(1));
         System.out.println(response);
 
         channel.shutdown();

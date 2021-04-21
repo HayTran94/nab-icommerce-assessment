@@ -29,6 +29,12 @@ message PProductCriteriaRequest {
   common.protobuf.PSorting sorting = 101;
 }
 
+message PProductResponse {
+  int32 code = 1;
+  PProduct data = 2;
+}
+
 message PProductsResponse {
-  repeated PProduct products = 1;
+  int32 code = 1;
+  repeated PProduct data = 2;
 }

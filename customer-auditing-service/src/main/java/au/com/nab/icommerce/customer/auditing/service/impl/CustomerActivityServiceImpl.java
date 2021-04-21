@@ -62,7 +62,7 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PCustomerActivitiesResponse.newBuilder().addAllCustomerActivities(pCustomerActivities).build();
+        return PCustomerActivitiesResponse.newBuilder().addAllData(pCustomerActivities).build();
     }
 
 }

@@ -13,7 +13,7 @@ service OrderService {
 
   rpc updateOrderStatus(PUpdateOrderStatusRequest) returns (google.protobuf.Int32Value);
 
-  rpc getOrderById(google.protobuf.Int32Value) returns (POrder);
+  rpc getOrderById(google.protobuf.Int32Value) returns (POrderResponse);
 
   rpc getOrdersByCustomerId(google.protobuf.Int32Value) returns (POrdersResponse);
 }

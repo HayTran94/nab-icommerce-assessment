@@ -8,6 +8,7 @@ import au.com.nab.icommerce.cart.mapper.ItemMapper;
 import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
 import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.cart.protobuf.PCartItem;
+import au.com.nab.icommerce.cart.protobuf.PCartResponse;
 import au.com.nab.icommerce.cart.repository.CartRepository;
 import au.com.nab.icommerce.cart.service.CartService;
 import au.com.nab.icommerce.common.error.ErrorCode;
@@ -83,7 +84,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public PCart getCustomerCart(Int32Value customerId) {
+    public PCartResponse getCustomerCart(Int32Value customerId) {
         PCart pCart = null;
         try {
             String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId.getValue());
@@ -95,7 +96,7 @@ public class CartServiceImpl implements CartService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return pCart;
+        return PCartResponse.newBuilder().setData(pCart).build();
     }
 
     @Override

@@ -14,5 +14,6 @@ message PProductPriceHistory {
 }
 
 message PProductPriceHistoriesResponse {
-  repeated PProductPriceHistory productPriceHistories = 1;
+  int32 code = 1;
+  repeated PProductPriceHistory data = 2;
 }

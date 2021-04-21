@@ -52,6 +52,6 @@ public class ProductPriceHistoryServiceImpl implements ProductPriceHistoryServic
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return PProductPriceHistoriesResponse.newBuilder().addAllProductPriceHistories(pProductPriceHistories).build();
+        return PProductPriceHistoriesResponse.newBuilder().addAllData(pProductPriceHistories).build();
     }
 }

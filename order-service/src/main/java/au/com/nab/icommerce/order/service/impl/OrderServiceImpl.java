@@ -7,6 +7,7 @@ import au.com.nab.icommerce.order.helper.OrderStatusHelper;
 import au.com.nab.icommerce.order.mapper.OrderMapper;
 import au.com.nab.icommerce.order.mapper.OrderStatusMapper;
 import au.com.nab.icommerce.order.protobuf.POrder;
+import au.com.nab.icommerce.order.protobuf.POrderResponse;
 import au.com.nab.icommerce.order.protobuf.POrdersResponse;
 import au.com.nab.icommerce.order.protobuf.PUpdateOrderStatusRequest;
 import au.com.nab.icommerce.order.repository.OrderRepository;
@@ -80,7 +81,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public POrder getOrderById(Int32Value id) {
+    public POrderResponse getOrderById(Int32Value id) {
         POrder pOrder = null;
         try {
             Optional<Order> order = orderRepository.findById(id.getValue());
@@ -90,7 +91,7 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return pOrder;
+        return POrderResponse.newBuilder().setData(pOrder).build();
     }
 
     @Override
@@ -102,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return POrdersResponse.newBuilder().addAllOrders(pOrders).build();
+        return POrdersResponse.newBuilder().addAllData(pOrders).build();
     }
 
 }

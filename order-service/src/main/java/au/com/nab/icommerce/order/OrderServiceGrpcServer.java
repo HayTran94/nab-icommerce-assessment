@@ -2,6 +2,7 @@ package au.com.nab.icommerce.order;
 
 import au.com.nab.icommerce.order.api.OrderServiceGrpc;
 import au.com.nab.icommerce.order.protobuf.POrder;
+import au.com.nab.icommerce.order.protobuf.POrderResponse;
 import au.com.nab.icommerce.order.protobuf.POrdersResponse;
 import au.com.nab.icommerce.order.protobuf.PUpdateOrderStatusRequest;
 import au.com.nab.icommerce.order.service.OrderService;
@@ -31,8 +32,8 @@ public class OrderServiceGrpcServer extends OrderServiceGrpc.OrderServiceImplBas
     }
 
     @Override
-    public void getOrderById(Int32Value request, StreamObserver<POrder> responseObserver) {
-        POrder result = orderService.getOrderById(request);
+    public void getOrderById(Int32Value request, StreamObserver<POrderResponse> responseObserver) {
+        POrderResponse result = orderService.getOrderById(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }
