@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.api.gateway.dto;
+package au.com.nab.icommerce.api.gateway.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

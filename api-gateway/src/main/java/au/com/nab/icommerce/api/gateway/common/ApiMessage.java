@@ -14,6 +14,8 @@ public class ApiMessage {
     public static ApiMessage UNKNOWN_EXCEPTION = new ApiMessage(-2, "Unknown exception");
     public static ApiMessage CREATE_FAILED = new ApiMessage(-4, "Create failed");
     public static ApiMessage UPDATE_FAILED = new ApiMessage(-4, "Update failed");
+    public static ApiMessage LOGIN_FAILED = new ApiMessage(-5, "Login failed");
+    public static ApiMessage INVALID_FACEBOOK_APP_DATA = new ApiMessage(-5, "Invalid Facebook app data");
 
     // CART ERRORS CODE
     public static ApiMessage CART_ITEMS_INVALID = new ApiMessage(-100, "Cart items are invalid");
@@ -38,6 +40,7 @@ public class ApiMessage {
         this.message = message;
     }
 
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
     public ApiMessage clone() {
         ApiMessage instance = new ApiMessage(code, message);
         instance.setData(this.getData());

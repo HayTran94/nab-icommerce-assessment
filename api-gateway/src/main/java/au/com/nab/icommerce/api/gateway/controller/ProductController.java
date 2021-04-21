@@ -2,10 +2,11 @@ package au.com.nab.icommerce.api.gateway.controller;
 
 import au.com.nab.icommerce.api.gateway.client.ProductServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
-import au.com.nab.icommerce.api.gateway.dto.ProductCriteriaRequest;
-import au.com.nab.icommerce.api.gateway.dto.ProductRequest;
-import au.com.nab.icommerce.api.gateway.mapper.ProductCriteriaRequestMapper;
-import au.com.nab.icommerce.api.gateway.mapper.ProductRequestMapper;
+import au.com.nab.icommerce.api.gateway.dto.request.ProductCriteriaRequest;
+import au.com.nab.icommerce.api.gateway.dto.request.ProductRequest;
+import au.com.nab.icommerce.api.gateway.mapper.request.ProductCriteriaRequestMapper;
+import au.com.nab.icommerce.api.gateway.mapper.request.ProductRequestMapper;
+import au.com.nab.icommerce.api.gateway.mapper.response.ProductResponseMapper;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import au.com.nab.icommerce.product.protobuf.PProductCriteriaRequest;
@@ -27,6 +28,9 @@ public class ProductController {
     @Autowired
     private ProductRequestMapper productRequestMapper;
 
+    @Autowired
+    private ProductResponseMapper productResponseMapper;
+
     @GetMapping("/{productId}")
     public ApiMessage getProduct(@PathVariable Integer productId) {
         try {
@@ -35,7 +39,7 @@ public class ProductController {
                 return ApiMessage.PRODUCT_NOT_FOUND;
             }
 
-            return ApiMessage.success(product);
+            return ApiMessage.success(productResponseMapper.toDomain(product));
         } catch (Exception e) {
             e.printStackTrace();
             return ApiMessage.UNKNOWN_EXCEPTION;
@@ -47,7 +51,7 @@ public class ProductController {
         try {
             PProductCriteriaRequest pProductCriteriaRequest = productCriteriaRequestMapper.toProtobuf(productCriteriaRequest);
             List<PProduct> products = productServiceClient.getProductsByCriteria(pProductCriteriaRequest);
-            return ApiMessage.success(products);
+            return ApiMessage.success(productResponseMapper.toDomainList(products));
         } catch (Exception e) {
             e.printStackTrace();
             return ApiMessage.UNKNOWN_EXCEPTION;

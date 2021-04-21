@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.api.gateway.dto;
+package au.com.nab.icommerce.api.gateway.dto.request;
 
 import au.com.nab.icommerce.protobuf.domain.Paging;
 import au.com.nab.icommerce.protobuf.domain.Sorting;

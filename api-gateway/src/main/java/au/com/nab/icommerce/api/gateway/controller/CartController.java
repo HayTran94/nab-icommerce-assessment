@@ -4,9 +4,10 @@ import au.com.nab.icommerce.api.gateway.client.CartServiceClient;
 import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
 import au.com.nab.icommerce.api.gateway.client.ProductServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
-import au.com.nab.icommerce.api.gateway.dto.AddToCartRequest;
-import au.com.nab.icommerce.api.gateway.dto.CartItemRequest;
-import au.com.nab.icommerce.api.gateway.mapper.AddToCartRequestMapper;
+import au.com.nab.icommerce.api.gateway.dto.request.AddToCartRequest;
+import au.com.nab.icommerce.api.gateway.dto.request.CartItemRequest;
+import au.com.nab.icommerce.api.gateway.mapper.request.AddToCartRequestMapper;
+import au.com.nab.icommerce.api.gateway.mapper.response.CartResponseMapper;
 import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
 import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
@@ -20,7 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cart")
+@RequestMapping("/api/cart/customer")
 public class CartController {
 
     @Autowired
@@ -34,6 +35,9 @@ public class CartController {
 
     @Autowired
     private AddToCartRequestMapper addToCartRequestMapper;
+
+    @Autowired
+    private CartResponseMapper cartResponseMapper;
 
     @PostMapping
     public ApiMessage addItemsToCart(@RequestBody @Valid AddToCartRequest addToCartRequest) {
@@ -71,7 +75,7 @@ public class CartController {
         }
     }
 
-    @GetMapping("/customer/{customerId}")
+    @GetMapping("/{customerId}")
     public ApiMessage getCustomerCart(@PathVariable Integer customerId) {
         try {
             PCustomer customer = customerServiceClient.getCustomerById(customerId);
@@ -84,14 +88,14 @@ public class CartController {
                 return ApiMessage.CART_EMPTY;
             }
 
-            return ApiMessage.success(cart);
+            return ApiMessage.success(cartResponseMapper.toDomain(cart));
         } catch (Exception e) {
             e.printStackTrace();
             return ApiMessage.UNKNOWN_EXCEPTION;
         }
     }
 
-    @DeleteMapping("/customer/{customerId}")
+    @DeleteMapping("/{customerId}")
     public ApiMessage clearCustomerCart(@PathVariable Integer customerId) {
         try {
             PCustomer customer = customerServiceClient.getCustomerById(customerId);
