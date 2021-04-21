@@ -8,5 +8,4 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface PagingMapper extends ProtobufMapper<Paging, PPaging> {
-    PagingMapper INSTANCE = Mappers.getMapper(PagingMapper.class);
 }

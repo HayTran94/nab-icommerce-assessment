@@ -19,3 +19,8 @@ message PCustomerResponse {
   int32 code = 1;
   PCustomer data = 2;
 }
+
+message PSocialInfoRequest {
+  string provider = 1;
+  string providerId = 2;
+}

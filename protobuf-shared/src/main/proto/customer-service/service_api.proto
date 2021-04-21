@@ -9,7 +9,9 @@ import "google/protobuf/wrappers.proto";
 import "customer-service/shared.proto";
 
 service CustomerService {
-  rpc createCustomer(PCustomer) returns (google.protobuf.Int32Value);
+  rpc createOrUpdateCustomer(PCustomer) returns (google.protobuf.Int32Value);
 
   rpc getCustomerById(google.protobuf.Int32Value) returns (PCustomerResponse);
+
+  rpc getCustomerBySocialInfo(PSocialInfoRequest) returns (PCustomerResponse);
 }

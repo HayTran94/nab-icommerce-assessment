@@ -8,8 +8,6 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface DirectionMapper extends ProtobufMapper<Direction, PDirection> {
 
-    DirectionMapper INSTANCE = Mappers.getMapper(DirectionMapper.class);
-
     @Override
     @InheritInverseConfiguration
     Direction toDomain(PDirection protobuf);

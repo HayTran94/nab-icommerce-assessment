@@ -6,19 +6,16 @@ import au.com.nab.icommerce.protobuf.mapper.ProtobufMapper;
 import au.com.nab.icommerce.protobuf.mapper.ProtobufMapperConfig;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(config = ProtobufMapperConfig.class, uses = ItemMapper.class)
 public interface CartMapper extends ProtobufMapper<Cart, PCart> {
 
-    CartMapper INSTANCE = Mappers.getMapper(CartMapper.class);
-
     @Override
-    @Mapping(target = "items", expression = "java(ItemMapper.INSTANCE.toDomainList(protobuf.getItemsList()))")
+    @Mapping(source = "itemsList", target = "items")
     Cart toDomain(PCart protobuf);
 
     @Override
-    @Mapping(target = "itemsList", expression = "java(ItemMapper.INSTANCE.toProtobufList(domain.getItems()))")
+    @Mapping(source = "items", target = "itemsList")
     PCart toProtobuf(Cart domain);
 
 }

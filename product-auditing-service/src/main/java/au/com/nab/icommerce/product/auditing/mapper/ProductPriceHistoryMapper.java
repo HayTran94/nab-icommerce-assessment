@@ -9,5 +9,4 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(config = ProtobufMapperConfig.class)
 public interface ProductPriceHistoryMapper extends ProtobufMapper<ProductPriceHistory, PProductPriceHistory> {
-    ProductPriceHistoryMapper INSTANCE = Mappers.getMapper(ProductPriceHistoryMapper.class);
 }
