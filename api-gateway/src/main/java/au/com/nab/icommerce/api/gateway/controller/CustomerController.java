@@ -3,6 +3,7 @@ package au.com.nab.icommerce.api.gateway.controller;
 import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.mapper.response.CustomerResponseMapper;
+import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +24,9 @@ public class CustomerController {
     @GetMapping("/customer/{customerId}")
     public ApiMessage getCustomerById(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = customerServiceClient.getCustomerById(customerId);
-            if (customer == null) {
-                return ApiMessage.CUSTOMER_NOT_FOUND;
+            PCustomer customer = SecurityHelper.getCustomer();
+            if (customer.getId() != customerId) {
+                return ApiMessage.CUSTOMER_VIOLATION;
             }
 
             return ApiMessage.success(customerResponseMapper.toDomain(customer));

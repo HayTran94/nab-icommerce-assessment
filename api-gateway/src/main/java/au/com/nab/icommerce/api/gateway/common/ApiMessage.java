@@ -27,6 +27,7 @@ public class ApiMessage {
 
     // CUSTOMER ERROR CODE
     public static ApiMessage CUSTOMER_NOT_FOUND = new ApiMessage(-200, "Customer not found");
+    public static ApiMessage CUSTOMER_VIOLATION = new ApiMessage(-200, "Customer violation");
 
     // PRODUCT ERROR CODE
     public static ApiMessage PRODUCT_NOT_FOUND = new ApiMessage(-300, "Product not found");

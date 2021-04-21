@@ -8,14 +8,13 @@ import au.com.nab.icommerce.api.gateway.dto.request.AddToCartRequest;
 import au.com.nab.icommerce.api.gateway.dto.request.CartItemRequest;
 import au.com.nab.icommerce.api.gateway.mapper.request.AddToCartRequestMapper;
 import au.com.nab.icommerce.api.gateway.mapper.response.CartResponseMapper;
+import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
 import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
 import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,19 +43,15 @@ public class CartController {
     @PostMapping
     public ApiMessage addItemsToCart(@RequestBody @Valid AddToCartRequest addToCartRequest) {
         try {
+            PCustomer customer = SecurityHelper.getCustomer();
+            if (customer.getId() != addToCartRequest.getCustomerId()) {
+                return ApiMessage.CUSTOMER_VIOLATION;
+            }
+
             List<CartItemRequest> cartItemRequests = addToCartRequest.getItems();
             if (CollectionUtils.isEmpty(cartItemRequests)) {
                 return ApiMessage.CART_ITEMS_EMPTY;
             }
-
-            // Check customer is existed
-            PCustomer customer = customerServiceClient.getCustomerById(addToCartRequest.getCustomerId());
-            if (customer == null) {
-                return ApiMessage.CUSTOMER_NOT_FOUND;
-            }
-
-            // Check customer login
-            SecurityContext securityContext = SecurityContextHolder.getContext();
 
             // Check product is existed
             for (CartItemRequest cartItemRequest : cartItemRequests) {
@@ -83,9 +78,9 @@ public class CartController {
     @GetMapping("/{customerId}")
     public ApiMessage getCustomerCart(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = customerServiceClient.getCustomerById(customerId);
-            if (customer == null) {
-                return ApiMessage.CUSTOMER_NOT_FOUND;
+            PCustomer customer = SecurityHelper.getCustomer();
+            if (customer.getId() != customerId) {
+                return ApiMessage.CUSTOMER_VIOLATION;
             }
 
             PCart cart = cartServiceClient.getCustomerCart(customerId);
@@ -103,9 +98,9 @@ public class CartController {
     @DeleteMapping("/{customerId}")
     public ApiMessage clearCustomerCart(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = customerServiceClient.getCustomerById(customerId);
-            if (customer == null) {
-                return ApiMessage.CUSTOMER_NOT_FOUND;
+            PCustomer customer = SecurityHelper.getCustomer();
+            if (customer.getId() != customerId) {
+                return ApiMessage.CUSTOMER_VIOLATION;
             }
 
             int response = cartServiceClient.clearCustomerCart(customerId);

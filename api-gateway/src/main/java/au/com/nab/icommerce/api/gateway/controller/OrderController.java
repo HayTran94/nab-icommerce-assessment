@@ -7,6 +7,7 @@ import au.com.nab.icommerce.api.gateway.client.ProductServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.request.UpdateOrderStatusRequest;
 import au.com.nab.icommerce.api.gateway.mapper.response.OrderResponseMapper;
+import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
 import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.cart.protobuf.PCartItem;
 import au.com.nab.icommerce.common.error.ErrorCode;
@@ -48,9 +49,9 @@ public class OrderController {
     @PostMapping("/customer/{customerId}")
     public ApiMessage placeOrder(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = customerServiceClient.getCustomerById(customerId);
-            if (customer == null) {
-                return ApiMessage.CUSTOMER_NOT_FOUND;
+            PCustomer customer = SecurityHelper.getCustomer();
+            if (customer.getId() != customerId) {
+                return ApiMessage.CUSTOMER_VIOLATION;
             }
 
             // Get customer cart
@@ -113,6 +114,11 @@ public class OrderController {
                 return ApiMessage.ORDER_NOT_FOUND;
             }
 
+            PCustomer customer = SecurityHelper.getCustomer();
+            if (customer.getId() != order.getCustomerId()) {
+                return ApiMessage.CUSTOMER_VIOLATION;
+            }
+
             return ApiMessage.success(orderResponseMapper.toDomain(order));
         } catch (Exception e) {
             e.printStackTrace();
@@ -123,9 +129,9 @@ public class OrderController {
     @GetMapping("/customer/{customerId}")
     public ApiMessage getOrdersByCustomerId(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = customerServiceClient.getCustomerById(customerId);
-            if (customer == null) {
-                return ApiMessage.CUSTOMER_NOT_FOUND;
+            PCustomer customer = SecurityHelper.getCustomer();
+            if (customer.getId() != customerId) {
+                return ApiMessage.CUSTOMER_VIOLATION;
             }
 
             List<POrder> orders = orderServiceClient.getOrdersByCustomerId(customerId);
@@ -142,6 +148,16 @@ public class OrderController {
             Integer orderId = updateOrderStatusRequest.getOrderId();
             POrderStatus newStatus = updateOrderStatusRequest.getStatus();
 
+            POrder order = orderServiceClient.getOrderById(orderId);
+            if (order == null) {
+                return ApiMessage.ORDER_NOT_FOUND;
+            }
+
+            PCustomer customer = SecurityHelper.getCustomer();
+            if (customer.getId() != order.getCustomerId()) {
+                return ApiMessage.CUSTOMER_VIOLATION;
+            }
+
             PUpdateOrderStatusRequest pUpdateOrderStatusRequest = PUpdateOrderStatusRequest.newBuilder()
                     .setOrderId(orderId)
                     .setStatus(newStatus)
@@ -149,11 +165,6 @@ public class OrderController {
             int response = orderServiceClient.updateOrderStatus(pUpdateOrderStatusRequest);
             if (ErrorCodeHelper.isSuccess(response)) {
                 return ApiMessage.SUCCESS;
-            }
-
-            POrder order = orderServiceClient.getOrderById(orderId);
-            if (order == null) {
-                return ApiMessage.ORDER_NOT_FOUND;
             }
 
             if (response == ErrorCode.ORDER_INVALID_STATUS) {
