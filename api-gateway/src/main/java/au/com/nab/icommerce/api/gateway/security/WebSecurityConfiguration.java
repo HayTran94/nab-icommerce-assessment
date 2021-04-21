@@ -1,7 +1,6 @@
 package au.com.nab.icommerce.api.gateway.security;
 
 import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
-import au.com.nab.icommerce.api.gateway.security.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

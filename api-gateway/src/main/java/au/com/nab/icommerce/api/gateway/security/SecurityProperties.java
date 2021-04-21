@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.api.gateway.security.properties;
+package au.com.nab.icommerce.api.gateway.security;
 
 import lombok.Getter;
 import lombok.Setter;

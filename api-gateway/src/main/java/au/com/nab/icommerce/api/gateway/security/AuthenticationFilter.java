@@ -2,7 +2,6 @@ package au.com.nab.icommerce.api.gateway.security;
 
 import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
 import au.com.nab.icommerce.api.gateway.exception.JwtParsingException;
-import au.com.nab.icommerce.api.gateway.security.properties.SecurityProperties;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;

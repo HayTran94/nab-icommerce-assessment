@@ -4,7 +4,7 @@ import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.request.LoginRequest;
 import au.com.nab.icommerce.api.gateway.dto.response.LoginResponse;
-import au.com.nab.icommerce.api.gateway.security.properties.SecurityProperties;
+import au.com.nab.icommerce.api.gateway.security.SecurityProperties;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import au.com.nab.icommerce.customer.protobuf.PSocialInfoRequest;
