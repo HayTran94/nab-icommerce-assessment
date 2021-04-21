@@ -1,0 +1,19 @@
+syntax = "proto3";
+package order.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.order.api";
+option java_outer_classname = "OrderServiceApi";
+
+import "google/protobuf/wrappers.proto";
+import "order-service/shared.proto";
+
+service OrderService {
+  rpc createOrder(POrder) returns (google.protobuf.Int32Value);
+
+  rpc updateOrderStatus(PUpdateOrderStatusRequest) returns (google.protobuf.Int32Value);
+
+  rpc getOrderById(google.protobuf.Int32Value) returns (POrder);
+
+  rpc getOrdersByCustomerId(google.protobuf.Int32Value) returns (POrdersResponse);
+}

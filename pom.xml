@@ -26,6 +26,7 @@
         <module>product-auditing-worker</module>
         <module>api-gateway</module>
         <module>discovery-server</module>
+        <module>order-service</module>
     </modules>
 
     <properties>

@@ -1,0 +1,43 @@
+syntax = "proto3";
+package order.service;
+
+option java_multiple_files = true;
+option java_package = "au.com.nab.icommerce.order.protobuf";
+option java_outer_classname = "OrderServiceDomain";
+
+message POrder {
+  int32 id = 1;
+  int32 customerId = 2;
+  string customerName = 3;
+  int32 totalAmount = 4;
+  POrderStatus status = 5;
+  repeated POrderItem items = 6;
+  int32 createdDate = 7;
+  int32 updatedDate = 8;
+}
+
+message POrderItem {
+  int32 id = 1;
+  int32 orderId = 2;
+  int32 productId = 3;
+  int32 price = 4;
+  int32 quantity = 5;
+}
+
+enum POrderStatus {
+  UNKNOWN = 0;
+  INIT = 1;
+  PROCESSING = 2;
+  DELIVERING = 3;
+  COMPLETED = 4;
+  DROP_OFF_FAIL = 5;
+}
+
+message PUpdateOrderStatusRequest {
+  int32 orderId = 1;
+  POrderStatus status = 2;
+}
+
+message POrdersResponse {
+  repeated POrder orders = 1;
+}
