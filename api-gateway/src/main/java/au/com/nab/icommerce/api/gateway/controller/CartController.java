@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cart/customer")
+@RequestMapping("/api/carts/customer")
 public class CartController {
 
     @Autowired
@@ -65,7 +65,7 @@ public class CartController {
             PAddToCartRequest pAddToCartRequest = addToCartRequestMapper.toProtobuf(addToCartRequest);
             int response = cartServiceClient.addItemsToCart(pAddToCartRequest);
             if (ErrorCodeHelper.isFail(response)) {
-                return ApiMessage.ADD_TO_CART_FAILED;
+                return ApiMessage.CART_ADD_ITEMS_FAILED;
             }
 
             return ApiMessage.SUCCESS;
@@ -105,7 +105,7 @@ public class CartController {
 
             int response = cartServiceClient.clearCustomerCart(customerId);
             if (ErrorCodeHelper.isFail(response)) {
-                return ApiMessage.CLEAR_CART_FAILED;
+                return ApiMessage.CART_CLEAR_FAILED;
             }
 
             return ApiMessage.SUCCESS;

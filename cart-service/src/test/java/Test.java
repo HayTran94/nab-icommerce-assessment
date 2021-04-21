@@ -1,8 +1,5 @@
 import au.com.nab.icommerce.cart.api.CartServiceGrpc;
-import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
-import au.com.nab.icommerce.cart.protobuf.PCart;
-import au.com.nab.icommerce.cart.protobuf.PCartItem;
-import au.com.nab.icommerce.cart.protobuf.PCartResponse;
+import au.com.nab.icommerce.cart.protobuf.*;
 import com.google.protobuf.Int32Value;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;

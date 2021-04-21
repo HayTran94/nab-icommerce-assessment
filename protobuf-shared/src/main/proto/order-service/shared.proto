@@ -12,8 +12,6 @@ message POrder {
   int32 totalAmount = 4;
   POrderStatus status = 5;
   repeated POrderItem items = 6;
-  int32 createdDate = 7;
-  int32 updatedDate = 8;
 }
 
 message POrderItem {

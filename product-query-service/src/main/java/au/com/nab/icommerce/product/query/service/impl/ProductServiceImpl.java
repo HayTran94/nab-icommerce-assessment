@@ -1,10 +1,7 @@
 package au.com.nab.icommerce.product.query.service.impl;
 
 import au.com.nab.icommerce.common.error.ErrorCode;
-import au.com.nab.icommerce.product.protobuf.PProduct;
-import au.com.nab.icommerce.product.protobuf.PProductCriteriaRequest;
-import au.com.nab.icommerce.product.protobuf.PProductResponse;
-import au.com.nab.icommerce.product.protobuf.PProductsResponse;
+import au.com.nab.icommerce.product.protobuf.*;
 import au.com.nab.icommerce.product.query.domain.Product;
 import au.com.nab.icommerce.product.query.dto.ProductCriteria;
 import au.com.nab.icommerce.product.query.mapper.ProductCriteriaMapper;
@@ -16,7 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -39,6 +39,22 @@ public class ProductServiceImpl implements ProductService {
                 PProduct pProduct = productMapper.toProtobuf(product.get());
                 return response.setCode(ErrorCode.SUCCESS).setData(pProduct).build();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return response.build();
+    }
+
+    @Override
+    public PProductMapResponse mGetProductsByIds(PProductIdsRequest pProductIdsRequest) {
+        PProductMapResponse.Builder response = PProductMapResponse.newBuilder().setCode(ErrorCode.FAILED);
+        try {
+            List<Integer> productIds = pProductIdsRequest.getProductIdsList();
+            List<Product> products = productRepository.findAllByIdIn(productIds);
+            Map<Integer, PProduct> pProductMap = products.stream()
+                    .map(productMapper::toProtobuf)
+                    .collect(Collectors.toMap(PProduct::getId, Function.identity()));
+            return response.setCode(ErrorCode.SUCCESS).putAllData(pProductMap).build();
         } catch (Exception e) {
             e.printStackTrace();
         }

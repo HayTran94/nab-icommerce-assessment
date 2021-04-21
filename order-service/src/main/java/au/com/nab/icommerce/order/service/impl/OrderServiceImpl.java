@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
             OrderStatus curStatus = order.getStatus();
             boolean changeStatusValid = OrderStatusHelper.isChangeStatusValid(curStatus, newStatus);
             if (!changeStatusValid) {
-                return Int32Value.of(response);
+                return Int32Value.of(ErrorCode.ORDER_INVALID_STATUS);
             }
 
             // Update status

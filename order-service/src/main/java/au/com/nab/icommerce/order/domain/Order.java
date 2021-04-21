@@ -23,7 +23,7 @@ public class Order {
     private Integer customerId;
 
     @Column(name = "customer_name")
-    private String  customerName;
+    private String customerName;
 
     @Column(name = "total_amount")
     private Integer totalAmount;
@@ -33,13 +33,7 @@ public class Order {
     private OrderStatus status;
 
     @Fetch(FetchMode.SUBSELECT)
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order", orphanRemoval = true)
     private List<OrderItem> items;
-
-    @Column(name = "created_date")
-    private Integer createdDate;
-
-    @Column(name = "updated_date")
-    private Integer updatedDate;
 
 }

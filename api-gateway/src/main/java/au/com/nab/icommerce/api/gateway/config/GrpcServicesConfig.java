@@ -3,6 +3,7 @@ package au.com.nab.icommerce.api.gateway.config;
 import au.com.nab.icommerce.cart.api.CartServiceGrpc;
 import au.com.nab.icommerce.common.grpc.BaseGrpcServicesConfiguration;
 import au.com.nab.icommerce.customer.api.CustomerServiceGrpc;
+import au.com.nab.icommerce.order.api.OrderServiceGrpc;
 import au.com.nab.icommerce.product.api.ProductCommandServiceGrpc;
 import au.com.nab.icommerce.product.api.ProductQueryServiceGrpc;
 import com.netflix.appinfo.InstanceInfo;
@@ -30,6 +31,12 @@ public class GrpcServicesConfig extends BaseGrpcServicesConfiguration {
     public CartServiceGrpc.CartServiceBlockingStub cartServiceBlockingStub() {
         InstanceInfo instanceInfo = getGrpcInstanceInfo("cart-service");
         return CartServiceGrpc.newBlockingStub(newChannel(instanceInfo.getHostName(), instanceInfo.getPort()));
+    }
+
+    @Bean
+    public OrderServiceGrpc.OrderServiceBlockingStub orderServiceBlockingStub() {
+        InstanceInfo instanceInfo = getGrpcInstanceInfo("order-service");
+        return OrderServiceGrpc.newBlockingStub(newChannel(instanceInfo.getHostName(), instanceInfo.getPort()));
     }
 
     @Bean
