@@ -2,6 +2,7 @@ package au.com.nab.icommerce.api.gateway.common;
 
 
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,6 @@ public class ApiMessage {
     public static ApiMessage SUCCESS = new ApiMessage(0, "Success");
     public static ApiMessage FAILED = new ApiMessage(-1, "Failed");
     public static ApiMessage UNKNOWN_EXCEPTION = new ApiMessage(-2, "Unknown exception");
-    public static ApiMessage NOT_FOUND = new ApiMessage(-3, "Not found");
     public static ApiMessage CREATE_FAILED = new ApiMessage(-4, "Create failed");
     public static ApiMessage UPDATE_FAILED = new ApiMessage(-4, "Update failed");
 
@@ -24,6 +24,9 @@ public class ApiMessage {
 
     // CUSTOMER ERRORS CODE
     public static ApiMessage CUSTOMER_NOT_FOUND = new ApiMessage(-200, "Customer not found");
+
+    // PRODUCT ERRORS CODE
+    public static ApiMessage PRODUCT_NOT_FOUND = new ApiMessage(-300, "Product not found");
 
     private int code;
     private String message;
@@ -41,10 +44,12 @@ public class ApiMessage {
         return instance;
     }
 
+    @JsonIgnore
     public boolean isSuccess() {
         return ErrorCodeHelper.isSuccess(this.code);
     }
 
+    @JsonIgnore
     public boolean isFail() {
         return !this.isSuccess();
     }

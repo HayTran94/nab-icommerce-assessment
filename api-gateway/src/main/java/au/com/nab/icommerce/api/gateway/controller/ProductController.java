@@ -32,7 +32,7 @@ public class ProductController {
         try {
             PProduct product = productServiceClient.getProductsById(productId);
             if (product == null) {
-                return ApiMessage.NOT_FOUND;
+                return ApiMessage.PRODUCT_NOT_FOUND;
             }
 
             return ApiMessage.success(product);
@@ -58,12 +58,12 @@ public class ProductController {
     public ApiMessage createProduct(@RequestBody ProductRequest productRequest) {
         try {
             PProduct product = productRequestMapper.toProtobuf(productRequest);
-            Integer res = productServiceClient.createProduct(product);
-            if (ErrorCodeHelper.isFail(res)) {
+            int response = productServiceClient.createProduct(product);
+            if (ErrorCodeHelper.isFail(response)) {
                 return ApiMessage.CREATE_FAILED;
             }
 
-            return ApiMessage.success(res);
+            return ApiMessage.success(response);
         } catch (Exception e) {
             e.printStackTrace();
             return ApiMessage.UNKNOWN_EXCEPTION;
@@ -74,8 +74,8 @@ public class ProductController {
     public ApiMessage updateProduct(@RequestBody ProductRequest productRequest) {
         try {
             PProduct product = productRequestMapper.toProtobuf(productRequest);
-            Integer res = productServiceClient.updateProduct(product);
-            if (ErrorCodeHelper.isFail(res)) {
+            int response = productServiceClient.updateProduct(product);
+            if (ErrorCodeHelper.isFail(response)) {
                 return ApiMessage.UPDATE_FAILED;
             }
 

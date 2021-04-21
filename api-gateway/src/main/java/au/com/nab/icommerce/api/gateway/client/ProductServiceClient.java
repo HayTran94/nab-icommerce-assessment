@@ -23,12 +23,12 @@ public class ProductServiceClient {
     @Autowired
     private ProductQueryServiceGrpc.ProductQueryServiceBlockingStub productQueryServiceBlockingStub;
 
-    public Integer createProduct(PProduct product) {
+    public int createProduct(PProduct product) {
         Int32Value res = productCommandServiceBlockingStub.createProduct(product);
         return res.getValue();
     }
 
-    public Integer updateProduct(PProduct product) {
+    public int updateProduct(PProduct product) {
         Int32Value res = productCommandServiceBlockingStub.updateProduct(product);
         return res.getValue();
     }

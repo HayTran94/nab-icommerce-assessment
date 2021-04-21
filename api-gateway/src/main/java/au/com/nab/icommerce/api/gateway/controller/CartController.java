@@ -59,8 +59,8 @@ public class CartController {
 
             // Call cart service
             PAddToCartRequest pAddToCartRequest = addToCartRequestMapper.toProtobuf(addToCartRequest);
-            Integer res = cartServiceClient.addItemsToCart(pAddToCartRequest);
-            if (ErrorCodeHelper.isFail(res)) {
+            int response = cartServiceClient.addItemsToCart(pAddToCartRequest);
+            if (ErrorCodeHelper.isFail(response)) {
                 return ApiMessage.ADD_TO_CART_FAILED;
             }
 
@@ -74,6 +74,11 @@ public class CartController {
     @GetMapping("/customer/{customerId}")
     public ApiMessage getCustomerCart(@PathVariable Integer customerId) {
         try {
+            PCustomer customer = customerServiceClient.getCustomerById(customerId);
+            if (customer == null) {
+                return ApiMessage.CUSTOMER_NOT_FOUND;
+            }
+
             PCart cart = cartServiceClient.getCustomerCart(customerId);
             if (cart == null) {
                 return ApiMessage.CART_EMPTY;
@@ -89,8 +94,13 @@ public class CartController {
     @DeleteMapping("/customer/{customerId}")
     public ApiMessage clearCustomerCart(@PathVariable Integer customerId) {
         try {
-            Integer res = cartServiceClient.clearCustomerCart(customerId);
-            if (ErrorCodeHelper.isFail(res)) {
+            PCustomer customer = customerServiceClient.getCustomerById(customerId);
+            if (customer == null) {
+                return ApiMessage.CUSTOMER_NOT_FOUND;
+            }
+
+            int response = cartServiceClient.clearCustomerCart(customerId);
+            if (ErrorCodeHelper.isFail(response)) {
                 return ApiMessage.CLEAR_CART_FAILED;
             }
 

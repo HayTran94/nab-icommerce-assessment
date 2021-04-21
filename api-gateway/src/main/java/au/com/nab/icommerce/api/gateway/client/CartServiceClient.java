@@ -15,7 +15,7 @@ public class CartServiceClient {
     @Autowired
     private CartServiceGrpc.CartServiceBlockingStub cartServiceBlockingStub;
 
-    public Integer addItemsToCart(PAddToCartRequest addToCartRequest) {
+    public int addItemsToCart(PAddToCartRequest addToCartRequest) {
         Int32Value response = cartServiceBlockingStub.addItemsToCart(addToCartRequest);
         return response.getValue();
     }
@@ -28,7 +28,7 @@ public class CartServiceClient {
         return null;
     }
 
-    public Integer clearCustomerCart(Integer customerId) {
+    public int clearCustomerCart(Integer customerId) {
         Int32Value response = cartServiceBlockingStub.clearCustomerCart(Int32Value.of(customerId));
         return response.getValue();
     }
