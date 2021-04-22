@@ -17,16 +17,16 @@ public class ProductPriceHistory {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @Field(type = FieldType.Integer, name = "productId")
+    @Field(type = FieldType.Integer, name = "product_id")
     private Integer productId;
 
-    @Field(type = FieldType.Integer, name = "oldPrice")
+    @Field(type = FieldType.Integer, name = "old_price")
     private Integer oldPrice;
 
-    @Field(type = FieldType.Integer, name = "newPrice")
+    @Field(type = FieldType.Integer, name = "new_price")
     private Integer newPrice;
 
-    @Field(type = FieldType.Long, name = "dateTime")
+    @Field(type = FieldType.Long, name = "date_time")
     private Long dateTime;
 
 }

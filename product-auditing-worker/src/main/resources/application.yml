@@ -6,10 +6,15 @@ spring:
       - localhost:9092
     consumer:
       group-id: product-auditing-worker
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       enable-auto-commit: true
       auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: 'au.com.nab.icommerce.product.auditing.worker.domain.*'
 
 eureka:
   client:

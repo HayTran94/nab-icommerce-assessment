@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
             Product product = productMapper.toDomain(pProduct);
             product = productRepository.save(product);
             if (product.getId() > 0) {
-                response = ErrorCode.SUCCESS;
+                response = product.getId();
             }
         } catch (Exception e) {
             e.printStackTrace();

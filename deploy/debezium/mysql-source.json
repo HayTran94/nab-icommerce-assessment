@@ -10,7 +10,7 @@
         "database.server.id": "184054",
         "database.server.name": "mysql_server",
         "database.include": "nab_product",
-        "database.history.kafka.bootstrap.servers": "kafka:9092",
+        "database.history.kafka.bootstrap.servers": "10.0.1.70:9092",
         "database.history.kafka.topic": "schema-changes.nab_product",
         "include.schema.changes": true,
         "transforms": "route",
