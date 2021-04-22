@@ -48,7 +48,7 @@ public class CustomerActivityAspect {
                     .queryString(queryString)
                     .body(body)
                     .response(response)
-                    .dataTime(System.currentTimeMillis())
+                    .dateTime(System.currentTimeMillis())
                     .build();
 
             // Start new thread to avoid blocking the main thread

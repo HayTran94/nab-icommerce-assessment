@@ -8,11 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerActivityData {
+    private Long dateTime;
     private String action;
     private String method;
     private String requestURI;
     private String queryString;
     private Object body;
     private Object response;
-    private Long dataTime;
 }
