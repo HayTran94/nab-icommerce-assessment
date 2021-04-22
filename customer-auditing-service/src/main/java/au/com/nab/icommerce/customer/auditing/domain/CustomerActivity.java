@@ -17,16 +17,28 @@ public class CustomerActivity {
     @Id
     private String id = UUID.randomUUID().toString();
 
-    @Field(type = FieldType.Integer, name = "customerId")
+    @Field(type = FieldType.Integer, name = "customer_id")
     private Integer customerId;
 
     @Field(type = FieldType.Keyword, name = "action")
     private String action;
 
-    @Field(type = FieldType.Long, name = "time")
-    private Long time;
+    @Field(type = FieldType.Keyword, name = "method")
+    private String method;
 
-    @Field(type = FieldType.Text, name = "data")
-    private String data;
+    @Field(type = FieldType.Text, name = "request_uri")
+    private String requestURI;
+
+    @Field(type = FieldType.Text, name = "query_string")
+    private String queryString;
+
+    @Field(type = FieldType.Long, name = "date_time")
+    private Long dateTime;
+
+    @Field(type = FieldType.Text, name = "body")
+    private String body;
+
+    @Field(type = FieldType.Text, name = "response")
+    private String response;
 
 }

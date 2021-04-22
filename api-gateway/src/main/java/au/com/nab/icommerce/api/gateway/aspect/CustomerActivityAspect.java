@@ -2,6 +2,7 @@ package au.com.nab.icommerce.api.gateway.aspect;
 
 import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -28,6 +29,8 @@ public class CustomerActivityAspect {
 
     private static final String KAFKA_TOPIC = "customer-activity";
 
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     @AfterReturning(pointcut = "execution(@au.com.nab.icommerce.api.gateway.aspect.CustomerActivity * *(..)) && @annotation(customerActivity)",
             returning = "response", argNames = "joinPoint,customerActivity,response")
     public void auditInfo(JoinPoint joinPoint, CustomerActivity customerActivity, Object response) {
@@ -39,16 +42,18 @@ public class CustomerActivityAspect {
             String method = request.getMethod();
             String requestURI = request.getRequestURI();
             String queryString = StringUtils.defaultString(request.getQueryString());
-            String body = request.getReader().lines().collect(Collectors.joining());
+            String bodyJson = request.getReader().lines().collect(Collectors.joining());
+            String responseJSon = objectMapper.writeValueAsString(response);
 
             CustomerActivityData customerActivityData = CustomerActivityData.builder()
+                    .customerId(customer.getId())
                     .action(action)
                     .method(method)
                     .requestURI(requestURI)
                     .queryString(queryString)
-                    .body(body)
-                    .response(response)
                     .dateTime(System.currentTimeMillis())
+                    .body(bodyJson)
+                    .response(responseJSon)
                     .build();
 
             // Start new thread to avoid blocking the main thread
