@@ -5,10 +5,13 @@ import au.com.nab.icommerce.api.gateway.client.ProductServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.request.ProductCriteriaRequest;
 import au.com.nab.icommerce.api.gateway.dto.request.ProductRequest;
+import au.com.nab.icommerce.api.gateway.dto.response.ProductPriceHistoryResponse;
 import au.com.nab.icommerce.api.gateway.mapper.request.ProductCriteriaRequestMapper;
 import au.com.nab.icommerce.api.gateway.mapper.request.ProductRequestMapper;
+import au.com.nab.icommerce.api.gateway.mapper.response.ProductPriceHistoryResponseMapper;
 import au.com.nab.icommerce.api.gateway.mapper.response.ProductResponseMapper;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
+import au.com.nab.icommerce.product.auditing.protobuf.PProductPriceHistory;
 import au.com.nab.icommerce.product.protobuf.PProduct;
 import au.com.nab.icommerce.product.protobuf.PProductCriteriaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class ProductController {
 
     @Autowired
     private ProductResponseMapper productResponseMapper;
+
+    @Autowired
+    private ProductPriceHistoryResponseMapper productPriceHistoryResponseMapper;
 
     @GetMapping("/{productId}")
     @CustomerActivity("GET_PRODUCT_INFO")
@@ -61,7 +67,21 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/{productId}/price/history")
+    @CustomerActivity("GET_PRODUCT_PRICE_HISTORIES")
+    public ApiMessage getProductPriceHistories(@PathVariable Integer productId) {
+        try {
+            List<PProductPriceHistory> priceHistories = productServiceClient.getProductPriceHistories(productId);
+            List<ProductPriceHistoryResponse> priceHistoryResponses = productPriceHistoryResponseMapper.toDomainList(priceHistories);
+            return ApiMessage.success(priceHistoryResponses);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ApiMessage.UNKNOWN_EXCEPTION;
+        }
+    }
+
     @PostMapping
+    @CustomerActivity("CREATE_PRODUCT")
     public ApiMessage createProduct(@RequestBody ProductRequest productRequest) {
         try {
             PProduct product = productRequestMapper.toProtobuf(productRequest);
@@ -78,6 +98,7 @@ public class ProductController {
     }
 
     @PutMapping
+    @CustomerActivity("UPDATE_PRODUCT")
     public ApiMessage updateProduct(@RequestBody ProductRequest productRequest) {
         try {
             PProduct product = productRequestMapper.toProtobuf(productRequest);

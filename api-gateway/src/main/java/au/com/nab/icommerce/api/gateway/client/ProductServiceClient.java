@@ -3,6 +3,9 @@ package au.com.nab.icommerce.api.gateway.client;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.product.api.ProductCommandServiceGrpc;
 import au.com.nab.icommerce.product.api.ProductQueryServiceGrpc;
+import au.com.nab.icommerce.product.auditing.api.ProductAuditingServiceGrpc;
+import au.com.nab.icommerce.product.auditing.protobuf.PProductPriceHistoriesResponse;
+import au.com.nab.icommerce.product.auditing.protobuf.PProductPriceHistory;
 import au.com.nab.icommerce.product.protobuf.*;
 import com.google.protobuf.Int32Value;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class ProductServiceClient {
 
     @Autowired
     private ProductQueryServiceGrpc.ProductQueryServiceBlockingStub productQueryServiceBlockingStub;
+
+    @Autowired
+    private ProductAuditingServiceGrpc.ProductAuditingServiceBlockingStub productAuditingServiceBlockingStub;
 
     public int createProduct(PProduct product) {
         Int32Value res = productCommandServiceBlockingStub.createProduct(product);
@@ -50,6 +56,14 @@ public class ProductServiceClient {
 
     public List<PProduct> getProductsByCriteria(PProductCriteriaRequest productCriteriaRequest) {
         PProductsResponse response = productQueryServiceBlockingStub.getProductsByCriteria(productCriteriaRequest);
+        if (ErrorCodeHelper.isSuccess(response.getCode())) {
+            return response.getDataList();
+        }
+        return Collections.emptyList();
+    }
+
+    public List<PProductPriceHistory> getProductPriceHistories(Integer productId) {
+        PProductPriceHistoriesResponse response = productAuditingServiceBlockingStub.getProductPriceHistories(Int32Value.of(productId));
         if (ErrorCodeHelper.isSuccess(response.getCode())) {
             return response.getDataList();
         }
