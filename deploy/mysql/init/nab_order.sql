@@ -32,8 +32,6 @@ CREATE TABLE `order_info` (
   `customer_name` varchar(255) NOT NULL,
   `total_amount` int NOT NULL,
   `status` varchar(255) NOT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

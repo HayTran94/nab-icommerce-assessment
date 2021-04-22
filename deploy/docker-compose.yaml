@@ -1,45 +1,13 @@
 version: '3.7'
 services:
-#  zookeeper:
-#    image: debezium/zookeeper:1.4
-#    container_name: icommerce-zookeeper
-#    ports:
-#      - 2181:2181
-#      - 2888:2888
-#      - 3888:3888
-#    networks:
-#      - icommerce-network
-
-#  kafka:
-#    image: debezium/kafka:1.4
-#    container_name: icommerce-kafka
-#    ports:
-#      - 9092:9092
-#    links:
-#      - zookeeper
-#    environment:
-#      - ZOOKEEPER_CONNECT=zookeeper:2181
-#      - KAFKA_LISTENERS=INSIDE://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
-#      - KAFKA_ADVERTISED_LISTENERS=INSIDE://kafka:29092,OUTSIDE://localhost:9092
-#      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-#      - KAFKA_INTER_BROKER_LISTENER_NAME=INSIDE
-#    networks:
-#      - icommerce-network
-
   kafka-manager:
     image: sheepkiller/kafka-manager
     container_name: icommerce-kafka-manager
     ports:
       - 9000:9000
     environment:
-      - ZK_HOSTS=10.0.1.70:2181
+      - ZK_HOSTS=${PUBLIC_HOST_IP}:2181
       - APPLICATION_SECRET=letmein
-#    links:
-#      - kafka
-#      - zookeeper
-#    depends_on:
-#      - kafka
-#      - zookeeper
     networks:
       - icommerce-network
 
@@ -79,11 +47,10 @@ services:
       - 8083:8083
       - 5005:5005
     links:
-#      - kafka
       - mysql
       - elasticsearch
     environment:
-      - BOOTSTRAP_SERVERS=10.0.1.70:9092
+      - BOOTSTRAP_SERVERS=${PUBLIC_HOST_IP}:9092
       - GROUP_ID=1
       - CONFIG_STORAGE_TOPIC=debezium_connect_configs
       - OFFSET_STORAGE_TOPIC=debezium_connect_offsets
