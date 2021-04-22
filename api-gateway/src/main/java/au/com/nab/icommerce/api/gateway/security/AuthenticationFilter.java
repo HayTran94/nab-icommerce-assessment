@@ -1,8 +1,10 @@
 package au.com.nab.icommerce.api.gateway.security;
 
 import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
+import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.exception.JwtParsingException;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +32,7 @@ import static org.apache.commons.lang.StringUtils.EMPTY;
 public class AuthenticationFilter extends BasicAuthenticationFilter {
     private CustomerServiceClient customerServiceClient;
     private SecurityProperties securityProperties;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     public AuthenticationFilter(AuthenticationManager authenticationManager, CustomerServiceClient customerServiceClient, SecurityProperties securityProperties) {
         super(authenticationManager);
@@ -59,6 +62,7 @@ public class AuthenticationFilter extends BasicAuthenticationFilter {
         } catch (Exception ex) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
+            objectMapper.writeValue(response.getOutputStream(), ApiMessage.UNAUTHORIZED);
         }
     }
 

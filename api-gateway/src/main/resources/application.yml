@@ -6,7 +6,7 @@ spring:
     name: api-gateway
   kafka:
     bootstrap-servers:
-      - localhost:9092
+      - 52.77.250.133:9092
     producer:
       acks: all
       compression-type: snappy

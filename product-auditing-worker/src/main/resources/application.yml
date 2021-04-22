@@ -3,7 +3,7 @@ spring:
     name: product-auditing-worker
   kafka:
     bootstrap-servers:
-      - localhost:9092
+      - 52.77.250.133:9092
     consumer:
       group-id: product-auditing-worker
       enable-auto-commit: true

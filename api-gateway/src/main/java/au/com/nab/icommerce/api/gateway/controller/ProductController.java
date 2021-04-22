@@ -102,6 +102,12 @@ public class ProductController {
     public ApiMessage updateProduct(@RequestBody ProductRequest productRequest) {
         try {
             PProduct product = productRequestMapper.toProtobuf(productRequest);
+
+            PProduct pProduct = productServiceClient.getProductsById(product.getId());
+            if (pProduct == null) {
+                return ApiMessage.PRODUCT_NOT_FOUND;
+            }
+
             int response = productServiceClient.updateProduct(product);
             if (ErrorCodeHelper.isFail(response)) {
                 return ApiMessage.UPDATE_FAILED;

@@ -8,7 +8,7 @@ spring:
   application:
     name: customer-service
   datasource:
-    url: jdbc:mysql://localhost:3306/nab_customer
+    url: jdbc:mysql://52.77.250.133:3306/nab_customer
     username: root
     password: 123456789
   jpa:

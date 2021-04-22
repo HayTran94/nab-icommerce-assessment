@@ -16,7 +16,8 @@ public class ApiMessage {
     public static ApiMessage CREATE_FAILED = new ApiMessage(-4, "Create failed");
     public static ApiMessage UPDATE_FAILED = new ApiMessage(-5, "Update failed");
     public static ApiMessage LOGIN_FAILED = new ApiMessage(-6, "Login failed");
-    public static ApiMessage INVALID_FACEBOOK_APP_DATA = new ApiMessage(-7, "Invalid Facebook app data");
+    public static ApiMessage UNAUTHORIZED = new ApiMessage(-7, "Unauthorized");
+    public static ApiMessage INVALID_FACEBOOK_APP_DATA = new ApiMessage(-8, "Invalid Facebook app data");
 
     // CART ERROR CODE
     public static ApiMessage CART_ITEMS_INVALID = new ApiMessage(-100, "Cart items are invalid");
