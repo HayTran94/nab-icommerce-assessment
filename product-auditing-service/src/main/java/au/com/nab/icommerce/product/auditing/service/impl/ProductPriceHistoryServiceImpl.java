@@ -43,10 +43,13 @@ public class ProductPriceHistoryServiceImpl implements ProductPriceHistoryServic
 
     @Override
     public PProductPriceHistoriesResponse getProductPriceHistories(Int32Value productId) {
-        PProductPriceHistoriesResponse.Builder response = PProductPriceHistoriesResponse.newBuilder().setCode(ErrorCode.FAILED);
+        PProductPriceHistoriesResponse.Builder response =
+                PProductPriceHistoriesResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
-            List<ProductPriceHistory> productPriceHistories = productPriceHistoryRepository.findAllByProductId(productId.getValue());
-            List<PProductPriceHistory> pProductPriceHistories = productPriceHistoryMapper.toProtobufList(productPriceHistories);
+            List<ProductPriceHistory> productPriceHistories =
+                    productPriceHistoryRepository.findAllByProductIdOrderByDateTimeDesc(productId.getValue());
+            List<PProductPriceHistory> pProductPriceHistories =
+                    productPriceHistoryMapper.toProtobufList(productPriceHistories);
             response.setCode(ErrorCode.SUCCESS).addAllData(pProductPriceHistories).build();
         } catch (Exception e) {
             e.printStackTrace();

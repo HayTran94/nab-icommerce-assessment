@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ProductPriceHistoryRepository extends CrudRepository<ProductPriceHistory, String> {
 
-    List<ProductPriceHistory> findAllByProductId(Integer productId);
+    List<ProductPriceHistory> findAllByProductIdOrderByDateTimeDesc(Integer productId);
 
 }

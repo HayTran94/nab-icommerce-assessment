@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Aspect
@@ -43,9 +43,11 @@ public class CustomerActivityAspect {
             String method = request.getMethod();
             String requestURI = request.getRequestURI();
             String queryString = StringUtils.defaultString(request.getQueryString());
-            String bodyJson = request.getReader().lines().collect(Collectors.joining());
-            JsonNode jsonNode = objectMapper.readValue(bodyJson, JsonNode.class);
-            String bodyJsonMinify = jsonNode.toString();
+            String bodyJson = new String(((ContentCachingRequestWrapper) request).getContentAsByteArray());
+            if (StringUtils.isNotBlank(bodyJson)) {
+                JsonNode jsonNode = objectMapper.readValue(bodyJson, JsonNode.class);
+                bodyJson = jsonNode.toString();
+            }
             String responseJSon = objectMapper.writeValueAsString(response);
 
             CustomerActivityData customerActivityData = CustomerActivityData.builder()
@@ -55,14 +57,15 @@ public class CustomerActivityAspect {
                     .requestURI(requestURI)
                     .queryString(queryString)
                     .dateTime(System.currentTimeMillis())
-                    .body(bodyJsonMinify)
+                    .body(bodyJson)
                     .response(responseJSon)
                     .build();
 
             // Start new thread to avoid blocking the main thread
             Runnable runnable = () -> {
                 ListenableFuture<SendResult<Integer, Object>> future = kafkaTemplate.send(KAFKA_TOPIC, customer.getId(), customerActivityData);
-                future.addCallback(sendResult -> { }, throwable -> log.error(throwable.getMessage(), throwable));
+                future.addCallback(sendResult -> {
+                }, throwable -> log.error(throwable.getMessage(), throwable));
             };
 
             new Thread(runnable).start();

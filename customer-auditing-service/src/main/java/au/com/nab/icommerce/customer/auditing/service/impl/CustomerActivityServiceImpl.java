@@ -56,7 +56,8 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
     public PCustomerActivitiesResponse getCustomerActivitiesByCustomerId(Int32Value customerId) {
         PCustomerActivitiesResponse.Builder response = PCustomerActivitiesResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
-            List<CustomerActivity> customerActivities = customerActivityRepository.findAllByCustomerId(customerId.getValue());
+            List<CustomerActivity> customerActivities =
+                    customerActivityRepository.findAllByCustomerIdOrderByDateTimeDesc(customerId.getValue());
             List<PCustomerActivity> pCustomerActivities = customerActivityMapper.toProtobufList(customerActivities);
             return response.setCode(ErrorCode.SUCCESS).addAllData(pCustomerActivities).build();
         } catch (Exception e) {

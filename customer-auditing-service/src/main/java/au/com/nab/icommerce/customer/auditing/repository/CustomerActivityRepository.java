@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface CustomerActivityRepository extends CrudRepository<CustomerActivity, String> {
-    List<CustomerActivity> findAllByCustomerId(Integer customerId);
+    List<CustomerActivity> findAllByCustomerIdOrderByDateTimeDesc(Integer customerId);
 }

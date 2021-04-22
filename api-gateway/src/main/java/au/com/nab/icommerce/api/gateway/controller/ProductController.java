@@ -67,7 +67,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/{productId}/price/history")
+    @GetMapping("/{productId}/price/histories")
     @CustomerActivity("GET_PRODUCT_PRICE_HISTORIES")
     public ApiMessage getProductPriceHistories(@PathVariable Integer productId) {
         try {
