@@ -1,7 +1,7 @@
 package au.com.nab.icommerce.api.gateway.controller;
 
+import au.com.nab.icommerce.api.gateway.aspect.CustomerActivity;
 import au.com.nab.icommerce.api.gateway.client.CartServiceClient;
-import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
 import au.com.nab.icommerce.api.gateway.client.OrderServiceClient;
 import au.com.nab.icommerce.api.gateway.client.ProductServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
@@ -38,15 +38,13 @@ public class OrderController {
     private CartServiceClient cartServiceClient;
 
     @Autowired
-    private CustomerServiceClient customerServiceClient;
-
-    @Autowired
     private ProductServiceClient productServiceClient;
 
     @Autowired
     private OrderResponseMapper orderResponseMapper;
 
     @PostMapping("/customer/{customerId}")
+    @CustomerActivity("PLACE_ORDER")
     public ApiMessage placeOrder(@PathVariable Integer customerId) {
         try {
             PCustomer customer = SecurityHelper.getCustomer();
@@ -107,7 +105,8 @@ public class OrderController {
     }
 
     @GetMapping("/{orderId}")
-    public ApiMessage getOrderById(@PathVariable Integer orderId) {
+    @CustomerActivity("GET_ORDER_INFO")
+    public ApiMessage getOrderInfo(@PathVariable Integer orderId) {
         try {
             POrder order = orderServiceClient.getOrderById(orderId);
             if (order == null) {
@@ -127,7 +126,8 @@ public class OrderController {
     }
 
     @GetMapping("/customer/{customerId}")
-    public ApiMessage getOrdersByCustomerId(@PathVariable Integer customerId) {
+    @CustomerActivity("GET_CUSTOMER_ORDERS")
+    public ApiMessage getCustomerOrders(@PathVariable Integer customerId) {
         try {
             PCustomer customer = SecurityHelper.getCustomer();
             if (customer.getId() != customerId) {
@@ -143,6 +143,7 @@ public class OrderController {
     }
 
     @PutMapping("/status")
+    @CustomerActivity("UPDATE_ORDER_STATUS")
     public ApiMessage updateOrderStatus(@RequestBody @Valid UpdateOrderStatusRequest updateOrderStatusRequest) {
         try {
             Integer orderId = updateOrderStatusRequest.getOrderId();

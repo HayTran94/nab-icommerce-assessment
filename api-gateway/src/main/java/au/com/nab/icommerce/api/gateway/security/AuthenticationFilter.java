@@ -44,7 +44,6 @@ public class AuthenticationFilter extends BasicAuthenticationFilter {
             chain.doFilter(request, response);
             return;
         }
-        log.info("Trying to filter request in AuthenticationFilter");
 
         try {
             Integer customerId = parseJWTToken(request);

@@ -1,7 +1,7 @@
 package au.com.nab.icommerce.api.gateway.controller;
 
+import au.com.nab.icommerce.api.gateway.aspect.CustomerActivity;
 import au.com.nab.icommerce.api.gateway.client.CartServiceClient;
-import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
 import au.com.nab.icommerce.api.gateway.client.ProductServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.request.AddToCartRequest;
@@ -32,15 +32,13 @@ public class CartController {
     private ProductServiceClient productServiceClient;
 
     @Autowired
-    private CustomerServiceClient customerServiceClient;
-
-    @Autowired
     private AddToCartRequestMapper addToCartRequestMapper;
 
     @Autowired
     private CartResponseMapper cartResponseMapper;
 
     @PostMapping
+    @CustomerActivity("ADD_ITEMS_TO_CART")
     public ApiMessage addItemsToCart(@RequestBody @Valid AddToCartRequest addToCartRequest) {
         try {
             PCustomer customer = SecurityHelper.getCustomer();
@@ -76,6 +74,7 @@ public class CartController {
     }
 
     @GetMapping("/{customerId}")
+    @CustomerActivity("GET_CUSTOMER_CART")
     public ApiMessage getCustomerCart(@PathVariable Integer customerId) {
         try {
             PCustomer customer = SecurityHelper.getCustomer();
@@ -96,6 +95,7 @@ public class CartController {
     }
 
     @DeleteMapping("/{customerId}")
+    @CustomerActivity("CLEAR_CUSTOMER_CART")
     public ApiMessage clearCustomerCart(@PathVariable Integer customerId) {
         try {
             PCustomer customer = SecurityHelper.getCustomer();

@@ -1,5 +1,6 @@
 package au.com.nab.icommerce.api.gateway.controller;
 
+import au.com.nab.icommerce.api.gateway.aspect.CustomerActivity;
 import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.mapper.response.CustomerResponseMapper;
@@ -22,7 +23,8 @@ public class CustomerController {
     private CustomerResponseMapper customerResponseMapper;
 
     @GetMapping("/customer/{customerId}")
-    public ApiMessage getCustomerById(@PathVariable Integer customerId) {
+    @CustomerActivity("GET_CUSTOMER_INFO")
+    public ApiMessage getCustomerInfo(@PathVariable Integer customerId) {
         try {
             PCustomer customer = SecurityHelper.getCustomer();
             if (customer.getId() != customerId) {

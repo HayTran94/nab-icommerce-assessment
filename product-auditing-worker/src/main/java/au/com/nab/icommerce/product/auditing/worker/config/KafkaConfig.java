@@ -1,7 +1,7 @@
 package au.com.nab.icommerce.product.auditing.worker.config;
 
 import au.com.nab.icommerce.product.auditing.worker.domain.CDCMessage;
-import org.apache.kafka.common.serialization.StringDeserializer;
+import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
@@ -22,17 +22,17 @@ public class KafkaConfig {
     private KafkaProperties kafkaProperties;
 
     @Bean
-    public ConsumerFactory<String, CDCMessage> cdcProductConsumerFactory() {
+    public ConsumerFactory<Integer, Object> cdcProductConsumerFactory() {
         Map<String, Object> consumerProperties = kafkaProperties.buildConsumerProperties();
         return new DefaultKafkaConsumerFactory<>(
                 consumerProperties,
-                new StringDeserializer(),
-                new JsonDeserializer<>(CDCMessage.class));
+                new IntegerDeserializer(),
+                new JsonDeserializer<>(Object.class));
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CDCMessage> cdcProductKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, CDCMessage> factory =
+    public ConcurrentKafkaListenerContainerFactory<Integer, CDCMessage> cdcProductKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<Integer, CDCMessage> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(cdcProductConsumerFactory());
         factory.setConcurrency(3);

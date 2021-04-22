@@ -1,5 +1,6 @@
 package au.com.nab.icommerce.api.gateway.controller;
 
+import au.com.nab.icommerce.api.gateway.aspect.CustomerActivity;
 import au.com.nab.icommerce.api.gateway.client.CustomerServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.request.LoginRequest;
@@ -37,6 +38,7 @@ public class LoginController {
     private String facebookClientSecret;
 
     @PostMapping("/login")
+    @CustomerActivity("LOGIN")
     public ApiMessage login(@RequestBody @Valid LoginRequest loginRequest) {
         try {
             // Verify facebook app data

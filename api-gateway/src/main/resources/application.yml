@@ -4,6 +4,15 @@ server:
 spring:
   application:
     name: api-gateway
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    producer:
+      acks: all
+      compression-type: snappy
+      properties:
+        batch.size: 64000 # 64KB
+        linger.ms: 5000   # 5s
 
 eureka:
   client:

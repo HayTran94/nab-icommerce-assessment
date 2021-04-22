@@ -1,5 +1,6 @@
 package au.com.nab.icommerce.api.gateway.controller;
 
+import au.com.nab.icommerce.api.gateway.aspect.CustomerActivity;
 import au.com.nab.icommerce.api.gateway.client.ProductServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.request.ProductCriteriaRequest;
@@ -32,7 +33,8 @@ public class ProductController {
     private ProductResponseMapper productResponseMapper;
 
     @GetMapping("/{productId}")
-    public ApiMessage getProduct(@PathVariable Integer productId) {
+    @CustomerActivity("GET_PRODUCT_INFO")
+    public ApiMessage getProductInfo(@PathVariable Integer productId) {
         try {
             PProduct product = productServiceClient.getProductsById(productId);
             if (product == null) {
@@ -47,6 +49,7 @@ public class ProductController {
     }
 
     @PostMapping("/search")
+    @CustomerActivity("SEARCH_PRODUCTS")
     public ApiMessage searchProducts(@RequestBody ProductCriteriaRequest productCriteriaRequest) {
         try {
             PProductCriteriaRequest pProductCriteriaRequest = productCriteriaRequestMapper.toProtobuf(productCriteriaRequest);
