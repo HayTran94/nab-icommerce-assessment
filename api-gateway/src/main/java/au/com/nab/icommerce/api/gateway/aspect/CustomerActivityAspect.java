@@ -2,6 +2,7 @@ package au.com.nab.icommerce.api.gateway.aspect;
 
 import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -43,6 +44,8 @@ public class CustomerActivityAspect {
             String requestURI = request.getRequestURI();
             String queryString = StringUtils.defaultString(request.getQueryString());
             String bodyJson = request.getReader().lines().collect(Collectors.joining());
+            JsonNode jsonNode = objectMapper.readValue(bodyJson, JsonNode.class);
+            String bodyJsonMinify = jsonNode.toString();
             String responseJSon = objectMapper.writeValueAsString(response);
 
             CustomerActivityData customerActivityData = CustomerActivityData.builder()
@@ -52,7 +55,7 @@ public class CustomerActivityAspect {
                     .requestURI(requestURI)
                     .queryString(queryString)
                     .dateTime(System.currentTimeMillis())
-                    .body(bodyJson)
+                    .body(bodyJsonMinify)
                     .response(responseJSon)
                     .build();
 
