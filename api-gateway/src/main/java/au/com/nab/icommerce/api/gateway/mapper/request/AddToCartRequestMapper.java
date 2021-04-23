@@ -6,9 +6,12 @@ import au.com.nab.icommerce.protobuf.mapper.ProtobufMapper;
 import au.com.nab.icommerce.protobuf.mapper.ProtobufMapperConfig;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(config = ProtobufMapperConfig.class)
 public interface AddToCartRequestMapper extends ProtobufMapper<AddToCartRequest, PAddToCartRequest> {
+
+    AddToCartRequestMapper INSTANCE = Mappers.getMapper(AddToCartRequestMapper.class);
 
     @Override
     @Mapping(source = "itemsList", target = "items")

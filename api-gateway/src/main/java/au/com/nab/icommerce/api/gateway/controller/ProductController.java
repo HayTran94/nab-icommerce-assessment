@@ -26,17 +26,13 @@ public class ProductController {
     @Autowired
     private ProductServiceClient productServiceClient;
 
-    @Autowired
-    private ProductCriteriaRequestMapper productCriteriaRequestMapper;
+    private ProductCriteriaRequestMapper productCriteriaRequestMapper = ProductCriteriaRequestMapper.INSTANCE;
 
-    @Autowired
-    private ProductRequestMapper productRequestMapper;
+    private ProductRequestMapper productRequestMapper = ProductRequestMapper.INSTANCE;
 
-    @Autowired
-    private ProductResponseMapper productResponseMapper;
+    private ProductResponseMapper productResponseMapper = ProductResponseMapper.INSTANCE;
 
-    @Autowired
-    private ProductPriceHistoryResponseMapper productPriceHistoryResponseMapper;
+    private ProductPriceHistoryResponseMapper productPriceHistoryResponseMapper = ProductPriceHistoryResponseMapper.INSTANCE;
 
     @GetMapping("/{productId}")
     @CustomerActivity("GET_PRODUCT_INFO")

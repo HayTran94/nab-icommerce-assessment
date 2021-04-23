@@ -31,11 +31,9 @@ public class CartController {
     @Autowired
     private ProductServiceClient productServiceClient;
 
-    @Autowired
-    private AddToCartRequestMapper addToCartRequestMapper;
+    private final AddToCartRequestMapper addToCartRequestMapper = AddToCartRequestMapper.INSTANCE;
 
-    @Autowired
-    private CartResponseMapper cartResponseMapper;
+    private final CartResponseMapper cartResponseMapper = CartResponseMapper.INSTANCE;
 
     @PostMapping
     @CustomerActivity("ADD_ITEMS_TO_CART")

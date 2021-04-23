@@ -9,4 +9,5 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(config = ProtobufMapperConfig.class)
 public interface CustomerActivityMapper extends ProtobufMapper<CustomerActivity, PCustomerActivity> {
+    CustomerActivityMapper INSTANCE = Mappers.getMapper(CustomerActivityMapper.class);
 }

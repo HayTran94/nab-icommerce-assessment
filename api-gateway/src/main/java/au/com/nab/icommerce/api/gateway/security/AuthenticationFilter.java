@@ -30,9 +30,9 @@ import static org.apache.commons.lang.StringUtils.EMPTY;
  */
 @Slf4j
 public class AuthenticationFilter extends BasicAuthenticationFilter {
-    private CustomerServiceClient customerServiceClient;
-    private SecurityProperties securityProperties;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final CustomerServiceClient customerServiceClient;
+    private final SecurityProperties securityProperties;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public AuthenticationFilter(AuthenticationManager authenticationManager, CustomerServiceClient customerServiceClient, SecurityProperties securityProperties) {
         super(authenticationManager);

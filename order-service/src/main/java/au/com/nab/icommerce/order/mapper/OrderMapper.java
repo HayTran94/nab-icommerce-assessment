@@ -9,12 +9,15 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
 @Mapper(config = ProtobufMapperConfig.class, uses = {OrderItemMapper.class, OrderStatusMapper.class})
 public interface OrderMapper extends ProtobufMapper<Order, POrder> {
+
+    OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     @Override
     @Mapping(source = "itemsList", target = "items")

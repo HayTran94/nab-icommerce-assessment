@@ -22,8 +22,7 @@ public class CustomerActivityServiceImpl implements CustomerActivityService {
     @Autowired
     private CustomerActivityRepository customerActivityRepository;
 
-    @Autowired
-    private CustomerActivityMapper customerActivityMapper;
+    private final CustomerActivityMapper customerActivityMapper = CustomerActivityMapper.INSTANCE;
 
     @Override
     public Int32Value addCustomerActivity(PCustomerActivity pCustomerActivity) {

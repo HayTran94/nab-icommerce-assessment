@@ -25,11 +25,9 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartRepository cartRepository;
 
-    @Autowired
-    private CartMapper cartMapper;
+    private final CartMapper cartMapper = CartMapper.INSTANCE;
 
-    @Autowired
-    private ItemMapper itemMapper;
+    private final ItemMapper itemMapper = ItemMapper.INSTANCE;
 
     @Override
     public Int32Value addItemsToCart(PAddToCartRequest addToCartRequest) {

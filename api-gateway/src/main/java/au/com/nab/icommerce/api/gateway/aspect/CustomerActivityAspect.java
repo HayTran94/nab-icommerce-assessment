@@ -30,7 +30,7 @@ public class CustomerActivityAspect {
 
     private static final String KAFKA_TOPIC = "customer-activity";
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @AfterReturning(pointcut = "execution(@au.com.nab.icommerce.api.gateway.aspect.CustomerActivity * *(..)) && @annotation(customerActivity)",
             returning = "response", argNames = "joinPoint,customerActivity,response")

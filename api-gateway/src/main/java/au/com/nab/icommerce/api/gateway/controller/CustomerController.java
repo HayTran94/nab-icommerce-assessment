@@ -24,11 +24,9 @@ public class CustomerController {
     @Autowired
     private CustomerServiceClient customerServiceClient;
 
-    @Autowired
-    private CustomerResponseMapper customerResponseMapper;
+    private final CustomerResponseMapper customerResponseMapper = CustomerResponseMapper.INSTANCE;
 
-    @Autowired
-    private CustomerActivityResponseMapper customerActivityResponseMapper;
+    private final CustomerActivityResponseMapper customerActivityResponseMapper = CustomerActivityResponseMapper.INSTANCE;
 
     @GetMapping("/{customerId}")
     @CustomerActivity("GET_CUSTOMER_INFO")

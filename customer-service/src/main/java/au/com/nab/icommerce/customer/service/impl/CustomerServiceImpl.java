@@ -22,8 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    private CustomerMapper customerMapper;
+    private final CustomerMapper customerMapper = CustomerMapper.INSTANCE;
 
     @Override
     public Int32Value createOrUpdateCustomer(PCustomer pCustomer) {

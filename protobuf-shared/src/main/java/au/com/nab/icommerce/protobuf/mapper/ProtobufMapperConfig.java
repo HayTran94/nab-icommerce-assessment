@@ -5,7 +5,6 @@ import org.mapstruct.MapperConfig;
 import org.mapstruct.NullValueCheckStrategy;
 
 @MapperConfig(
-        componentModel = "spring",
         nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
         collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED,
         uses = {

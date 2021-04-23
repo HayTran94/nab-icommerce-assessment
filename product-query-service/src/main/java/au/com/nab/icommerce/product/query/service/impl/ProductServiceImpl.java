@@ -24,11 +24,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    private ProductMapper productMapper;
+    private final ProductMapper productMapper = ProductMapper.INSTANCE;
 
-    @Autowired
-    private ProductCriteriaMapper productCriteriaMapper;
+    private final ProductCriteriaMapper productCriteriaMapper = ProductCriteriaMapper.INSTANCE;
 
     @Override
     public PProductResponse getProductById(Int32Value id) {

@@ -27,11 +27,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    private OrderMapper orderMapper;
+    private final OrderMapper orderMapper = OrderMapper.INSTANCE;
 
-    @Autowired
-    private OrderStatusMapper orderStatusMapper;
+    private final OrderStatusMapper orderStatusMapper = OrderStatusMapper.INSTANCE;
 
     @Override
     public Int32Value createOrder(POrder pOrder) {

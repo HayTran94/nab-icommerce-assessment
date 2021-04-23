@@ -21,8 +21,7 @@ public class ProductPriceHistoryServiceImpl implements ProductPriceHistoryServic
     @Autowired
     private ProductPriceHistoryRepository productPriceHistoryRepository;
 
-    @Autowired
-    private ProductPriceHistoryMapper productPriceHistoryMapper;
+    private final ProductPriceHistoryMapper productPriceHistoryMapper = ProductPriceHistoryMapper.INSTANCE;
 
     @Override
     public Int32Value addProductPriceHistory(PProductPriceHistory pProductPriceHistory) {

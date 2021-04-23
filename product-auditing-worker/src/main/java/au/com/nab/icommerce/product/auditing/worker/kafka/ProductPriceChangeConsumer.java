@@ -19,7 +19,7 @@ public class ProductPriceChangeConsumer {
     @Autowired
     private ProductAuditingServiceClient productAuditingServiceClient;
 
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @KafkaListener(topics = "cdc-product")
     public void cdcProductListener(String message) {

@@ -8,9 +8,12 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.ValueMapping;
+import org.mapstruct.factory.Mappers;
 
 @Mapper(config = ProtobufMapperConfig.class)
 public interface OrderStatusMapper extends ProtobufMapper<OrderStatus, POrderStatus> {
+
+    OrderStatusMapper INSTANCE = Mappers.getMapper(OrderStatusMapper.class);
 
     @Override
     @InheritInverseConfiguration
