@@ -11,7 +11,8 @@ message POrder {
   string customerName = 3;
   int32 totalAmount = 4;
   POrderStatus status = 5;
-  repeated POrderItem items = 6;
+  int64 createdDate = 6;
+  repeated POrderItem items = 7;
 }
 
 message POrderItem {

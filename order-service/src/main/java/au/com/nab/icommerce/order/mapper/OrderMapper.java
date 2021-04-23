@@ -21,10 +21,12 @@ public interface OrderMapper extends ProtobufMapper<Order, POrder> {
 
     @Override
     @Mapping(source = "itemsList", target = "items")
+    @Mapping(target = "createdDate", expression = "java(new java.util.Date(protobuf.getCreatedDate()))")
     Order toDomain(POrder protobuf);
 
     @Override
     @Mapping(source = "items", target = "itemsList")
+    @Mapping(target = "createdDate", expression = "java(domain.getCreatedDate().getTime())")
     POrder toProtobuf(Order domain);
 
     @AfterMapping

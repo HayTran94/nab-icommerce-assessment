@@ -14,5 +14,6 @@ public class OrderResponse {
     private String customerName;
     private Integer totalAmount;
     private POrderStatus status;
+    private Long createdDate;
     private List<OrderItemResponse> items;
 }
