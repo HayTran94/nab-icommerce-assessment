@@ -167,7 +167,7 @@ public class OrderController {
                 return ApiMessage.SUCCESS;
             }
 
-            if (response == ErrorCode.ORDER_INVALID_STATUS) {
+            if (response == ErrorCode.ORDER_STATUS_INVALID_FLOW) {
                 POrderStatus curStatus = order.getStatus();
                 return ApiMessage.ORDER_INVALID_STATUS_FLOW.setMessageArgs(curStatus, newStatus);
             }
