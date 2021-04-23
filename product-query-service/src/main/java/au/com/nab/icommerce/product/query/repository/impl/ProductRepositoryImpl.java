@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ProductRepositoryCustomImpl implements ProductRepositoryCustom {
+public class ProductRepositoryImpl implements ProductRepositoryCustom {
 
     @Autowired
     private ElasticsearchOperations elasticsearchTemplate;
