@@ -47,7 +47,7 @@ public class OrderServiceImplTest {
 
         // THEN
         Assert.assertNotNull(response);
-        Assert.assertEquals(ErrorCode.SUCCESS, response.getValue());
+        Assert.assertEquals(ORDER_ID, response.getValue());
     }
 
     @Test

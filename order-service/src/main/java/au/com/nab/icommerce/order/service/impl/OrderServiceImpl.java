@@ -35,6 +35,10 @@ public class OrderServiceImpl implements OrderService {
     public Int32Value createOrder(POrder pOrder) {
         int response = ErrorCode.FAILED;
         try {
+            if (pOrder == null) {
+                return Int32Value.of(ErrorCode.INVALID_DATA);
+            }
+
             Order order = orderMapper.toDomain(pOrder);
             order = orderRepository.save(order);
             if (order.getId() > 0) {
