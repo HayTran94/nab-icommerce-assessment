@@ -37,11 +37,28 @@ Each service only serves for a certain funtionalities of a concerns and can scal
 
 2. CQRS (Command Query Responsibility Segregation):
 In the Product domain, I divided it into 2 services. One for reading purpose (product-query-service) and another one for writing purpose (product-command-service).
-In practice, any ecommerce platform will have many products. Beside that, reading and writing data ratio are difference. If you combine reading and writing data in a service, it can be affected by each other.
-By divived it in to 2 services, you can scale independently way, for example 1 instance for writing service and 3 instances for reading service if reading ratio is larger than writing ratio.
+In practice, any ecommerce platform will have many products. Beside that, reading and writing data ratio are difference. If we combine reading and writing data in a service, it can be affected by each other.
+By divide it into 2 parts, we can choose technologies for each part to achieve the best performance and scale independently way, for example 1 instance for writing service and 3 instances for reading service if reading ratio is larger than writing ratio.
 
-DRY
-SOLID
-KISS
-Law of Demeter
-YAGNI
+3. DRY (Don't Repeat Yourself):
+There are 2 common modules: common-shared and protobuf-shared. They are provide boilerplate code and can be shared for all other micro-services to avoid repeating code.
+
+4. YAGNI (You aren't gonna need it):
+In the project, I only implemented functionalities for currenty requirements. I do not add more methods, or class for furture purposes, but the system is designed with flexible expansion capacity.
+
+5. Law of Demeter:
+To avoid services uncontrollably interdependent and risk leading to cyclic dependencies, I have applied the following rules: 
+* There are 2 layers: low level services (core services) and high level services (api-gateway, background workers)
+* All services in the same layer must not be able communicate directly with each other. They only serve apis for higher level services.
+* High level services can communicate with low level services.
+* If low level services need some data from another service, it should claim the missing data from higher level services.
+
+See the above Architecture Design for more details.
+
+6. SOLID:
+I also applied SOLID pricipal in the project.
+* Each class is designed according to the Single Responsibility Principle.
+* All implementation class of an interface do not alter the correctness of the program by follow the Liskov Substitution Principle.
+* Interfaces are broken down and provide a certain amount of work, avoid a large interface by follow Interface Segregation Principle.
+* High level modules and low level modules must depend on abstractions, not on concretions by follow Dependency Inversion Principle. Using DI supported by Spring Framework to doing this.
+
