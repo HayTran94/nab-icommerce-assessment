@@ -37,7 +37,7 @@ Each service only serves for a certain funtionalities of a concerns and can scal
 
 2. CQRS (Command Query Responsibility Segregation):
 In the Product domain, I divided it into 2 services. One for reading purpose (product-query-service) and another one for writing purpose (product-command-service).
-In practice, any ecommerce platform will have many products. Beside that, reading and writing data ratio are difference. If we combine reading and writing data in a service, it can be affected by each other.
+In the real-world, any ecommerce platform have a lot of products. Beside that, reading and writing data ratio are difference. If we combine reading and writing data in one service, it can be affected by each other.
 By divide it into 2 parts, we can choose technologies for each part to achieve the best performance and scale independently way, for example 1 instance for writing service and 3 instances for reading service if reading ratio is larger than writing ratio.
 
 3. DRY (Don't Repeat Yourself):
@@ -63,7 +63,7 @@ I also applied SOLID pricipal in the project.
 ## Java Libraries and Frameworks
 * Spring boot: main framework for all micro-services.
 * LogNet/grpc-spring-boot-starter: implement Grpc services.
-* Spring Netflix Eureka: implement discovery service, services communicate via service name.
+* Spring Cloud Netflix Eureka: implement discovery service, services communicate via service name.
 * Spring Data JPA, Spring Data Redis, Spring Data Elasticsearch: connect to data stores.
 * Spring Kafka: asynchronous communication of inter-services.
 * Spring AOP: using in api-gateway to tracking customer ativities.
@@ -91,3 +91,19 @@ I also applied SOLID pricipal in the project.
 * Controller: expose public Rest Api and handle bussiness logic.
 * Security: setup authentication/authorization.
 * Classes annotated with @SpringBootApplication: Main class to run Spring Boot application.
+
+## Unit Test
+There is an amount of unit testing in order-service. 
+The unit testing applied for helper, mapper, service impl package, they consist of 21 test cases.
+
+## Setup To Run On Local Computer
+**NOTE:** There are some backing services that I have already setup and deployed on AWS to save your time. Let's focus deep into my services that I was built.
+The backing services that hosted on my AWS:
+* MySQL
+* Redis
+* Elasticsearch
+* Kafka
+* Debezium (CDC)
+More details about Debezium: Sync data from MySQL especially table `product` in `nab_product` database to Elasticsearch.
+
+**Setup local services:**
