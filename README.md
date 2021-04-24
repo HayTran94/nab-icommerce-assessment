@@ -103,7 +103,6 @@ The backing services that hosted on my AWS:
 * Redis
 * Elasticsearch
 * Kafka
-* Debezium (CDC)
-More details about Debezium: Sync data from MySQL especially table `product` in `nab_product` database to Elasticsearch.
+* Debezium (CDC): Sync data from MySQL especially table `product` in `nab_product` database to Elasticsearch.
 
 **Setup local services:**
