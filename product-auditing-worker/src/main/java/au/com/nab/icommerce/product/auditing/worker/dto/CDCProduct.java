@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.product.auditing.worker.domain;
+package au.com.nab.icommerce.product.auditing.worker.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;

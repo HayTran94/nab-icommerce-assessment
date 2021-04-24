@@ -1,4 +1,4 @@
-package au.com.nab.icommerce.customer.auditing.worker.domain;
+package au.com.nab.icommerce.customer.auditing.worker.dto;
 
 import lombok.*;
 

@@ -3,7 +3,7 @@ package au.com.nab.icommerce.customer.auditing.worker.kafka;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivity;
 import au.com.nab.icommerce.customer.auditing.worker.client.CustomerAuditingServiceClient;
-import au.com.nab.icommerce.customer.auditing.worker.domain.CustomerActivityData;
+import au.com.nab.icommerce.customer.auditing.worker.dto.CustomerActivityData;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class CustomerActivityConsumer {
     @Autowired
     private CustomerAuditingServiceClient customerAuditingServiceClient;
     
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @KafkaListener(topics = "customer-activity")
     public void customerActivityListener(String message) {
