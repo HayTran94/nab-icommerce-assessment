@@ -1,6 +1,6 @@
 # NAB Assessment
 
-### Problem Statement
+## Problem Statement
 A small start-up named "iCommerce" wants to build a very simple online shopping
 application to sell their products. In order to get to the market quickly, they just want to
 build an MVP version with a very limited set of functionalities:
@@ -21,13 +21,13 @@ account registration is required.
 7. No online payment is supported yet. The customer is required to pay by cash when
 the product got delivered.
 
-### Entity Relationship Diagram
+## Entity Relationship Diagram
 ![ERD](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ERD.png)
 
-### Architecture Design
+## Architecture Design
 ![ArchitectureDesign](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ArchitectureDesign.png)
 
-### Software Development Principles
+## Software Development Principles
 There are software development principles which I applied in the project:
 1. SOC (Separation of concerns):
 Because the project was built according micro-services architecture, so the first thing I need to do was separate a large overall picture into specific concerns. 
@@ -60,7 +60,7 @@ I also applied SOLID pricipal in the project.
 * Interfaces are broken down and provide a certain amount of work, avoid a large interface by follow Interface Segregation Principle.
 * High level modules and low level modules must depend on abstractions, not on concretions by follow Dependency Inversion Principle. Using DI supported by Spring Framework to doing this.
 
-### Java Libraries and Frameworks
+## Java Libraries and Frameworks
 * Spring boot: main framework for all micro-services.
 * LogNet/grpc-spring-boot-starter: implement Grpc services.
 * Spring Netflix Eureka: implement discovery service, services communicate via service name.
@@ -70,7 +70,7 @@ I also applied SOLID pricipal in the project.
 * Spring Security + JJWT: implement security by using JWT. 
 * Junit: writing unit tests.
 
-### Code Folder Structure
+## Code Folder Structure
 1. Low level services package struture:
 * Helper: utilities classes.
 * Config: components and beans configuration.
