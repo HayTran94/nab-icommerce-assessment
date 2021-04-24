@@ -53,8 +53,6 @@ To avoid services uncontrollably interdependent and risk leading to cyclic depen
 * High level services can communicate with low level services.
 * If low level services need some data from another service, it should claim the missing data from higher level services.
 
-See the above Architecture Design for more details.
-
 6. SOLID:
 I also applied SOLID pricipal in the project.
 * Each class is designed according to the Single Responsibility Principle.
@@ -62,3 +60,34 @@ I also applied SOLID pricipal in the project.
 * Interfaces are broken down and provide a certain amount of work, avoid a large interface by follow Interface Segregation Principle.
 * High level modules and low level modules must depend on abstractions, not on concretions by follow Dependency Inversion Principle. Using DI supported by Spring Framework to doing this.
 
+### Java Libraries and Frameworks
+* Spring boot: main framework for all micro-services.
+* LogNet/grpc-spring-boot-starter: implement Grpc services.
+* Spring Netflix Eureka: implement discovery service, services communicate via service name.
+* Spring Data JPA, Spring Data Redis, Spring Data Elasticsearch: connect to data stores.
+* Spring Kafka: asynchronous communication of inter-services.
+* Spring AOP: using in api-gateway to tracking customer ativities.
+* Spring Security + JJWT: implement security by using JWT. 
+* Junit: writing unit tests.
+
+### Code Folder Structure
+1. Low level services package struture:
+* Helper: utilities classes.
+* Config: components and beans configuration.
+* Domain: contains classes mapping with database, these class reflect database structure.
+* Mapper: convert Domain to Proto and vice versase.
+* Repository: this is the layer communicate directly to database, read/write operations to database.
+* Service: implements bussiness logics. Higher level than Repository package and use it as dependencies.
+* Classes annotated with @GRpcService: implements Grpc interface, use Service package as it's dependencies.
+* Classes annotated with @SpringBootApplication: Main class to run Spring Boot application.
+
+2. High level services package struture:
+* Config: components and beans configuration.
+* Dto: request and response data transfer objects.
+* Client: wrapper class used to communicate with orther service.
+* Mapper: convert Dto to Proto and vice versase.
+* Aspect: implement Aspect Oriented Programming.
+* Kafka: Kafka consumers handler.
+* Controller: expose public Rest Api and handle bussiness logic.
+* Security: setup authentication/authorization.
+* Classes annotated with @SpringBootApplication: Main class to run Spring Boot application.
