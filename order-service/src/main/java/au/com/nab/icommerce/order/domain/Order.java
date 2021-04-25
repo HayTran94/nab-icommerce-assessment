@@ -40,4 +40,9 @@ public class Order {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "order", orphanRemoval = true)
     private List<OrderItem> items;
 
+    @PrePersist
+    private void beforeSave() {
+        this.setCreatedDate(new Date());
+    }
+
 }
