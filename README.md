@@ -1,5 +1,18 @@
 # NAB Assessment
 
+## Table of Contents:
+- [1. Problem Statement](#1-problem-statement)
+- [2. Entity Relationship Diagram](#2-entity-relationship-diagram)
+- [3. Architecture Design](#3-architecture-design)
+- [4. Software Development Principles](#4-software-development-principles)
+- [5. Java Libraries and Frameworks](#5-java-libraries-and-frameworks)
+- [6. Services Detail](#6-services-detail)
+- [7. Code Folder Structure](#7-code-folder-structure)
+- [8. Unit Test](#8-unit-test)
+- [9. Setup To Run On Local Computer](#9-setup-to-run-on-local-computer)
+- [10. CURL Commands](#10-curl-commands)
+
+
 ## 1. Problem Statement
 A small start-up named "iCommerce" wants to build a very simple online shopping
 application to sell their products. In order to get to the market quickly, they just want to
