@@ -29,31 +29,31 @@ the product got delivered.
 
 ## Software Development Principles
 There are software development principles that I applied in the project:
-1. SOC (Separation of concerns):
+**1. SOC (Separation of concerns):** <br />
 Because the project was built according micro-services architecture, so the first thing I need to do was separate a large overall picture into specific concerns. 
 Listed entities and figure out which of them related to a bussiness domain then indicated it as bounded context.
 By doing this, I have already separated the project requirement to micro-services. 
 Each service only serves for a certain funtionalities of a concerns and can scale independently.
 
-2. CQRS (Command Query Responsibility Segregation):
+**2. CQRS (Command Query Responsibility Segregation):** <br />
 In the Product domain, I divided it into 2 services. One for reading purpose (product-query-service) and another one for writing purpose (product-command-service).
 In the real-world, any ecommerce platform have a lot of products. Beside that, reading and writing data ratio are difference. If we combine reading and writing data in one service, it can be affected by each other.
 By divide it into 2 parts, we can choose technologies for each part to achieve the best performance and scale independently way, for example 1 instance for writing service and 3 instances for reading service if reading ratio is larger than writing ratio.
 
-3. DRY (Don't Repeat Yourself):
+**3. DRY (Don't Repeat Yourself):** <br />
 There are 2 common modules: common-shared and protobuf-shared. They are provide boilerplate code and can be shared for all other micro-services to avoid repeating code.
 
-4. YAGNI (You aren't gonna need it):
+**4. YAGNI (You aren't gonna need it):** <br />
 In the project, I only implemented functionalities for currenty requirements. I do not add more methods, or class for furture purposes, but the system is designed with flexible expansion capacity.
 
-5. Law of Demeter:
+**5. Law of Demeter:** <br />
 To avoid services uncontrollably interdependent and risk leading to cyclic dependencies, I have applied the following rules: 
 * There are 2 layers: low level services (core services) and high level services (api-gateway, background workers)
 * All services in the same layer must not be able communicate directly with each other. They only serve apis for higher level services.
 * High level services can communicate with low level services.
 * If low level services need some data from another service, it should claim the missing data from higher level services.
 
-6. SOLID:
+**6. SOLID:** <br />
 I also applied SOLID pricipal in the project.
 * Each class is designed according to the Single Responsibility Principle.
 * All implementation class of an interface do not alter the correctness of the program by follow the Liskov Substitution Principle.
@@ -100,18 +100,17 @@ There is an amount of unit testing in order-service.
 The unit testing applied for helper, mapper, service impl package, they consist of 21 test cases.
 
 ## Setup To Run On Local Computer
-**NOTE:** There are some backing services that I have already setup and deployed on AWS to save your time. Let's focus deep into my services that I was built.
-The backing services that hosted on my AWS:
+**NOTE:** There are a number of backing services that I have already setup and deployed on AWS to save your time. Let's focus on the services I have built in depth. They include:
 * MySQL
 * Redis
 * Elasticsearch
 * Kafka
-* Debezium (CDC): Sync data from MySQL especially table `product` in `nab_product` database to Elasticsearch.
+* Debezium (CDC): Synchronize data from MySQL, namely the table `product` in the `nab_product` database to Elasticsearch.
 
 **Setup local services:**
 Run with IntelliJ IDEA:
 1. Clone the source code and open with InteliJ IDEA
-2. Open run configuration tab, I have set up and ordered them according to their dependencies.
+2. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
 3. Run Maven Compile one by one in the following order:
 ![MavenCompileOrdering](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png)
 4. Run Spring Boot Application one by one in the following order:
