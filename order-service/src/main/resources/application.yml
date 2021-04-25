@@ -21,7 +21,7 @@ spring:
         format_sql: false
         temp:
           use_jdbc_metadata_defaults: false
-    show-sql: true
+    show-sql: false
 
 eureka:
   client:

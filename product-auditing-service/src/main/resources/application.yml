@@ -10,6 +10,8 @@ spring:
   elasticsearch:
     rest:
       uris: 52.77.250.133:9200
+      username: elastic
+      password: eEBrCXyeS6mmrZ7P
 
 eureka:
   client:

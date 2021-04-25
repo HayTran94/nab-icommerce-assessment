@@ -13,12 +13,19 @@ import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 public class ElasticsearchConfig {
 
     @Value("${spring.elasticsearch.rest.uris}")
-    private String elasticsearchUris;
+    private String url;
+
+    @Value("${spring.elasticsearch.rest.username}")
+    private String username;
+
+    @Value("${spring.elasticsearch.rest.password}")
+    private String password;
 
     @Bean
     public RestHighLevelClient restHighLevelClient() {
         ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo(elasticsearchUris)
+                .connectedTo(url)
+                .withBasicAuth(username, password)
                 .build();
 
         return RestClients.create(clientConfiguration).rest();

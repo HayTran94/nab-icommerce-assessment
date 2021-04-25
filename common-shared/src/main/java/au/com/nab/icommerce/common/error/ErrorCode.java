@@ -7,4 +7,7 @@ public class ErrorCode {
 
     // ORDER ERROR CODE
     public static final int ORDER_STATUS_INVALID_FLOW = -100;
+
+    // CART ERROR CODE
+    public static final int CART_EMPTY = -200;
 }

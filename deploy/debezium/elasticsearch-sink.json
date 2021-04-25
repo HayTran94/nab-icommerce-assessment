@@ -5,6 +5,8 @@
         "tasks.max": "1",
         "topics": "cdc-product",
         "connection.url": "http://52.77.250.133:9200",
+        "connection.username": "elastic",
+        "connection.password": "eEBrCXyeS6mmrZ7P",
         "transforms": "unwrap,key",
         "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
         "transforms.unwrap.drop.tombstones": "false",
