@@ -109,5 +109,11 @@ The backing services that hosted on my AWS:
 * Debezium (CDC): Sync data from MySQL especially table `product` in `nab_product` database to Elasticsearch.
 
 **Setup local services:**
-1. Clone the source and open with InteliJ
-2. 
+Run with IntelliJ IDEA:
+1. Clone the source code and open with InteliJ IDEA
+2. Open run configuration tab, I have set up and ordered them according to their dependencies.
+3. Run Maven Compile one by one in the following order:
+![MavenCompileOrdering](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png)
+4. Run Spring Boot Application one by one in the following order:
+![RunApplicationOrdering](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/RunApplicationOrdering.png)
+Done. All services already start, you can use the below cURL to test the application.
