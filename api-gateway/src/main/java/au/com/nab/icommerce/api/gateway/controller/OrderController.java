@@ -142,7 +142,6 @@ public class OrderController {
     }
 
     @PutMapping("/status")
-    @CustomerActivity("UPDATE_ORDER_STATUS")
     public ApiMessage updateOrderStatus(@RequestBody @Valid UpdateOrderStatusRequest updateOrderStatusRequest) {
         try {
             Integer orderId = updateOrderStatusRequest.getOrderId();
