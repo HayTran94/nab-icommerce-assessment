@@ -74,7 +74,6 @@ public class ProductController {
     }
 
     @PostMapping
-    @CustomerActivity("CREATE_PRODUCT")
     public ApiMessage createProduct(@RequestBody ProductRequest productRequest) {
         try {
             PProduct product = productRequestMapper.toProtobuf(productRequest);
@@ -91,7 +90,6 @@ public class ProductController {
     }
 
     @PutMapping
-    @CustomerActivity("UPDATE_PRODUCT")
     public ApiMessage updateProduct(@RequestBody ProductRequest productRequest) {
         try {
             PProduct product = productRequestMapper.toProtobuf(productRequest);
