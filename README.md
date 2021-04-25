@@ -37,7 +37,7 @@ By doing this, I have already separated the project requirement to micro-service
 Each service only serves for a certain funtionalities of a concerns and can scale independently.
 
 **2. CQRS (Command Query Responsibility Segregation):** <br />
-In the Product domain, I divided it into 2 services. One for reading purpose (product-query-service) and another one for writing purpose (product-command-service).
+In the Product domain, I divided it into 2 services. One for reading purpose (`product-query-service`) and another one for writing purpose (`product-command-service`).
 In the real-world, any ecommerce platform have a lot of products. Beside that, reading and writing data ratio are difference. If we combine reading and writing data in one service, it can be affected by each other.
 By divide it into 2 parts, we can choose technologies for each part to achieve the best performance and scale independently way, for example 1 instance for writing service and 3 instances for reading service if reading ratio is larger than writing ratio.
 
@@ -122,7 +122,7 @@ Done. All services already started, you can use the below cURL to test the appli
 
 ## 10. CURL Commands
 There is the Postman collection, you can import it to your Postman and use it for a more visual view: <br />
-https://www.getpostman.com/collections/b3e6e0be5fdc6509e328
+https://www.getpostman.com/collections/c07a126b0c4d21ad9a3a
 
 ### There are some rule for api response data:
 1. All api return data with the following structure: <br />
@@ -140,7 +140,6 @@ https://www.getpostman.com/collections/b3e6e0be5fdc6509e328
 
 ### Customer Login:
 This api simulate Login With Facebook feature.
-Request:
 ```shell
 curl -L -X POST 'http://localhost:8080/api/customers/login' \
 -H 'Content-Type: application/json' \
@@ -156,7 +155,6 @@ curl -L -X POST 'http://localhost:8080/api/customers/login' \
 
 }'
 ```
-
 Payload:
 ``name``: customer name.
 ``email``: customer email.
@@ -170,7 +168,6 @@ Payload:
 Sample response:
 
 ### Get Customer Infomation:
-Request:
 ```shell
 curl -L -X GET 'http://localhost:8080/api/customers/1' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
@@ -180,7 +177,6 @@ Sample response:
 
 
 ### Get Customer Activities:
-Request:
 ```shell
 curl -L -X GET 'http://localhost:8080/api/customers/1/activities' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
@@ -190,7 +186,6 @@ Sample response:
 
 
 ### Search Products:
-Request:
 ```shell
 curl -L -X POST 'http://localhost:8080/api/products/search' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
@@ -217,7 +212,6 @@ That is the default search criteria with paging and sorting operations, you can 
 Sample response:
 
 ### Get Product Detail:
-Request:
 ```shell
 curl -L -X GET 'http://localhost:8080/api/products/2' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
@@ -226,7 +220,6 @@ curl -L -X GET 'http://localhost:8080/api/products/2' \
 Sample response:
 
 ### Get Product Price Histories:
-Request:
 ```shell
 curl -L -X GET 'http://localhost:8080/api/products/2/price/histories' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
@@ -235,7 +228,6 @@ curl -L -X GET 'http://localhost:8080/api/products/2/price/histories' \
 Sample response:
 
 ### Add Items To Cart:
-Request:
 ```shell
 curl -L -X POST 'http://localhost:8080/api/carts/customer' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
@@ -259,7 +251,6 @@ Sample response:
 
 
 ### Get Customer Cart:
-Request:
 ```shell
 curl -L -X GET 'http://localhost:8080/api/carts/customer/1' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
@@ -268,7 +259,6 @@ curl -L -X GET 'http://localhost:8080/api/carts/customer/1' \
 Sample response:
 
 ### Delete Customer Cart:
-Request:
 ```shell
 curl -L -X DELETE 'http://localhost:8080/api/carts/customer/1' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
@@ -277,7 +267,6 @@ curl -L -X DELETE 'http://localhost:8080/api/carts/customer/1' \
 Sample response:
 
 ### Place Order:
-Request:
 ```shell
 curl -L -X POST 'http://localhost:8080/api/orders/customer/1' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
@@ -287,20 +276,19 @@ Sample response:
 
 
 ### Get Order Information:
-Request:
 ```shell
 curl -L -X GET 'http://localhost:8080/api/orders/1' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
 ```
 
 ### Get Customer Ordders:
-Request:
 ```shell
 curl -L -X GET 'http://localhost:8080/api/orders/customer/1' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
 ```
 
 Sample response:
+
 
 ### APIs For Admin:
 Here are some APIs I made for Admin, using simply by logging in as customer, but not implementing the user authorization feature yet.
@@ -346,6 +334,5 @@ curl -L -X PUT 'http://localhost:8080/api/orders/status' \
 }'
 ```
 Order status flow: INIT -> PROCESSING -> DELIVERING -> COMPLETED or DROP_OFF_FAIL
-
 
 # Thank you very much and hope to see you at NAB
