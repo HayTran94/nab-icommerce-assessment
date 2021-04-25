@@ -113,7 +113,8 @@ Run with IntelliJ IDEA:
 1. Clone the source code and open with InteliJ IDEA
 2. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
 3. Run Maven Compile one by one in the following order:
-![MavenCompileOrdering](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png)
+<img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png" alt="MavenCompileOrdering" height="200"/>
+
 4. Run Spring Boot Application one by one in the following order:
 ![RunApplicationOrdering](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/RunApplicationOrdering.png)
 
