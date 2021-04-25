@@ -12,11 +12,11 @@ public class Test {
 
         CartServiceGrpc.CartServiceBlockingStub blockingStub = CartServiceGrpc.newBlockingStub(channel);
 
-        PAddToCartRequest addItemRequest = PAddToCartRequest.newBuilder()
+        PAddCartItemsRequest addItemRequest = PAddCartItemsRequest.newBuilder()
                 .setCustomerId(1)
                 .addItems(PCartItem.newBuilder().setProductId(102).setQuantity(1).build())
                 .build();
-        Int32Value res = blockingStub.addItemsToCart(addItemRequest);
+        Int32Value res = blockingStub.addCartItems(addItemRequest);
         System.out.println("Add: " + res);
 
         PCartResponse response = blockingStub.getCustomerCart(Int32Value.of(1));
