@@ -40,7 +40,7 @@ public class OrderController {
     @Autowired
     private ProductServiceClient productServiceClient;
 
-    private OrderResponseMapper orderResponseMapper = OrderResponseMapper.INSTANCE;
+    private final OrderResponseMapper orderResponseMapper = OrderResponseMapper.INSTANCE;
 
     @PostMapping("/customer/{customerId}")
     @CustomerActivity("PLACE_ORDER")

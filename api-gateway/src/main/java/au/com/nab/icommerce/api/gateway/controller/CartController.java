@@ -32,7 +32,6 @@ public class CartController {
     private ProductServiceClient productServiceClient;
 
     private final AddToCartRequestMapper addToCartRequestMapper = AddToCartRequestMapper.INSTANCE;
-
     private final CartResponseMapper cartResponseMapper = CartResponseMapper.INSTANCE;
 
     @PostMapping

@@ -26,7 +26,6 @@ public class CartServiceImpl implements CartService {
     private CartRepository cartRepository;
 
     private final CartMapper cartMapper = CartMapper.INSTANCE;
-
     private final ItemMapper itemMapper = ItemMapper.INSTANCE;
 
     @Override

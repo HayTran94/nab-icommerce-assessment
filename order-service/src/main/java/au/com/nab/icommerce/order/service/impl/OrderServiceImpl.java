@@ -28,7 +28,6 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     private final OrderMapper orderMapper = OrderMapper.INSTANCE;
-
     private final OrderStatusMapper orderStatusMapper = OrderStatusMapper.INSTANCE;
 
     @Override

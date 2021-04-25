@@ -25,7 +25,6 @@ public class CustomerController {
     private CustomerServiceClient customerServiceClient;
 
     private final CustomerResponseMapper customerResponseMapper = CustomerResponseMapper.INSTANCE;
-
     private final CustomerActivityResponseMapper customerActivityResponseMapper = CustomerActivityResponseMapper.INSTANCE;
 
     @GetMapping("/{customerId}")

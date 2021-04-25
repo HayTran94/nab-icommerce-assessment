@@ -25,7 +25,6 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
     private final ProductMapper productMapper = ProductMapper.INSTANCE;
-
     private final ProductCriteriaMapper productCriteriaMapper = ProductCriteriaMapper.INSTANCE;
 
     @Override
