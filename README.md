@@ -126,10 +126,10 @@ Run with IntelliJ IDEA:
 1. Clone the source code and open with InteliJ IDEA
 2. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
 3. Run Maven Compile one by one in the following order:
-  <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png" alt="MavenCompileOrdering" height="300"/>
+  <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png" alt="MavenCompileOrdering" width="350"/>
 
 4. Run Spring Boot Application one by one in the following order:
-  <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/RunApplicationOrdering.png" alt="RunApplicationOrdering" height="300"/>
+  <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/SpringApplicationOrdering.png" alt="SpringApplicationOrdering" width="350"/>
 
 Done. All services already started, you can use the below cURL to test the application.
 
