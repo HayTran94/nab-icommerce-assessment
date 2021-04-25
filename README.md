@@ -1,6 +1,6 @@
 # NAB Assessment
 
-## Problem Statement
+## 1. Problem Statement
 A small start-up named "iCommerce" wants to build a very simple online shopping
 application to sell their products. In order to get to the market quickly, they just want to
 build an MVP version with a very limited set of functionalities:
@@ -21,13 +21,13 @@ account registration is required.
 7. No online payment is supported yet. The customer is required to pay by cash when
 the product got delivered.
 
-## Entity Relationship Diagram
+## 2. Entity Relationship Diagram
 ![ERD](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ERD.png)
 
-## Architecture Design
+## 3. Architecture Design
 ![ArchitectureDesign](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ArchitectureDesign.png)
 
-## Software Development Principles
+## 4. Software Development Principles
 There are software development principles that I applied in the project: <br />
 
 **1. SOC (Separation of concerns):** <br />
@@ -61,7 +61,7 @@ I also applied SOLID pricipal in the project.
 * Interfaces are broken down and provide a certain amount of work, avoid a large interface by follow Interface Segregation Principle.
 * High level modules and low level modules must depend on abstractions, not on concretions by follow Dependency Inversion Principle. Using DI supported by Spring Framework to doing this.
 
-## Java Libraries and Frameworks
+## 5. Java Libraries and Frameworks
 * **Spring Boot:** main framework for all micro-services.
 * **LogNet Spring Boot GRPC:** implement Grpc services.
 * **Spring Cloud Netflix Eureka:** implement discovery service, services communicate via service name.
@@ -71,10 +71,10 @@ I also applied SOLID pricipal in the project.
 * **Spring Security + JJWT:** implement security by using JWT. 
 * **Junit:** writing unit tests.
 
-## Services Detail
+## 6. Services Detail
 ![ServicesDetail](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesDetail.png)
 
-## Code Folder Structure
+## 7. Code Folder Structure
 1. Low level services package struture:
 * **Helper:** utilities classes.
 * **Config:** components and beans configuration.
@@ -96,11 +96,11 @@ I also applied SOLID pricipal in the project.
 * **Security:** setup authentication/authorization.
 * **Classes annotated with @SpringBootApplication:** Main class to run Spring Boot application.
 
-## Unit Test
+## 8. Unit Test
 There are a number of unit testing in `order-service`. 
 The unit testing applied for helper, mapper, service impl package, they consist of 21 test cases.
 
-## Setup To Run On Local Computer
+## 9. Setup To Run On Local Computer
 **NOTE:** There are a number of backing services that I have already setup and deployed on AWS to save your time. Let's focus on the services I have built in depth. They include:
 * MySQL
 * Redis
@@ -120,7 +120,7 @@ Run with IntelliJ IDEA:
 
 Done. All services already started, you can use the below cURL to test the application.
 
-## CURL Commands
+## 10. CURL Commands
 There is the Postman collection, you can import it to your Postman and use it for a more visual view: <br />
 https://www.getpostman.com/collections/b3e6e0be5fdc6509e328
 
