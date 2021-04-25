@@ -128,12 +128,15 @@ https://www.getpostman.com/collections/b3e6e0be5fdc6509e328
 1. All api return data with the following structure: <br />
 ```json
 {
-  "code": Integer,     // SUCCESS: code >= 0, FAIL code < 0 
-  "message": String,   // Error message when FAIL
-  "data": Object       // Response data
+  "code": 0,
+  "message": "",
+  "data": {}
 }
 ```
-2. When calling api to create a new object, if successful, the field data in the response returns the Id of the created object.
+2. `code`: SUCCESS: code >= 0, FAIL code < 0 
+3. `message`: Error message when FAIL
+4. `data`: Response data, it can contain any of data types
+5. When calling api to create a new object, if successful, the field data in the response returns the Id of the created object.
 
 ### Customer Login:
 This api simulate Login With Facebook feature.
