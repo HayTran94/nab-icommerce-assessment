@@ -88,7 +88,7 @@ public class CartServiceImpl implements CartService {
             String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId);
             Optional<Cart> cartOptional = cartRepository.findById(cartCacheKey);
             if (!cartOptional.isPresent()) {
-                return Int32Value.of(ErrorCode.INVALID_DATA);
+                return Int32Value.of(ErrorCode.CART_EMPTY);
             }
 
             Cart cart = cartOptional.get();

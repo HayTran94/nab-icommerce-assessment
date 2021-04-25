@@ -10,10 +10,11 @@ import au.com.nab.icommerce.api.gateway.dto.request.RemoveCartItemsRequest;
 import au.com.nab.icommerce.api.gateway.mapper.request.AddCartItemsRequestMapper;
 import au.com.nab.icommerce.api.gateway.mapper.request.RemoveCartItemsRequestMapper;
 import au.com.nab.icommerce.api.gateway.mapper.response.CartResponseMapper;
-import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
+import au.com.nab.icommerce.api.gateway.security.SecurityContextHelper;
 import au.com.nab.icommerce.cart.protobuf.PAddCartItemsRequest;
 import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.cart.protobuf.PRemoveCartItemsRequest;
+import au.com.nab.icommerce.common.error.ErrorCode;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import au.com.nab.icommerce.product.protobuf.PProduct;
@@ -42,7 +43,7 @@ public class CartController {
     @CustomerActivity("ADD_CART_ITEMS")
     public ApiMessage addCartItems(@RequestBody @Valid AddCartItemsRequest addCartItemsRequest) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != addCartItemsRequest.getCustomerId()) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }
@@ -78,7 +79,7 @@ public class CartController {
     @CustomerActivity("REMOVE_CART_ITEMS")
     public ApiMessage removeCartItems(@RequestBody @Valid RemoveCartItemsRequest removeItemsInCartRequest) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != removeItemsInCartRequest.getCustomerId()) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }
@@ -88,6 +89,9 @@ public class CartController {
                     removeCartItemsRequestMapper.toProtobuf(removeItemsInCartRequest);
             int response = cartServiceClient.removeCartItems(pRemoveCartItemsRequest);
             if (ErrorCodeHelper.isFail(response)) {
+                if (response == ErrorCode.CART_EMPTY) {
+                    return ApiMessage.CART_EMPTY;
+                }
                 return ApiMessage.DELETE_FAILED;
             }
 
@@ -102,7 +106,7 @@ public class CartController {
     @CustomerActivity("GET_CUSTOMER_CART")
     public ApiMessage getCustomerCart(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != customerId) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }
@@ -123,7 +127,7 @@ public class CartController {
     @CustomerActivity("CLEAR_CUSTOMER_CART")
     public ApiMessage clearCustomerCart(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != customerId) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }
