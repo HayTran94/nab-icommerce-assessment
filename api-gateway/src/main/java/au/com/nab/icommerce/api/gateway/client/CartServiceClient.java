@@ -1,9 +1,10 @@
 package au.com.nab.icommerce.api.gateway.client;
 
 import au.com.nab.icommerce.cart.api.CartServiceGrpc;
-import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
+import au.com.nab.icommerce.cart.protobuf.PAddCartItemsRequest;
 import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.cart.protobuf.PCartResponse;
+import au.com.nab.icommerce.cart.protobuf.PRemoveCartItemsRequest;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import com.google.protobuf.Int32Value;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,13 @@ public class CartServiceClient {
     @Autowired
     private CartServiceGrpc.CartServiceBlockingStub cartServiceBlockingStub;
 
-    public int addItemsToCart(PAddToCartRequest addToCartRequest) {
-        Int32Value response = cartServiceBlockingStub.addItemsToCart(addToCartRequest);
+    public int addCartItems(PAddCartItemsRequest addCartItemsRequest) {
+        Int32Value response = cartServiceBlockingStub.addCartItems(addCartItemsRequest);
+        return response.getValue();
+    }
+
+    public int removeCartItems(PRemoveCartItemsRequest removeCartItemsRequest) {
+        Int32Value response = cartServiceBlockingStub.removeCartItems(removeCartItemsRequest);
         return response.getValue();
     }
 

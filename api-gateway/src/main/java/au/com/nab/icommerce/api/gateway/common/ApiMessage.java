@@ -15,20 +15,23 @@ public class ApiMessage {
     public static ApiMessage UNKNOWN_EXCEPTION = new ApiMessage(-3, "Unknown exception");
     public static ApiMessage CREATE_FAILED = new ApiMessage(-4, "Create failed");
     public static ApiMessage UPDATE_FAILED = new ApiMessage(-5, "Update failed");
-    public static ApiMessage LOGIN_FAILED = new ApiMessage(-6, "Login failed");
-    public static ApiMessage UNAUTHORIZED = new ApiMessage(-7, "Unauthorized");
-    public static ApiMessage INVALID_FACEBOOK_APP_DATA = new ApiMessage(-8, "Invalid Facebook app data");
+    public static ApiMessage DELETE_FAILED = new ApiMessage(-6, "Delete failed");
+
+    // LOGIN ERROR
+    public static ApiMessage LOGIN_FAILED = new ApiMessage(-50, "Login failed");
+    public static ApiMessage UNAUTHORIZED = new ApiMessage(-51, "Unauthorized");
+    public static ApiMessage INVALID_FACEBOOK_APP_DATA = new ApiMessage(-52, "Invalid Facebook app data");
 
     // CART ERROR CODE
     public static ApiMessage CART_ITEMS_INVALID = new ApiMessage(-100, "Cart items are invalid");
     public static ApiMessage CART_ITEMS_EMPTY = new ApiMessage(-101, "Cart items is empty");
     public static ApiMessage CART_ADD_ITEMS_FAILED = new ApiMessage(-102, "Add to cart failed");
     public static ApiMessage CART_CLEAR_FAILED = new ApiMessage(-103, "Clear cart failed");
-    public static ApiMessage CART_EMPTY = new ApiMessage(-103, "Cart is empty");
+    public static ApiMessage CART_EMPTY = new ApiMessage(-104, "Cart is empty");
 
     // CUSTOMER ERROR CODE
     public static ApiMessage CUSTOMER_NOT_FOUND = new ApiMessage(-200, "Customer not found");
-    public static ApiMessage CUSTOMER_VIOLATION = new ApiMessage(-200, "Customer violation");
+    public static ApiMessage CUSTOMER_VIOLATION = new ApiMessage(-201, "Customer violation");
 
     // PRODUCT ERROR CODE
     public static ApiMessage PRODUCT_NOT_FOUND = new ApiMessage(-300, "Product not found");
@@ -37,7 +40,6 @@ public class ApiMessage {
     public static ApiMessage ORDER_CREATE_FAILED = new ApiMessage(-400, "Place order failed");
     public static ApiMessage ORDER_NOT_FOUND = new ApiMessage(-401, "Order not found");
     public static ApiMessage ORDER_INVALID_STATUS_FLOW = new ApiMessage(-402, "Can not change order status from %s to %s");
-
 
     private int code;
     @Setter

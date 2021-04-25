@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class AddToCartRequest {
+public class AddCartItemsRequest {
     @Min(1)
     @NotNull
     private Integer customerId;
