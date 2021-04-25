@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Low Level Services Multirun" type="Multirun" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0.0">
+    <runConfiguration name="CustomerServiceApplication" type="Spring Boot" />
+    <runConfiguration name="CustomerAuditingServiceApplication" type="Spring Boot" />
+    <runConfiguration name="ProductCommandServiceApplication" type="Spring Boot" />
+    <runConfiguration name="ProductQueryServiceApplication" type="Spring Boot" />
+    <runConfiguration name="ProductAuditingServiceApplication" type="Spring Boot" />
+    <runConfiguration name="CartServiceApplication" type="Spring Boot" />
+    <runConfiguration name="OrderServiceApplication" type="Spring Boot" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="High Level Services Multirun" type="Multirun" separateTabs="false" reuseTabsWithFailures="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0.0">
+    <runConfiguration name="CustomerAuditingWorkerApplication" type="Spring Boot" />
+    <runConfiguration name="ProductAuditingWorkerApplication" type="Spring Boot" />
+    <runConfiguration name="ApiGatewayApplication" type="Spring Boot" />
+    <method v="2" />
+  </configuration>
+</component>
