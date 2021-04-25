@@ -152,7 +152,7 @@ https://www.getpostman.com/collections/c07a126b0c4d21ad9a3a
 5. When calling api to create a new object, if successful, the field data in the response returns the Id of the created object.
 
 ### Customer Login:
-This api simulate Login With Facebook feature.
+This api simulate Login With Facebook feature. 
 ```shell
 curl -L -X POST 'http://localhost:8080/api/customers/login' \
 -H 'Content-Type: application/json' \
@@ -168,17 +168,30 @@ curl -L -X POST 'http://localhost:8080/api/customers/login' \
 
 }'
 ```
-Payload:
-- ``name``: customer name.
-- ``email``: customer email.
-- ``provider``: login provider, "FACEBOOK" for example.
-- ``providerId``: the user ID provided by Facebook.
-- ``photoUrl``: customer photo url.
-- ``token``: customer social token issued by Facebook.
-- ``clientId``: Facebook application id.
-- ``clientSecret``: Facebook application client secret key.
+- `name`: customer name.
+- `email`: customer email.
+- `provider`: login provider, "FACEBOOK" for example.
+- `providerId`: the user ID provided by Facebook.
+- `photoUrl`: customer photo url.
+- `token`: customer social token issued by Facebook.
+- `clientId`: Facebook application id.
+- `clientSecret`: Facebook application client secret key.
+- Note: A customer will be identified by a provider + providerId.
 
 Sample response:
+```json
+{
+  "code": 0,
+  "message": "Success",
+  "data": {
+    "customerId": 1,
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MzYzODM4LCJleHAiOjE2MjAyMjc4Mzh9.8qxg81jxSCLpEQB-JjZFZlIz_KoT-bnUCYR8nA9bZolPS_rmiZZm73KwDoDD4TalefDTtr8JsQlbUJ7zWywBlA"
+  }
+}
+```
+- `customerId`: customer id in the system.
+- `accessToken`: the access token will be attached to the header to check the authentication.
+
 
 ### Get Customer Infomation:
 ```shell
@@ -187,6 +200,20 @@ curl -L -X GET 'http://localhost:8080/api/customers/1' \
 ```
 
 Sample response:
+```json
+{
+  "code": 0,
+  "message": "Success",
+  "data": {
+    "id": 1,
+    "name": "Võ Thành Tài",
+    "email": "taivtse@gmail.com",
+    "provider": "FACEBOOK",
+    "providerId": "A16E518CAF8CD1A99917F3841928D",
+    "photoUrl": "image"
+  }
+}
+```
 
 
 ### Get Customer Activities:
@@ -196,7 +223,34 @@ curl -L -X GET 'http://localhost:8080/api/customers/1/activities' \
 ```
 
 Sample response:
-
+```json
+{
+  "code": 0,
+  "message": "Success",
+  "data": [
+    {
+      "customerId": 1,
+      "action": "GET_CUSTOMER_INFO",
+      "method": "GET",
+      "requestURI": "/api/customers/1",
+      "queryString": "",
+      "dateTime": 1619364445931,
+      "body": "",
+      "response": "{\"code\":0,\"message\":\"Success\",\"data\":{\"id\":1,\"name\":\"Võ Thành Tài\",\"email\":\"taivtse@gmail.com\",\"provider\":\"FACEBOOK\",\"providerId\":\"A16E518CAF8CD1A99917F3841928D\",\"photoUrl\":\"image\"}}"
+    },
+    {
+      "customerId": 1,
+      "action": "LOGIN",
+      "method": "POST",
+      "requestURI": "/api/customers/login",
+      "queryString": "",
+      "dateTime": 1619363838953,
+      "body": "{\"name\":\"Võ Thành Tài\",\"email\":\"taivtse@gmail.com\",\"provider\":\"FACEBOOK\",\"providerId\":\"A16E518CAF8CD1A99917F3841928D\",\"photoUrl\":\"image\",\"token\":\"eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTYxOTAxOTgxMywiaWF0IjoxNjE5MDE5ODEzfQ.fnmHbry8qVQsSYJexgNuDVX4tsciEfDmi_c_v-kNI9Q\",\"clientId\":\"98123841002394711283\",\"clientSecret\":\"3DS9v9KWpt3TeCGWcISuOZOrMtunHn4c\"}",
+      "response": "{\"code\":0,\"message\":\"Success\",\"data\":{\"customerId\":1,\"accessToken\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MzYzODM4LCJleHAiOjE2MjAyMjc4Mzh9.8qxg81jxSCLpEQB-JjZFZlIz_KoT-bnUCYR8nA9bZolPS_rmiZZm73KwDoDD4TalefDTtr8JsQlbUJ7zWywBlA\"}}"
+    }
+  ]
+}
+```
 
 ### Search Products:
 ```shell
@@ -223,6 +277,41 @@ curl -L -X POST 'http://localhost:8080/api/products/search' \
 That is the default search criteria with paging and sorting operations, you can change the search data to get the information you are looking for.
 
 Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": [
+        {
+            "id": 1,
+            "name": "New Apple iPhone 12 Pro Max (128GB, Graphite) [Locked] + Carrier Subscription",
+            "brand": "Apple",
+            "price": 22000000,
+            "color": "gold",
+            "image": "https://m.media-amazon.com/images/I/71XXJC7V8tL._FMwebp__.jpg",
+            "unit": "piece"
+        },
+        {
+            "id": 2,
+            "name": "2020 Apple MacBook Air with Apple M1 Chip (13-inch, 8GB RAM, 256GB SSD Storage) - Space Gray",
+            "brand": "Apple",
+            "price": 30000000,
+            "color": "gray",
+            "image": "https://images-na.ssl-images-amazon.com/images/I/71jG%2Be7roXL._AC_SX679_.jpg",
+            "unit": "piece"
+        },
+        {
+            "id": 3,
+            "name": "NVIDIA Jetson Xavier NX Developer Kit (812674024318)",
+            "brand": "NVIDIA",
+            "price": 9000000,
+            "color": "black",
+            "image": "https://images-na.ssl-images-amazon.com/images/I/71TiOw6fSuL._AC_SX679_.jpg",
+            "unit": "kit"
+        }
+    ]
+}
+```
 
 ### Get Product Detail:
 ```shell
@@ -231,6 +320,21 @@ curl -L -X GET 'http://localhost:8080/api/products/2' \
 ```
 
 Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "id": 2,
+        "name": "2020 Apple MacBook Air with Apple M1 Chip (13-inch, 8GB RAM, 256GB SSD Storage) - Space Gray",
+        "brand": "Apple",
+        "price": 30000000,
+        "color": "gray",
+        "image": "https://images-na.ssl-images-amazon.com/images/I/71jG%2Be7roXL._AC_SX679_.jpg",
+        "unit": "piece"
+    }
+}
+```
 
 ### Get Product Price Histories:
 ```shell
@@ -239,10 +343,42 @@ curl -L -X GET 'http://localhost:8080/api/products/2/price/histories' \
 ```
 
 Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": [
+        {
+            "productId": 2,
+            "oldPrice": 45000000,
+            "newPrice": 42000000,
+            "dateTime": 1619378298735
+        },
+        {
+            "productId": 2,
+            "oldPrice": 49000000,
+            "newPrice": 45000000,
+            "dateTime": 1619378294734
+        },
+        {
+            "productId": 2,
+            "oldPrice": 45000000,
+            "newPrice": 49000000,
+            "dateTime": 1619378289234
+        },
+        {
+            "productId": 2,
+            "oldPrice": 30000000,
+            "newPrice": 45000000,
+            "dateTime": 1619378261236
+        }
+    ]
+}
+```
 
-### Add Items To Cart:
+### Add Cart Items:
 ```shell
-curl -L -X POST 'http://localhost:8080/api/carts/customer' \
+curl -L -X POST 'http://localhost:8080/api/carts/items/customer' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
 -H 'Content-Type: application/json' \
 --data-raw '{
@@ -261,7 +397,13 @@ curl -L -X POST 'http://localhost:8080/api/carts/customer' \
 ```
 
 Sample response:
-
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": null
+}
+```
 
 ### Get Customer Cart:
 ```shell
@@ -270,14 +412,64 @@ curl -L -X GET 'http://localhost:8080/api/carts/customer/1' \
 ```
 
 Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": {
+        "customerId": 1,
+        "items": [
+            {
+                "productId": 1,
+                "quantity": 3,
+                "dateTime": 1619378404352
+            },
+            {
+                "productId": 2,
+                "quantity": 1,
+                "dateTime": 1619378404352
+            }
+        ]
+    }
+}
+```
 
-### Delete Customer Cart:
+### Remove Cart Items:
+```shell
+curl -L -X DELETE 'http://localhost:8080/api/carts/items/customer' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+    "customerId": "1",
+    "productIds": [
+        1
+    ]
+}'
+```
+
+Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": null
+}
+```
+
+### Clear Customer Cart:
 ```shell
 curl -L -X DELETE 'http://localhost:8080/api/carts/customer/1' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
 ```
 
 Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": null
+}
+```
 
 ### Place Order:
 ```shell
@@ -286,12 +478,51 @@ curl -L -X POST 'http://localhost:8080/api/orders/customer/1' \
 ```
 
 Sample response:
-
+```json
+{
+  "code": 0,
+  "message": "Success",
+  "data": 1
+}
+```
+- `data`: order id if place order success.
 
 ### Get Order Information:
 ```shell
 curl -L -X GET 'http://localhost:8080/api/orders/1' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+```json
+{
+  "code": 0,
+  "message": "Success",
+  "data": {
+    "id": 1,
+    "customerId": 1,
+    "customerName": "Võ Thành Tài",
+    "totalAmount": 132000000,
+    "status": "INIT",
+    "createdDate": 0,
+    "items": [
+      {
+        "id": 1,
+        "orderId": 0,
+        "productId": 1,
+        "price": 30000000,
+        "quantity": 3
+      },
+      {
+        "id": 2,
+        "orderId": 0,
+        "productId": 2,
+        "price": 42000000,
+        "quantity": 1
+      }
+    ]
+  }
+}
 ```
 
 ### Get Customer Ordders:
@@ -301,10 +532,41 @@ curl -L -X GET 'http://localhost:8080/api/orders/customer/1' \
 ```
 
 Sample response:
-
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": [
+        {
+            "id": 1,
+            "customerId": 1,
+            "customerName": "Võ Thành Tài",
+            "totalAmount": 132000000,
+            "status": "INIT",
+            "createdDate": 0,
+            "items": [
+                {
+                    "id": 1,
+                    "orderId": 0,
+                    "productId": 1,
+                    "price": 30000000,
+                    "quantity": 3
+                },
+                {
+                    "id": 2,
+                    "orderId": 0,
+                    "productId": 2,
+                    "price": 42000000,
+                    "quantity": 1
+                }
+            ]
+        }
+    ]
+}
+```
 
 ### APIs For Admin:
-Here are some APIs I made for Admin, using simply by logging in as customer, but not implementing the user authorization feature yet.
+Here are some APIs I made for Admin, using simply by log in as customer, but not implementing the user authorization feature yet.
 
 #### Create product:
 ```shell
@@ -312,14 +574,24 @@ curl -L -X POST 'http://localhost:8080/api/products' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
 -H 'Content-Type: application/json' \
 --data-raw '{
-    "name": "Iphone XS MAX",
+    "name": "Samsung Electronics Samsung Galaxy S21 5G | Factory Unlocked Android Cell Phone",
     "brand": "Samsung",
-    "price": 29000000,
-    "color": "gold",
+    "price": 15000000,
+    "color": "pink",
     "image": "",
     "unit": "piece"
 }'
 ```
+
+Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": 4
+}
+```
+- `data`: product id if create success.
 
 #### Update product:
 ```shell
@@ -327,25 +599,44 @@ curl -L -X PUT 'http://localhost:8080/api/products' \
 -H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
 -H 'Content-Type: application/json' \
 --data-raw '{
-    "id": 2,
-    "name": "Macbook air 2020",
+    "id": 4,
+    "name": "Samsung Electronics Samsung Galaxy S21 5G | Factory Unlocked Android Cell Phone",
     "brand": "Samsung",
-    "price": 29000000,
-    "color": "gold",
+    "price": 17000000,
+    "color": "pink",
     "image": "",
     "unit": "piece"
 }'
 ```
 
+Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": null
+}
+```
+
 #### Update order status:
+Order status flow: INIT -> PROCESSING -> DELIVERING -> COMPLETED or DROP_OFF_FAIL
 ```shell
 curl -L -X PUT 'http://localhost:8080/api/orders/status' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
 -H 'Content-Type: application/json' \
 --data-raw '{
-    "orderId": 12,
-    "status": "COMPLETED"
+    "orderId": 1,
+    "status": "PROCESSING"
 }'
 ```
-Order status flow: INIT -> PROCESSING -> DELIVERING -> COMPLETED or DROP_OFF_FAIL
+
+Sample response:
+```json
+{
+    "code": 0,
+    "message": "Success",
+    "data": null
+}
+```
 
 # Thank you very much and hope to see you at NAB
