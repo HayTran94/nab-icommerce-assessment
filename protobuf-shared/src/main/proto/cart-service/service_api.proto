@@ -9,9 +9,9 @@ import "google/protobuf/wrappers.proto";
 import "cart-service/shared.proto";
 
 service CartService {
-  rpc addItemsToCart(PAddToCartRequest) returns (google.protobuf.Int32Value);
+  rpc addCartItems(PAddCartItemsRequest) returns (google.protobuf.Int32Value);
 
-  rpc removeItemsInCart(PRemoveItemsRequest) returns (google.protobuf.Int32Value);
+  rpc removeCartItems(PRemoveCartItemsRequest) returns (google.protobuf.Int32Value);
 
   rpc getCustomerCart(google.protobuf.Int32Value) returns (PCartResponse);
 

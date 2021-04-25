@@ -17,12 +17,12 @@ message PCart {
   repeated PCartItem items = 3;
 }
 
-message PAddToCartRequest {
+message PAddCartItemsRequest {
   int32 customerId = 1;
   repeated PCartItem items = 2;
 }
 
-message PRemoveItemsRequest {
+message PRemoveCartItemsRequest {
   int32 customerId = 1;
   repeated int32 productIds = 2;
 }

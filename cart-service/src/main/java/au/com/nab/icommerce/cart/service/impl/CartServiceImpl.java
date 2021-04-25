@@ -29,7 +29,7 @@ public class CartServiceImpl implements CartService {
     private final ItemMapper itemMapper = ItemMapper.INSTANCE;
 
     @Override
-    public Int32Value addItemsToCart(PAddToCartRequest addToCartRequest) {
+    public Int32Value addCartItems(PAddCartItemsRequest addToCartRequest) {
         int response = ErrorCode.FAILED;
         try {
             int customerId = addToCartRequest.getCustomerId();
@@ -78,7 +78,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Int32Value removeItemsInCart(PRemoveItemsRequest removeItemsRequest) {
+    public Int32Value removeCartItems(PRemoveCartItemsRequest removeItemsRequest) {
         int response = ErrorCode.FAILED;
         try {
             int customerId = removeItemsRequest.getCustomerId();

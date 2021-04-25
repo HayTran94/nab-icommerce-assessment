@@ -1,9 +1,9 @@
 package au.com.nab.icommerce.cart;
 
 import au.com.nab.icommerce.cart.api.CartServiceGrpc;
-import au.com.nab.icommerce.cart.protobuf.PAddToCartRequest;
+import au.com.nab.icommerce.cart.protobuf.PAddCartItemsRequest;
 import au.com.nab.icommerce.cart.protobuf.PCartResponse;
-import au.com.nab.icommerce.cart.protobuf.PRemoveItemsRequest;
+import au.com.nab.icommerce.cart.protobuf.PRemoveCartItemsRequest;
 import au.com.nab.icommerce.cart.service.CartService;
 import com.google.protobuf.Int32Value;
 import io.grpc.stub.StreamObserver;
@@ -17,15 +17,15 @@ public class CartServiceGrpcServer extends CartServiceGrpc.CartServiceImplBase {
     private CartService cartService;
 
     @Override
-    public void addItemsToCart(PAddToCartRequest request, StreamObserver<Int32Value> responseObserver) {
-        Int32Value result = cartService.addItemsToCart(request);
+    public void addCartItems(PAddCartItemsRequest request, StreamObserver<Int32Value> responseObserver) {
+        Int32Value result = cartService.addCartItems(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }
 
     @Override
-    public void removeItemsInCart(PRemoveItemsRequest request, StreamObserver<Int32Value> responseObserver) {
-        Int32Value result = cartService.removeItemsInCart(request);
+    public void removeCartItems(PRemoveCartItemsRequest request, StreamObserver<Int32Value> responseObserver) {
+        Int32Value result = cartService.removeCartItems(request);
         responseObserver.onNext(result);
         responseObserver.onCompleted();
     }
