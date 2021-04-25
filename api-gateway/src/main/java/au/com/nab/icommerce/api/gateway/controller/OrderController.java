@@ -7,7 +7,7 @@ import au.com.nab.icommerce.api.gateway.client.ProductServiceClient;
 import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.request.UpdateOrderStatusRequest;
 import au.com.nab.icommerce.api.gateway.mapper.response.OrderResponseMapper;
-import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
+import au.com.nab.icommerce.api.gateway.security.SecurityContextHelper;
 import au.com.nab.icommerce.cart.protobuf.PCart;
 import au.com.nab.icommerce.cart.protobuf.PCartItem;
 import au.com.nab.icommerce.common.error.ErrorCode;
@@ -46,7 +46,7 @@ public class OrderController {
     @CustomerActivity("PLACE_ORDER")
     public ApiMessage placeOrder(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != customerId) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }
@@ -112,7 +112,7 @@ public class OrderController {
                 return ApiMessage.ORDER_NOT_FOUND;
             }
 
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != order.getCustomerId()) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }
@@ -128,7 +128,7 @@ public class OrderController {
     @CustomerActivity("GET_CUSTOMER_ORDERS")
     public ApiMessage getCustomerOrders(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != customerId) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }
@@ -152,7 +152,7 @@ public class OrderController {
                 return ApiMessage.ORDER_NOT_FOUND;
             }
 
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != order.getCustomerId()) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }

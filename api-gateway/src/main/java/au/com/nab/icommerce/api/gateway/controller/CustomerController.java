@@ -6,7 +6,7 @@ import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.response.CustomerActivityResponse;
 import au.com.nab.icommerce.api.gateway.mapper.response.CustomerActivityResponseMapper;
 import au.com.nab.icommerce.api.gateway.mapper.response.CustomerResponseMapper;
-import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
+import au.com.nab.icommerce.api.gateway.security.SecurityContextHelper;
 import au.com.nab.icommerce.customer.auditing.protobuf.PCustomerActivity;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class CustomerController {
     @CustomerActivity("GET_CUSTOMER_INFO")
     public ApiMessage getCustomerInfo(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != customerId) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }
@@ -46,7 +46,7 @@ public class CustomerController {
     @GetMapping("/{customerId}/activities")
     public ApiMessage getCustomerActivities(@PathVariable Integer customerId) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
             if (customer.getId() != customerId) {
                 return ApiMessage.CUSTOMER_VIOLATION;
             }

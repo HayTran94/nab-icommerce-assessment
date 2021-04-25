@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -19,7 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Objects;
 
 import static org.apache.commons.lang.StringUtils.EMPTY;
@@ -53,9 +51,7 @@ public class AuthenticationFilter extends BasicAuthenticationFilter {
             PCustomer customer = customerServiceClient.getCustomerById(customerId);
             Objects.requireNonNull(customer);
 
-            UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(customerId, null, Collections.emptyList());
-            authentication.setDetails(customer);
+            SocialAuthenticationToken authentication = new SocialAuthenticationToken(customer);
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             chain.doFilter(request, response);

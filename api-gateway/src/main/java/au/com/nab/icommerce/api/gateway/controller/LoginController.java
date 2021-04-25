@@ -6,6 +6,7 @@ import au.com.nab.icommerce.api.gateway.common.ApiMessage;
 import au.com.nab.icommerce.api.gateway.dto.request.LoginRequest;
 import au.com.nab.icommerce.api.gateway.dto.response.LoginResponse;
 import au.com.nab.icommerce.api.gateway.security.SecurityProperties;
+import au.com.nab.icommerce.api.gateway.security.SocialAuthenticationToken;
 import au.com.nab.icommerce.common.error.ErrorCodeHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import au.com.nab.icommerce.customer.protobuf.PSocialInfoRequest;
@@ -13,6 +14,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,6 +70,15 @@ public class LoginController {
             if (ErrorCodeHelper.isFail(customerId)) {
                 return ApiMessage.LOGIN_FAILED;
             }
+
+            // New user
+            if (customer.getId() == 0) {
+                customer = customer.toBuilder().setId(customerId).build();
+            }
+
+            // Set user to security context holder
+            SocialAuthenticationToken authentication = new SocialAuthenticationToken(customer);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
             String token = generateToken(String.valueOf(customerId));
             LoginResponse loginResponse = new LoginResponse(customerId, token);

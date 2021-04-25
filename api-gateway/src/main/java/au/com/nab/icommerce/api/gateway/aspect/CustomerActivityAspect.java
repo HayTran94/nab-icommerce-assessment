@@ -1,6 +1,6 @@
 package au.com.nab.icommerce.api.gateway.aspect;
 
-import au.com.nab.icommerce.api.gateway.security.SecurityHelper;
+import au.com.nab.icommerce.api.gateway.security.SecurityContextHelper;
 import au.com.nab.icommerce.customer.protobuf.PCustomer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,9 +36,13 @@ public class CustomerActivityAspect {
             returning = "response", argNames = "joinPoint,customerActivity,response")
     public void auditInfo(JoinPoint joinPoint, CustomerActivity customerActivity, Object response) {
         try {
-            PCustomer customer = SecurityHelper.getCustomer();
-            String action = customerActivity.value();
+            PCustomer customer = SecurityContextHelper.getLoggedInCustomer();
+            // Customer authentication failed
+            if (customer == PCustomer.getDefaultInstance()) {
+                return;
+            }
 
+            String action = customerActivity.value();
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
             String method = request.getMethod();
             String requestURI = request.getRequestURI();

@@ -5,18 +5,19 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-public class SecurityHelper {
-    public static PCustomer getCustomer() {
+public class SecurityContextHelper {
+    public static PCustomer getLoggedInCustomer() {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         if (authentication == null) {
             return PCustomer.getDefaultInstance();
         }
 
-        PCustomer customer = (PCustomer) authentication.getDetails();
-        if (customer == null) {
-            customer = PCustomer.getDefaultInstance();
+        Object authenticationDetails = authentication.getDetails();
+        if (!(authenticationDetails instanceof PCustomer)) {
+            return PCustomer.getDefaultInstance();
         }
-        return customer;
+
+        return (PCustomer) authenticationDetails;
     }
 }
