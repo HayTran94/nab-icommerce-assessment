@@ -152,7 +152,7 @@ https://www.getpostman.com/collections/c07a126b0c4d21ad9a3a
 5. When calling api to create a new object, if successful, the field data in the response returns the Id of the created object.
 
 ### Customer Login:
-This api simulate Login With Facebook feature.
+This api simulate Login With Facebook feature. 
 ```shell
 curl -L -X POST 'http://localhost:8080/api/customers/login' \
 -H 'Content-Type: application/json' \
@@ -168,17 +168,30 @@ curl -L -X POST 'http://localhost:8080/api/customers/login' \
 
 }'
 ```
-Payload:
-- ``name``: customer name.
-- ``email``: customer email.
-- ``provider``: login provider, "FACEBOOK" for example.
-- ``providerId``: the user ID provided by Facebook.
-- ``photoUrl``: customer photo url.
-- ``token``: customer social token issued by Facebook.
-- ``clientId``: Facebook application id.
-- ``clientSecret``: Facebook application client secret key.
+- `name`: customer name.
+- `email`: customer email.
+- `provider`: login provider, "FACEBOOK" for example.
+- `providerId`: the user ID provided by Facebook.
+- `photoUrl`: customer photo url.
+- `token`: customer social token issued by Facebook.
+- `clientId`: Facebook application id.
+- `clientSecret`: Facebook application client secret key.
+- Note: A customer will be identified by a provider + providerId.
 
 Sample response:
+```json
+{
+  "code": 0,
+  "message": "Success",
+  "data": {
+    "customerId": 1,
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MzYzODM4LCJleHAiOjE2MjAyMjc4Mzh9.8qxg81jxSCLpEQB-JjZFZlIz_KoT-bnUCYR8nA9bZolPS_rmiZZm73KwDoDD4TalefDTtr8JsQlbUJ7zWywBlA"
+  }
+}
+```
+- `customerId`: customer id in the system.
+- `accessToken`: the access token will be attached to the header to check the authentication.
+
 
 ### Get Customer Infomation:
 ```shell
@@ -187,6 +200,20 @@ curl -L -X GET 'http://localhost:8080/api/customers/1' \
 ```
 
 Sample response:
+```json
+{
+  "code": 0,
+  "message": "Success",
+  "data": {
+    "id": 1,
+    "name": "Võ Thành Tài",
+    "email": "taivtse@gmail.com",
+    "provider": "FACEBOOK",
+    "providerId": "A16E518CAF8CD1A99917F3841928D",
+    "photoUrl": "image"
+  }
+}
+```
 
 
 ### Get Customer Activities:
@@ -196,7 +223,34 @@ curl -L -X GET 'http://localhost:8080/api/customers/1/activities' \
 ```
 
 Sample response:
-
+```json
+{
+  "code": 0,
+  "message": "Success",
+  "data": [
+    {
+      "customerId": 1,
+      "action": "GET_CUSTOMER_INFO",
+      "method": "GET",
+      "requestURI": "/api/customers/1",
+      "queryString": "",
+      "dateTime": 1619364445931,
+      "body": "",
+      "response": "{\"code\":0,\"message\":\"Success\",\"data\":{\"id\":1,\"name\":\"Võ Thành Tài\",\"email\":\"taivtse@gmail.com\",\"provider\":\"FACEBOOK\",\"providerId\":\"A16E518CAF8CD1A99917F3841928D\",\"photoUrl\":\"image\"}}"
+    },
+    {
+      "customerId": 1,
+      "action": "LOGIN",
+      "method": "POST",
+      "requestURI": "/api/customers/login",
+      "queryString": "",
+      "dateTime": 1619363838953,
+      "body": "{\"name\":\"Võ Thành Tài\",\"email\":\"taivtse@gmail.com\",\"provider\":\"FACEBOOK\",\"providerId\":\"A16E518CAF8CD1A99917F3841928D\",\"photoUrl\":\"image\",\"token\":\"eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTYxOTAxOTgxMywiaWF0IjoxNjE5MDE5ODEzfQ.fnmHbry8qVQsSYJexgNuDVX4tsciEfDmi_c_v-kNI9Q\",\"clientId\":\"98123841002394711283\",\"clientSecret\":\"3DS9v9KWpt3TeCGWcISuOZOrMtunHn4c\"}",
+      "response": "{\"code\":0,\"message\":\"Success\",\"data\":{\"customerId\":1,\"accessToken\":\"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MzYzODM4LCJleHAiOjE2MjAyMjc4Mzh9.8qxg81jxSCLpEQB-JjZFZlIz_KoT-bnUCYR8nA9bZolPS_rmiZZm73KwDoDD4TalefDTtr8JsQlbUJ7zWywBlA\"}}"
+    }
+  ]
+}
+```
 
 ### Search Products:
 ```shell
