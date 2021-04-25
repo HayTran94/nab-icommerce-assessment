@@ -28,7 +28,7 @@ the product got delivered.
 ![ArchitectureDesign](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ArchitectureDesign.png)
 
 ## Software Development Principles
-There are software development principles which I applied in the project:
+There are software development principles that I applied in the project:
 1. SOC (Separation of concerns):
 Because the project was built according micro-services architecture, so the first thing I need to do was separate a large overall picture into specific concerns. 
 Listed entities and figure out which of them related to a bussiness domain then indicated it as bounded context.
@@ -70,6 +70,9 @@ I also applied SOLID pricipal in the project.
 * Spring Security + JJWT: implement security by using JWT. 
 * Junit: writing unit tests.
 
+## Services Detail
+![ServicesDetail](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesDetail.png)
+
 ## Code Folder Structure
 1. Low level services package struture:
 * Helper: utilities classes.
@@ -106,3 +109,5 @@ The backing services that hosted on my AWS:
 * Debezium (CDC): Sync data from MySQL especially table `product` in `nab_product` database to Elasticsearch.
 
 **Setup local services:**
+1. Clone the source and open with InteliJ
+2. 
