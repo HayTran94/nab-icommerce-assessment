@@ -11,6 +11,8 @@ import "cart-service/shared.proto";
 service CartService {
   rpc addItemsToCart(PAddToCartRequest) returns (google.protobuf.Int32Value);
 
+  rpc removeItemsInCart(PRemoveItemsRequest) returns (google.protobuf.Int32Value);
+
   rpc getCustomerCart(google.protobuf.Int32Value) returns (PCartResponse);
 
   rpc clearCustomerCart(google.protobuf.Int32Value) returns (google.protobuf.Int32Value);

@@ -22,6 +22,11 @@ message PAddToCartRequest {
   repeated PCartItem items = 2;
 }
 
+message PRemoveItemsRequest {
+  int32 customerId = 1;
+  repeated int32 productIds = 2;
+}
+
 message PCartResponse {
   int32 code = 1;
   PCart data = 2;

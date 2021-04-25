@@ -78,6 +78,45 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public Int32Value removeItemsInCart(PRemoveItemsRequest removeItemsRequest) {
+        int response = ErrorCode.FAILED;
+        try {
+            int customerId = removeItemsRequest.getCustomerId();
+            List<Integer> productIds = removeItemsRequest.getProductIdsList();
+
+            // Get current cart
+            String cartCacheKey = CacheKeyManager.getCartCacheKey(customerId);
+            Optional<Cart> cartOptional = cartRepository.findById(cartCacheKey);
+            if (!cartOptional.isPresent()) {
+                return Int32Value.of(ErrorCode.INVALID_DATA);
+            }
+
+            Cart cart = cartOptional.get();
+            List<CartItem> currentCartItems = cart.getItems() != null ? cart.getItems() : new ArrayList<>();
+            Map<Integer, CartItem> curItemMap = currentCartItems.stream()
+                    .collect(Collectors.toMap(CartItem::getProductId,
+                            Function.identity(),
+                            (v1, v2) -> v1,
+                            LinkedHashMap::new));
+
+            // Remove items out of cart
+            for (Integer productId : productIds) {
+                curItemMap.remove(productId);
+            }
+
+            // Set remaining items to cart
+            cart.setItems(new ArrayList<>(curItemMap.values()));
+
+            cartRepository.save(cart);
+            response = ErrorCode.SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Int32Value.of(response);
+    }
+
+    @Override
     public PCartResponse getCustomerCart(Int32Value customerId) {
         PCartResponse.Builder response = PCartResponse.newBuilder().setCode(ErrorCode.FAILED);
         try {
