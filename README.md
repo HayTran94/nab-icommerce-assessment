@@ -169,14 +169,14 @@ curl -L -X POST 'http://localhost:8080/api/customers/login' \
 }'
 ```
 Payload:
-``name``: customer name.
-``email``: customer email.
-``provider``: login provider, "FACEBOOK" for example.
-``providerId``: the user ID provided by Facebook.
-``photoUrl``: customer photo url.
-``token``: customer social token issued by Facebook.
-``clientId``: Facebook application id.
-``clientSecret``: Facebook application client secret key.
+- ``name``: customer name.
+- ``email``: customer email.
+- ``provider``: login provider, "FACEBOOK" for example.
+- ``providerId``: the user ID provided by Facebook.
+- ``photoUrl``: customer photo url.
+- ``token``: customer social token issued by Facebook.
+- ``clientId``: Facebook application id.
+- ``clientSecret``: Facebook application client secret key.
 
 Sample response:
 
