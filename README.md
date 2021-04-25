@@ -118,4 +118,231 @@ Run with IntelliJ IDEA:
 4. Run Spring Boot Application one by one in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/RunApplicationOrdering.png" alt="RunApplicationOrdering" height="300"/>
 
-Done. All services already start, you can use the below cURL to test the application.
+Done. All services already started, you can use the below cURL to test the application.
+
+## CURL Commands
+There is the Postman collection, you can import it to your Postman and use it for a more visual view: <br />
+https://www.getpostman.com/collections/b3e6e0be5fdc6509e328
+
+### There are some rule for api response data:
+1. All api return data with the following structure: <br />
+```json
+{
+  "code": Integer,     // SUCCESS: code >= 0, FAIL code < 0 
+  "message": String,   // Error message when FAIL
+  "data": Object       // Response data
+}
+```
+2. When calling api to create a new object, if successful, the field data in the response returns the Id of the created object.
+
+### Customer Login:
+This api simulate Login With Facebook feature.
+Request:
+```shell
+curl -L -X POST 'http://localhost:8080/api/customers/login' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Võ Thành Tài",
+    "email": "taivtse@gmail.com",
+    "provider": "FACEBOOK",
+    "providerId": "A16E518CAF8CD1A99917F3841928D",
+    "photoUrl": "image",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTYxOTAxOTgxMywiaWF0IjoxNjE5MDE5ODEzfQ.fnmHbry8qVQsSYJexgNuDVX4tsciEfDmi_c_v-kNI9Q",
+    "clientId": "98123841002394711283",
+    "clientSecret": "3DS9v9KWpt3TeCGWcISuOZOrMtunHn4c"
+
+}'
+```
+
+Payload:
+``name``: customer name.
+``email``: customer email.
+``provider``: login provider, "FACEBOOK" for example.
+``providerId``: the user ID provided by Facebook.
+``photoUrl``: customer photo url.
+``token``: customer social token issued by Facebook.
+``clientId``: Facebook application id.
+``clientSecret``: Facebook application client secret key.
+
+Sample response:
+
+### Get Customer Infomation:
+Request:
+```shell
+curl -L -X GET 'http://localhost:8080/api/customers/1' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+
+
+### Get Customer Activities:
+Request:
+```shell
+curl -L -X GET 'http://localhost:8080/api/customers/1/activities' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+
+
+### Search Products:
+Request:
+```shell
+curl -L -X POST 'http://localhost:8080/api/products/search' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+    "name": "",
+    "brand": "",
+    "priceFrom": 0,
+    "priceTo": 0,
+    "color": "",
+    "unit": "",
+    "paging": {
+        "index": 0,
+        "size": 100
+    },
+    "sorting": {
+        "property": "id",
+        "direction": "ASC"
+    }
+}'
+```
+That is the default search criteria with paging and sorting operations, you can change the search data to get the information you are looking for.
+
+Sample response:
+
+### Get Product Detail:
+Request:
+```shell
+curl -L -X GET 'http://localhost:8080/api/products/2' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+
+### Get Product Price Histories:
+Request:
+```shell
+curl -L -X GET 'http://localhost:8080/api/products/2/price/histories' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+
+### Add Items To Cart:
+Request:
+```shell
+curl -L -X POST 'http://localhost:8080/api/carts/customer' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+    "customerId": "1",
+    "items": [
+        {
+            "productId": 1,
+            "quantity": 3
+        },
+        {
+            "productId": 2,
+            "quantity": 1
+        }
+    ]
+}'
+```
+
+Sample response:
+
+
+### Get Customer Cart:
+Request:
+```shell
+curl -L -X GET 'http://localhost:8080/api/carts/customer/1' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+
+### Delete Customer Cart:
+Request:
+```shell
+curl -L -X DELETE 'http://localhost:8080/api/carts/customer/1' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+
+### Place Order:
+Request:
+```shell
+curl -L -X POST 'http://localhost:8080/api/orders/customer/1' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+
+
+### Get Order Information:
+Request:
+```shell
+curl -L -X GET 'http://localhost:8080/api/orders/1' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+### Get Customer Ordders:
+Request:
+```shell
+curl -L -X GET 'http://localhost:8080/api/orders/customer/1' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA'
+```
+
+Sample response:
+
+### APIs For Admin:
+Here are some APIs I made for Admin, using simply by logging in as customer, but not implementing the user authorization feature yet.
+
+#### Create product:
+```shell
+curl -L -X POST 'http://localhost:8080/api/products' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Iphone XS MAX",
+    "brand": "Samsung",
+    "price": 29000000,
+    "color": "gold",
+    "image": "",
+    "unit": "piece"
+}'
+```
+
+#### Update product:
+```shell
+curl -L -X PUT 'http://localhost:8080/api/products' \
+-H 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjE5MTA0NTQ5LCJleHAiOjE2MTk5Njg1NDl9.-iiS-oxLZF6RVx5fQFm66ZfaJ0YvVijxptdsu-kjAad0NUQrmeQ2vf2X_RoB5gWpR59QA3dSD4SFAYx6aRkjXA' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+    "id": 2,
+    "name": "Macbook air 2020",
+    "brand": "Samsung",
+    "price": 29000000,
+    "color": "gold",
+    "image": "",
+    "unit": "piece"
+}'
+```
+
+#### Update order status:
+```shell
+curl -L -X PUT 'http://localhost:8080/api/orders/status' \
+-H 'Content-Type: application/json' \
+--data-raw '{
+    "orderId": 12,
+    "status": "COMPLETED"
+}'
+```
+Order status flow: INIT -> PROCESSING -> DELIVERING -> COMPLETED or DROP_OFF_FAIL
+
+
+# Thank you very much and hope to see you at NAB
