@@ -146,7 +146,7 @@ https://www.getpostman.com/collections/c07a126b0c4d21ad9a3a
   "data": {}
 }
 ```
-2. `code`: SUCCESS: code >= 0, FAIL code < 0 
+2. `code`: SUCCESS: code >= 0, FAIL: code < 0 
 3. `message`: Error message when FAIL
 4. `data`: Response data, it can contain any of data types
 5. When calling api to create a new object, if successful, the field data in the response returns the Id of the created object.
