@@ -97,7 +97,7 @@ I also applied SOLID pricipal in the project.
 * **Classes annotated with @SpringBootApplication:** Main class to run Spring Boot application.
 
 ## Unit Test
-There is an amount of unit testing in `order-service`. 
+There are a number of unit testing in `order-service`. 
 The unit testing applied for helper, mapper, service impl package, they consist of 21 test cases.
 
 ## Setup To Run On Local Computer
