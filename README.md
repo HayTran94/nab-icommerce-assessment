@@ -28,7 +28,7 @@ the product got delivered.
 ![ArchitectureDesign](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ArchitectureDesign.png)
 
 ## Software Development Principles
-There are software development principles that I applied in the project:
+There are software development principles that I applied in the project: <br />
 **1. SOC (Separation of concerns):** <br />
 Because the project was built according micro-services architecture, so the first thing I need to do was separate a large overall picture into specific concerns. 
 Listed entities and figure out which of them related to a bussiness domain then indicated it as bounded context.
