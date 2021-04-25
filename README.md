@@ -29,6 +29,7 @@ the product got delivered.
 
 ## Software Development Principles
 There are software development principles that I applied in the project: <br />
+
 **1. SOC (Separation of concerns):** <br />
 Because the project was built according micro-services architecture, so the first thing I need to do was separate a large overall picture into specific concerns. 
 Listed entities and figure out which of them related to a bussiness domain then indicated it as bounded context.
@@ -61,42 +62,42 @@ I also applied SOLID pricipal in the project.
 * High level modules and low level modules must depend on abstractions, not on concretions by follow Dependency Inversion Principle. Using DI supported by Spring Framework to doing this.
 
 ## Java Libraries and Frameworks
-* Spring boot: main framework for all micro-services.
-* LogNet/grpc-spring-boot-starter: implement Grpc services.
-* Spring Cloud Netflix Eureka: implement discovery service, services communicate via service name.
-* Spring Data JPA, Spring Data Redis, Spring Data Elasticsearch: connect to data stores.
-* Spring Kafka: asynchronous communication of inter-services.
-* Spring AOP: using in api-gateway to tracking customer ativities.
-* Spring Security + JJWT: implement security by using JWT. 
-* Junit: writing unit tests.
+* **Spring Boot:** main framework for all micro-services.
+* **LogNet Spring Boot GRPC:** implement Grpc services.
+* **Spring Cloud Netflix Eureka:** implement discovery service, services communicate via service name.
+* **Spring Data JPA, Spring Data Redis, Spring Data Elasticsearch:** connect to data stores.
+* **Spring Kafka:** asynchronous communication of inter-services.
+* **Spring AOP:** using in api-gateway to tracking customer ativities.
+* **Spring Security + JJWT:** implement security by using JWT. 
+* **Junit:** writing unit tests.
 
 ## Services Detail
 ![ServicesDetail](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesDetail.png)
 
 ## Code Folder Structure
 1. Low level services package struture:
-* Helper: utilities classes.
-* Config: components and beans configuration.
-* Domain: contains classes mapping with database, these class reflect database structure.
-* Mapper: convert Domain to Proto and vice versase.
-* Repository: this is the layer communicate directly to database, read/write operations to database.
-* Service: implements bussiness logics. Higher level than Repository package and use it as dependencies.
-* Classes annotated with @GRpcService: implements Grpc interface, use Service package as it's dependencies.
-* Classes annotated with @SpringBootApplication: Main class to run Spring Boot application.
+* **Helper:** utilities classes.
+* **Config:** components and beans configuration.
+* **Domain:** contains classes mapping with database, these class reflect database structure.
+* **Mapper:** convert Domain to Proto and vice versase.
+* **Repository:** this is the layer communicate directly to database, read/write operations to database.
+* **Service:** implements bussiness logics. Higher level than Repository package and use it as dependencies.
+* **Classes annotated with @GRpcService:** implements Grpc interface, use Service package as it's dependencies.
+* **Classes annotated with @SpringBootApplication:** Main class to run Spring Boot application.
 
 2. High level services package struture:
-* Config: components and beans configuration.
-* Dto: request and response data transfer objects.
-* Client: wrapper class used to communicate with orther service.
-* Mapper: convert Dto to Proto and vice versase.
-* Aspect: implement Aspect Oriented Programming.
-* Kafka: Kafka consumers handler.
-* Controller: expose public Rest Api and handle bussiness logic.
-* Security: setup authentication/authorization.
-* Classes annotated with @SpringBootApplication: Main class to run Spring Boot application.
+* **Config:** components and beans configuration.
+* **Dto:** request and response data transfer objects.
+* **Client:** wrapper class used to communicate with orther service.
+* **Mapper:** convert Dto to Proto and vice versase.
+* **Aspect:** implement Aspect Oriented Programming.
+* **Kafka:** Kafka consumers handler.
+* **Controller:** expose public Rest Api and handle bussiness logic.
+* **Security:** setup authentication/authorization.
+* **Classes annotated with @SpringBootApplication:** Main class to run Spring Boot application.
 
 ## Unit Test
-There is an amount of unit testing in order-service. 
+There is an amount of unit testing in `order-service`. 
 The unit testing applied for helper, mapper, service impl package, they consist of 21 test cases.
 
 ## Setup To Run On Local Computer
@@ -115,4 +116,5 @@ Run with IntelliJ IDEA:
 ![MavenCompileOrdering](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png)
 4. Run Spring Boot Application one by one in the following order:
 ![RunApplicationOrdering](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/RunApplicationOrdering.png)
+
 Done. All services already start, you can use the below cURL to test the application.
