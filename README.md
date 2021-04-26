@@ -85,7 +85,12 @@ I also applied SOLID pricipal in the project.
 * **Junit:** writing unit tests.
 
 ## 6. Services Detail
+Services Technical Stack:
 ![ServicesDetail](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesDetail.png)
+
+Services Port:
+![ServicesPort](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesPort.png)
+**NOTE:** Make sure that all of the above ports are available on your computer when you get them up and running.
 
 ## 7. Code Folder Structure
 1. Low level services package struture:
