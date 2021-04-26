@@ -89,7 +89,7 @@ Services Technical Stack:
 ![ServicesDetail](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesDetail.png)
 
 Services Port:
-![ServicesPort](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesPort.png)
+![ServicesPortInfo](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesPortInfo.png)
 **NOTE:** Make sure that all of the above ports are available on your computer when you get them up and running.
 
 ## 7. Code Folder Structure
