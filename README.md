@@ -130,11 +130,13 @@ Run with IntelliJ IDEA:
 3. Open Project Structure, select Java 8 SDK
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ProjectStructureChooseSDK.png" alt="ProjectStructureChooseSDK"/>
 
-5. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
-6. Run Maven Compile one by one in the following order:
+4. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
+  <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/RunConfiguration.png" alt="RunConfiguration"/>
+  
+5. Run Maven Compile one by one in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png" alt="MavenCompileOrdering" width="350"/>
 
-5. Run Spring Boot Application one by one in the following order:
+6. Run Spring Boot Application one by one in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/SpringApplicationOrdering.png" alt="SpringApplicationOrdering" width="350"/>
 
 Done. All services already started, you can use the below cURL to test the application.
