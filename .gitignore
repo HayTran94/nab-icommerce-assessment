@@ -32,3 +32,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+deploy/mysql
+deploy/redis
