@@ -137,7 +137,7 @@ Run with IntelliJ IDEA:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png" alt="MavenCompileOrdering" width="350"/>
 
 6. If you have Multirun plugin, just click on `Low Level Services Multirun` and waiting for it to run all low level services, then click on `High Level Services Multirun` and run it. <br />
-If you do not have Multirun plugin, click one one by one in the following order:
+If you do not have Multirun plugin, click one by one and run in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/SpringApplicationOrdering.png" alt="SpringApplicationOrdering" width="350"/>
 Note: Always run Discovery Server first.
 
