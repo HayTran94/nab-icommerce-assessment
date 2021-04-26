@@ -37,25 +37,25 @@ the product got delivered.
 ## 2. Entity Relationship Diagram
 ![ERD](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ERD.png)
 
-## 3. Architecture Design
+## 3. System Architecture
 ![ArchitectureDesign](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ArchitectureDesign.png)
 
 ## 4. Software Development Principles
 There are software development principles that I applied in the project: <br />
 
 **1. SOC (Separation of concerns):** <br />
-Because the project was built according micro-services architecture, so the first thing I need to do was separate a large overall picture into specific concerns. 
-Listed entities and figure out which of them related to a bussiness domain then indicated it as bounded context.
-By doing this, I have already separated the project requirement to micro-services. 
-Each service only serves for a certain funtionalities of a concerns and can scale independently.
+Since the project is built on a microservice architecture, the first thing I need to do is separate a broad big picture into specific concerns.
+Entities are listed and find them related to the business domain then indicate it as the bound context.
+By doing this, I split the project requirement into microservices.
+Each service only caters to certain tasks of concern and is able to scale independently.
 
 **2. CQRS (Command Query Responsibility Segregation):** <br />
-In the Product domain, I divided it into 2 services. One for reading purpose (`product-query-service`) and another one for writing purpose (`product-command-service`).
-In the real-world, any ecommerce platform have a lot of products. Beside that, reading and writing data ratio are difference. If we combine reading and writing data in one service, it can be affected by each other.
-By divide it into 2 parts, we can choose technologies for each part to achieve the best performance and scale independently way, for example 1 instance for writing service and 3 instances for reading service if reading ratio is larger than writing ratio.
+In the Products domain, I divide it into 2 services. One is for read purposes (`product-query-service`) and the other for writing purposes (`product-command-service`). 
+In the real world, any ecommerce platform has a plethora of products. Besides, the read and write rate is the difference. If we combine read and write data in a service, it can be affected by each other. 
+By dividing it into 2 parts, we can choose the technology for each part to achieve best performance and scale independently, e.g. 1 instance for write service and 3 instance for read service if the read rate is greater than the write rate.
 
 **3. DRY (Don't Repeat Yourself):** <br />
-There are 2 common modules: common-shared and protobuf-shared. They are provide boilerplate code and can be shared for all other micro-services to avoid repeating code.
+There are 2 common modules: common-shared and protobuf-shared. They are provide boilerplate code and can be shared for all other microservices to avoid repeating code.
 
 **4. YAGNI (You aren't gonna need it):** <br />
 In the project, I only implemented functionalities for currenty requirements. I do not add more methods, or class for furture purposes, but the system is designed with flexible expansion capacity.
@@ -65,7 +65,7 @@ To avoid services uncontrollably interdependent and risk leading to cyclic depen
 * There are 2 layers: low level services (core services) and high level services (api-gateway, background workers)
 * All services in the same layer must not be able communicate directly with each other. They only serve apis for higher level services.
 * High level services can communicate with low level services.
-* If low level services need some data from another service, it should claim the missing data from higher level services.
+* If low level services need some data from another service, it should request the missing data from higher level services.
 
 **6. SOLID:** <br />
 I also applied SOLID pricipal in the project.
@@ -75,7 +75,7 @@ I also applied SOLID pricipal in the project.
 * High level modules and low level modules must depend on abstractions, not on concretions by follow Dependency Inversion Principle. Using DI supported by Spring Framework to doing this.
 
 ## 5. Java Libraries and Frameworks
-* **Spring Boot:** main framework for all micro-services.
+* **Spring Boot:** main framework for all microservices.
 * **LogNet Spring Boot GRPC:** implement Grpc services.
 * **Spring Cloud Netflix Eureka:** implement discovery service, services communicate via service name.
 * **Spring Data JPA, Spring Data Redis, Spring Data Elasticsearch:** connect to data stores.
@@ -85,7 +85,12 @@ I also applied SOLID pricipal in the project.
 * **Junit:** writing unit tests.
 
 ## 6. Services Detail
+Services Technical Stack:
 ![ServicesDetail](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesDetail.png)
+
+Services Port:
+![ServicesPort](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesPort.png)
+**NOTE:** Make sure that all of the above ports are available on your computer when you get them up and running.
 
 ## 7. Code Folder Structure
 1. Low level services package struture:
@@ -145,6 +150,9 @@ Note: Always run Discovery Server first.
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/EurekaUI.png" alt="EurekaUI"/>
 
 Done. All services already started, you can use the below cURL to test the application.
+**NOTE:** If you have any problem when set up project, please feel free to contact to me via: <br />
+Facebook: https://www.facebook.com/taivtse/
+Zalo: 0932938178
 
 ## 10. CURL Commands
 There is the Postman collection, you can import it to your Postman and use it for a more visual view: <br />
