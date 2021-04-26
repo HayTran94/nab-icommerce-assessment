@@ -8,7 +8,7 @@ spring:
   application:
     name: cart-service
   redis:
-    host: localhost
+    host: 52.77.250.133
     port: 6379
     username: default
     password: 6BEz9ED6BckEASTJ
