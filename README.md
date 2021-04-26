@@ -37,7 +37,7 @@ the product got delivered.
 ## 2. Entity Relationship Diagram
 ![ERD](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ERD.png)
 
-## 3. Architecture Design
+## 3. System Architecture
 ![ArchitectureDesign](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ArchitectureDesign.png)
 
 ## 4. Software Development Principles
