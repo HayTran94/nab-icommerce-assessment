@@ -36,6 +36,8 @@ services:
       - xpack.security.enabled=true
       - ELASTIC_PASSWORD=eEBrCXyeS6mmrZ7P
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - ./elasticsearch/data:/usr/share/elasticsearch/data
     networks:
       - icommerce-network
 
@@ -51,7 +53,7 @@ services:
       - mysql
       - elasticsearch
     environment:
-      - BOOTSTRAP_SERVERS=${PUBLIC_HOST_IP}:9092
+      - BOOTSTRAP_SERVERS=${PRIVATE_HOST_IP}:9092
       - GROUP_ID=1
       - CONFIG_STORAGE_TOPIC=debezium_connect_configs
       - OFFSET_STORAGE_TOPIC=debezium_connect_offsets
@@ -75,8 +77,8 @@ services:
     container_name: icommerce_redisinsight
     ports:
       - 8081:8001
-    volumes:
-      - ./redis/insight:/db
+    depends_on:
+      - redis
     networks:
       - icommerce-network
 
