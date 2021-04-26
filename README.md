@@ -150,6 +150,9 @@ Note: Always run Discovery Server first.
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/EurekaUI.png" alt="EurekaUI"/>
 
 Done. All services already started, you can use the below cURL to test the application.
+**NOTE:** If you have any problem when set up project, please feel free to contact to me via: <br />
+Facebook: https://www.facebook.com/taivtse/
+Zalo: 0932938178
 
 ## 10. CURL Commands
 There is the Postman collection, you can import it to your Postman and use it for a more visual view: <br />
