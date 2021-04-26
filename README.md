@@ -124,11 +124,14 @@ The unit testing applied for helper, mapper, service impl package, they consist 
 **Setup local services:**
 Run with IntelliJ IDEA:
 1. Clone the source code and open with InteliJ IDEA
-2. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
-3. Run Maven Compile one by one in the following order:
+2. Choose Add as Maven Project and wait for it's dependencies loading.
+  <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/AddAsMavenProject.png" alt="AddAsMavenProject"/>
+  
+4. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
+5. Run Maven Compile one by one in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png" alt="MavenCompileOrdering" width="350"/>
 
-4. Run Spring Boot Application one by one in the following order:
+5. Run Spring Boot Application one by one in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/SpringApplicationOrdering.png" alt="SpringApplicationOrdering" width="350"/>
 
 Done. All services already started, you can use the below cURL to test the application.
