@@ -21,7 +21,6 @@ services:
       - MYSQL_ROOT_PASSWORD=123456789
     volumes:
       - ./mysql/data:/var/lib/mysql
-      - ./mysql/init:/docker-entrypoint-initdb.d/:ro
     networks:
       - icommerce-network
 
@@ -63,7 +62,7 @@ services:
   redis:
     image: redis:6.2.1-alpine
     container_name: icommerce-redis
-    command: redis-server --appendonly yes
+    command: redis-server --appendonly yes --requirepass 6BEz9ED6BckEASTJ
     ports:
       - 6379:6379
     volumes:
@@ -71,17 +70,13 @@ services:
     networks:
       - icommerce-network
 
-  redis-commander:
-    image: rediscommander/redis-commander:latest
-    container_name: icommerce-redis-commander
-    environment:
-      - REDIS_HOSTS=local:redis:6379
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    container_name: icommerce_redisinsight
     ports:
-      - 8081:8081
-    links:
-      - redis
-    depends_on:
-      - redis
+      - 8081:8001
+    volumes:
+      - ./redis/insight:/db
     networks:
       - icommerce-network
 
