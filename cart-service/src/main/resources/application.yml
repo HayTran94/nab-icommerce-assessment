@@ -8,8 +8,10 @@ spring:
   application:
     name: cart-service
   redis:
-    host: 52.77.250.133
+    host: localhost
     port: 6379
+    username: default
+    password: 6BEz9ED6BckEASTJ
 
 eureka:
   client:
