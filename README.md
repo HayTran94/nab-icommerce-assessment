@@ -136,8 +136,13 @@ Run with IntelliJ IDEA:
 5. Run Maven Compile one by one in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png" alt="MavenCompileOrdering" width="350"/>
 
-6. Run Spring Boot Application one by one in the following order:
+6. If you have Multirun plugin, just click on `Low Level Services Multirun` and waiting for it to run all low level services, then click on `High Level Services Multirun` and run it. <br \>
+If you do not have Multirun plugin, click one one by one in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/SpringApplicationOrdering.png" alt="SpringApplicationOrdering" width="350"/>
+Note: Always run Discovery Server first.
+
+7. Open your browser then navigate to http://localhost:8761/, scroll to `Instances currently registered with Eureka` section, verify that all service already started.
+  <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/EurekaUI.png" alt="EurekaUI"/>
 
 Done. All services already started, you can use the below cURL to test the application.
 
