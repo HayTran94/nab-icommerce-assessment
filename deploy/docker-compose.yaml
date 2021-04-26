@@ -1,13 +1,13 @@
 version: '3.7'
 services:
   kafka-manager:
-    image: sheepkiller/kafka-manager
+    image: kafkamanager/kafka-manager:latest
     container_name: icommerce-kafka-manager
     ports:
       - 9000:9000
     environment:
-      - ZK_HOSTS=${PUBLIC_HOST_IP}:2181
-      - APPLICATION_SECRET=letmein
+      - ZK_HOSTS=${PRIVATE_HOST_IP}:2181
+      - APPLICATION_SECRET=icommerce
     networks:
       - icommerce-network
 
