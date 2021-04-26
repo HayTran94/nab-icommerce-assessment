@@ -127,8 +127,11 @@ Run with IntelliJ IDEA:
 2. Choose Add as Maven Project and wait for it's dependencies loading.
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/AddAsMavenProject.png" alt="AddAsMavenProject"/>
   
-4. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
-5. Run Maven Compile one by one in the following order:
+3. Open Project Structure, select SDK for Java 8
+  <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ProjectStructureChooseSDK.png" alt="ProjectStructureChooseSDK"/>
+
+5. Open the run configuration tab, I've set them up and arranged them according to their dependencies.
+6. Run Maven Compile one by one in the following order:
   <img src="https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/MavenCompileOrdering.png" alt="MavenCompileOrdering" width="350"/>
 
 5. Run Spring Boot Application one by one in the following order:
