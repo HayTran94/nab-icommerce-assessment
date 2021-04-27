@@ -42,32 +42,7 @@ the product got delivered.
 
 ## Sequence Diagram
 ### Tracking customer activity:
-```plantuml
-@startuml
-title Tracking Customer Activity
-
-== Synchronize flow ==
-Customer -> Browser: Search/get products...
-Browser -> ApiGateway: Make Http request
-ApiGateway -> ProductQueryService: Call internal api
-ProductQueryService --> ApiGateway: Return result
-ApiGateway --> Browser: Return result
-Browser -> Browser: Render UI
-
-== Asynchronize flow ==
-ApiGateway -> ApiGateway: Batch, compress message
-ApiGateway -> Kafka: Send message
-Kafka --> ApiGateway: Return result
-
-Kafka -> CustomerAuditingWorker: Send message
-CustomerAuditingWorker -> CustomerAuditingService: Insert customer action
-CustomerAuditingService -> Elasticsearch: Save data
-Elasticsearch --> CustomerAuditingService: Return result
-CustomerAuditingService --> CustomerAuditingWorker: Return result
-CustomerAuditingWorker --> Kafka: Commit offset
-
-@enduml
-```
+![CustomerActivitySequenceDiagram](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/CustomerActivitySequenceDiagram.png)
 
 ## 4. Software Development Principles
 There are software development principles that I applied in the project: <br />
