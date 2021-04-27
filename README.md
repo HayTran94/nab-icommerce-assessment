@@ -3,7 +3,7 @@
 ## Table of Contents:
 - [1. Problem Statement](#1-problem-statement)
 - [2. Entity Relationship Diagram](#2-entity-relationship-diagram)
-- [3. Architecture Design](#3-architecture-design)
+- [3. System Architecture](#3-system-architecture)
 - [4. Software Development Principles](#4-software-development-principles)
 - [5. Java Libraries and Frameworks](#5-java-libraries-and-frameworks)
 - [6. Services Detail](#6-services-detail)
@@ -39,6 +39,35 @@ the product got delivered.
 
 ## 3. System Architecture
 ![ArchitectureDesign](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ArchitectureDesign.png)
+
+## Sequence Diagram
+### Tracking customer activity:
+```plantuml
+@startuml
+title Tracking Customer Activity
+
+== Synchronize flow ==
+Customer -> Browser: Search/get products...
+Browser -> ApiGateway: Make Http request
+ApiGateway -> ProductQueryService: Call internal api
+ProductQueryService --> ApiGateway: Return result
+ApiGateway --> Browser: Return result
+Browser -> Browser: Render UI
+
+== Asynchronize flow ==
+ApiGateway -> ApiGateway: Batch, compress message
+ApiGateway -> Kafka: Send message
+Kafka --> ApiGateway: Return result
+
+Kafka -> CustomerAuditingWorker: Send message
+CustomerAuditingWorker -> CustomerAuditingService: Insert customer action
+CustomerAuditingService -> Elasticsearch: Save data
+Elasticsearch --> CustomerAuditingService: Return result
+CustomerAuditingService --> CustomerAuditingWorker: Return result
+CustomerAuditingWorker --> Kafka: Commit offset
+
+@enduml
+```
 
 ## 4. Software Development Principles
 There are software development principles that I applied in the project: <br />
@@ -151,7 +180,7 @@ Note: Always run Discovery Server first.
 
 Done. All services already started, you can use the below cURL to test the application.
 **NOTE:** If you have any problem when set up project, please feel free to contact to me via: <br />
-Facebook: https://www.facebook.com/taivtse/
+Facebook: https://www.facebook.com/taivtse/ <br />
 Zalo: 0932938178
 
 ## 10. CURL Commands
