@@ -4,14 +4,14 @@
 - [1. Problem Statement](#1-problem-statement)
 - [2. Entity Relationship Diagram](#2-entity-relationship-diagram)
 - [3. System Architecture](#3-system-architecture)
-- [4. Sequence Diagram](#3-sequence-diagram)
-- [5. Software Development Principles](#4-software-development-principles)
-- [6. Java Libraries and Frameworks](#5-java-libraries-and-frameworks)
-- [7. Services Detail](#6-services-detail)
-- [8. Code Folder Structure](#7-code-folder-structure)
-- [9. Unit Test](#8-unit-test)
-- [10. Setup To Run On Local Computer](#9-setup-to-run-on-local-computer)
-- [11. CURL Commands](#10-curl-commands)
+- [4. Sequence Diagram](#4-sequence-diagram)
+- [5. Software Development Principles](#5-software-development-principles)
+- [6. Java Libraries and Frameworks](#6-java-libraries-and-frameworks)
+- [7. Services Detail](#7-services-detail)
+- [8. Code Folder Structure](#8-code-folder-structure)
+- [9. Unit Test](#9-unit-test)
+- [10. Setup To Run On Local Computer](#10-setup-to-run-on-local-computer)
+- [11. CURL Commands](#11-curl-commands)
 
 
 ## 1. Problem Statement
