@@ -4,13 +4,14 @@
 - [1. Problem Statement](#1-problem-statement)
 - [2. Entity Relationship Diagram](#2-entity-relationship-diagram)
 - [3. System Architecture](#3-system-architecture)
-- [4. Software Development Principles](#4-software-development-principles)
-- [5. Java Libraries and Frameworks](#5-java-libraries-and-frameworks)
-- [6. Services Detail](#6-services-detail)
-- [7. Code Folder Structure](#7-code-folder-structure)
-- [8. Unit Test](#8-unit-test)
-- [9. Setup To Run On Local Computer](#9-setup-to-run-on-local-computer)
-- [10. CURL Commands](#10-curl-commands)
+- [4. Sequence Diagram](#3-sequence-diagram)
+- [5. Software Development Principles](#4-software-development-principles)
+- [6. Java Libraries and Frameworks](#5-java-libraries-and-frameworks)
+- [7. Services Detail](#6-services-detail)
+- [8. Code Folder Structure](#7-code-folder-structure)
+- [9. Unit Test](#8-unit-test)
+- [10. Setup To Run On Local Computer](#9-setup-to-run-on-local-computer)
+- [11. CURL Commands](#10-curl-commands)
 
 
 ## 1. Problem Statement
@@ -40,11 +41,11 @@ the product got delivered.
 ## 3. System Architecture
 ![ArchitectureDesign](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ArchitectureDesign.png)
 
-## Sequence Diagram
+## 4. Sequence Diagram
 ### Tracking customer activity:
-![CustomerActivitySequenceDiagram](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/CustomerActivitySequenceDiagram.png)
+![CustomerActivitySD](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/CustomerActivitySD.png)
 
-## 4. Software Development Principles
+## 5. Software Development Principles
 There are software development principles that I applied in the project: <br />
 
 **1. SOC (Separation of concerns):** <br />
@@ -78,7 +79,7 @@ I also applied SOLID pricipal in the project.
 * Interfaces are broken down and provide a certain amount of work, avoid a large interface by follow Interface Segregation Principle.
 * High level modules and low level modules must depend on abstractions, not on concretions by follow Dependency Inversion Principle. Using DI supported by Spring Framework to doing this.
 
-## 5. Java Libraries and Frameworks
+## 6. Java Libraries and Frameworks
 * **Spring Boot:** main framework for all microservices.
 * **LogNet Spring Boot GRPC:** implement Grpc services.
 * **Spring Cloud Netflix Eureka:** implement discovery service, services communicate via service name.
@@ -88,7 +89,7 @@ I also applied SOLID pricipal in the project.
 * **Spring Security + JJWT:** implement security by using JWT. 
 * **Junit:** writing unit tests.
 
-## 6. Services Detail
+## 7. Services Detail
 Services Technical Stack:
 ![ServicesDetail](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesDetail.png)
 
@@ -96,7 +97,7 @@ Services Port:
 ![ServicesPortInfo](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/ServicesPortInfo.png)
 **NOTE:** Make sure that all of the above ports are available on your computer when you get them up and running.
 
-## 7. Code Folder Structure
+## 8. Code Folder Structure
 1. Low level services package struture:
 * **Helper:** utilities classes.
 * **Config:** components and beans configuration.
@@ -118,11 +119,11 @@ Services Port:
 * **Security:** setup authentication/authorization.
 * **Classes annotated with @SpringBootApplication:** Main class to run Spring Boot application.
 
-## 8. Unit Test
+## 9. Unit Test
 There are a number of unit testing in `order-service`. 
 The unit testing applied for helper, mapper, service impl package, they consist of 21 test cases.
 
-## 9. Setup To Run On Local Computer
+## 10. Setup To Run On Local Computer
 **NOTE:** There are a number of backing services that I have already setup and deployed on AWS to save your time. Let's focus on the services I have built in depth. They include:
 * MySQL
 * Redis
@@ -158,7 +159,7 @@ Done. All services already started, you can use the below cURL to test the appli
 Facebook: https://www.facebook.com/taivtse/ <br />
 Zalo: 0932938178
 
-## 10. CURL Commands
+## 11. CURL Commands
 There is the Postman collection, you can import it to your Postman and use it for a more visual view: <br />
 https://www.getpostman.com/collections/c07a126b0c4d21ad9a3a
 
