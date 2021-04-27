@@ -43,7 +43,10 @@ the product got delivered.
 
 ## 4. Sequence Diagram
 ### Tracking customer activity:
-![CustomerActivitySD](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/CustomerActivitySD.png)
+![TrackingCustomerActivitySD](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/TrackingCustomerActivitySD.png)
+
+### Tracking product price changed:
+![TrackingProductPriceChangedSD](https://github.com/taivtse/nab-icommerce-assessment/blob/master/docs/TrackingProductPriceChangedSD.png)
 
 ## 5. Software Development Principles
 There are software development principles that I applied in the project: <br />
